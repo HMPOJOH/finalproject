@@ -13,4 +13,6 @@ public class TimeSeries {
     public Parameters[] getParameters() {
         return parameters;
     }
+
+
 }

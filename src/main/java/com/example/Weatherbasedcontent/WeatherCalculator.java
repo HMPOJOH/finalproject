@@ -18,8 +18,33 @@ public class WeatherCalculator {
 
 
         Date date  =  weather.getTimeSeries()[0].getValidTime(); //Tue Dec 08 12:00:00 CET 2020
-        Float currentTemp =  weather.getTimeSeries()[0].getParameters()[1].getValue();
-        System.out.println(date + " " + currentTemp);
+        Float currentTemp =  getTemperatureParameter(weather.getTimeSeries()[0]).getValue();
 
+        Float currentWeatherStatusNumber = getWeatherStatusParameter(weather.getTimeSeries()[0]).getValues()[0];
+
+
+        System.out.println(date + " temp:" + currentTemp + " symbolnumber:" + currentWeatherStatusNumber);
+
+    }
+
+    private Parameters getWeatherStatusParameter(TimeSeries timeSery) {
+        for (int i=0; i < timeSery.getParameters().length;i++){
+            if (timeSery.getParameters()[i].getName().equals("Wsymb2")) {
+                System.out.println("weatherstatus"+ i);
+                return timeSery.getParameters()[i];
+            }
+        }
+
+        return null;
+    }
+
+    private Parameters getTemperatureParameter(TimeSeries timeSery) {
+
+        for (int i=0; i < timeSery.getParameters().length;i++){
+            if (timeSery.getParameters()[i].getName().equals("t"))
+                return timeSery.getParameters()[i];
+        }
+
+        return null;
     }
 }
