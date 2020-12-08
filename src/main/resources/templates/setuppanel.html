@@ -5,6 +5,49 @@
     <title>Title</title>
 </head>
 <body>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Dummy weather Page</title>
+</head>
+<body>
+<h1>test</h1>
 
+
+
+
+<form th:action="@{/dummyweather}" method="POST" >
+
+
+
+    <select th:name="city">
+        <option th:each="location : ${locations}"
+                th:value="${location.city}"
+                th:text="${location.city}" id="city" name="city"></option>
+    </select>
+
+    <input type="submit" value="Get Temp">
+</form>
+
+
+<table border="1">
+    <tr>
+        <th>Time</th>
+        <th>Temperature</th>
+        <th>Icon</th>
+    </tr>
+    <tr th:if="${weather.timeSeries}!=null" th:each="time : ${weather.timeSeries}">
+        <td th:text="${time.validTime}"></td>
+        <td th:each="parameter : ${time.parameters}" th:if="${parameter.name} == 't'"><span th:text="${parameter.getValue()}"></span></td>
+        <td th:each="parameter : ${time.parameters}" th:if="${parameter.name} == 'Wsymb2'">
+            <span th:if="${parameter.getValue()} == 1">☀️</span>
+            <span th:if="${parameter.getValue()} == 2">🌤️</span>
+            <span th:text="${parameter.getValue()}"></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
 </body>
 </html>

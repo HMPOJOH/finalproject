@@ -5,14 +5,14 @@
     <title>Dummy weather Page</title>
 </head>
 <body>
-<h1 th:text="'Temperature at ' + ${location}"></h1>
+<h1>TEst</h1>
 <table border="1">
     <tr>
         <th>Time</th>
         <th>Temperature</th>
         <th>Icon</th>
     </tr>
-    <tr th:each="time : ${weather.timeSeries}">
+    <tr th:if="${weather.timeSeries}!=null" th:each="time : ${weather.timeSeries}">
         <td th:text="${time.validTime}"></td>
         <td th:each="parameter : ${time.parameters}" th:if="${parameter.name} == 't'"><span th:text="${parameter.getValue()}"></span></td>
         <td th:each="parameter : ${time.parameters}" th:if="${parameter.name} == 'Wsymb2'">
