@@ -1,0 +1,1 @@
+INSERT INTO WEATHERCAT (DESCRIPTION) VALUES ('Sunny', 'Rain', 'Snow', 'Windy'');
