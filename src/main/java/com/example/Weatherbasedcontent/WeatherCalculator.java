@@ -30,7 +30,7 @@ public class WeatherCalculator {
     private Parameters getWeatherStatusParameter(TimeSeries timeSery) {
         for (int i=0; i < timeSery.getParameters().length;i++){
             if (timeSery.getParameters()[i].getName().equals("Wsymb2")) {
-                System.out.println("weatherstatus"+ i);
+                System.out.println("weatherstatus parameter "+ i);
                 return timeSery.getParameters()[i];
             }
         }
@@ -41,8 +41,11 @@ public class WeatherCalculator {
     private Parameters getTemperatureParameter(TimeSeries timeSery) {
 
         for (int i=0; i < timeSery.getParameters().length;i++){
-            if (timeSery.getParameters()[i].getName().equals("t"))
+            if (timeSery.getParameters()[i].getName().equals("t")){
+                System.out.println("temperature parameter "+ i);
                 return timeSery.getParameters()[i];
+            }
+
         }
 
         return null;

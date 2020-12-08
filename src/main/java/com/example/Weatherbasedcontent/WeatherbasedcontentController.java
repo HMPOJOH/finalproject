@@ -14,7 +14,7 @@ public class WeatherbasedcontentController {
     @GetMapping("/dummyweather")
     public String testSMHI(RestTemplate restTemplate, Model model) {
         //Stockholm geocode 59.325117	",	"Longitude"	:"	18.071093
-        Weather weather = restTemplate.getForObject("https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/11.071/lat/57.325/data.json", Weather.class);
+        Weather weather = restTemplate.getForObject("https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.071/lat/59.325/data.json", Weather.class);
 
         WeatherCalculator weatherCalc = new WeatherCalculator(weather);
         weatherCalc.getCurrentTemp();
