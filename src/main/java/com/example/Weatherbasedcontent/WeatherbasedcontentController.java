@@ -20,6 +20,10 @@ public class WeatherbasedcontentController {
         weatherCalc.getCurrentTemp();
 
 
+
+
+
+
         model.addAttribute("location", "Home");
         model.addAttribute("weather", weather);
         return "dummypage";
