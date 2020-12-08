@@ -11,3 +11,5 @@ public class WeatherbasedcontentApplication {
 	}
 
 }
+
+//Championi TEST
