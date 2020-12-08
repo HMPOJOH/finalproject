@@ -5,6 +5,33 @@ import java.util.List;
 
 public class WeatherCalculator {
 
+    public String[] weatherSymbolText = {"Clearsky",
+            "Nearlyclearsky",
+            "Variablecloudiness",
+            "Halfclearsky",
+            "Cloudysky",
+            "Overcast",
+            "Fog",
+            "Lightrainshowers",
+            "Moderaterainshowers",
+            "Heavyrainshowers",
+            "Thunderstorm",
+            "Lightsleetshowers",
+            "Moderatesleetshowers",
+            "Heavysleetshowers",
+            "Lightsnowshowers",
+            "Moderatesnowshowers",
+            "Heavysnowshowers",
+            "Lightrain",
+            "Moderaterain",
+            "Heavyrain",
+            "Thunder",
+            "Lightsleet",
+            "Moderatesleet",
+            "Heavysleet",
+            "Lightsnowfall",
+            "Moderatesnowfall",
+            "Heavysnowfall"};
 
     private Weather weather;
 
@@ -14,6 +41,10 @@ public class WeatherCalculator {
 
 
     public void getCurrentTemp() {
+
+
+
+
 
 
 
@@ -31,42 +62,16 @@ public class WeatherCalculator {
     }
 
     private void getWeatherCategory(Float currentWeatherStatusNumber) {
-        String[] weatherSymbolText = {"Clearsky",
-                "Nearlyclearsky",
-                "Variablecloudiness",
-                "Halfclearsky",
-                "Cloudysky",
-                "Overcast",
-                "Fog",
-                "Lightrainshowers",
-                "Moderaterainshowers",
-                "Heavyrainshowers",
-                "Thunderstorm",
-                "Lightsleetshowers",
-                "Moderatesleetshowers",
-                "Heavysleetshowers",
-                "Lightsnowshowers",
-                "Moderatesnowshowers",
-                "Heavysnowshowers",
-                "Lightrain",
-                "Moderaterain",
-                "Heavyrain",
-                "Thunder",
-                "Lightsleet",
-                "Moderatesleet",
-                "Heavysleet",
-                "Lightsnowfall",
-                "Moderatesnowfall",
-                "Heavysnowfall"};
 
 
+        float x = (Float)currentWeatherStatusNumber;
 
         if (currentWeatherStatusNumber<=4.0 && currentWeatherStatusNumber>=1.0)
             System.out.println("Sunny");
         else if (currentWeatherStatusNumber<=11.0 && currentWeatherStatusNumber>=8)
             System.out.println("Rain");
         else
-            System.out.println(weatherSymbolText[6]);
+            System.out.println(weatherSymbolText[(int)x-1]);
     }
 
     private Parameters getWeatherStatusParameter(TimeSeries timeSery) {
