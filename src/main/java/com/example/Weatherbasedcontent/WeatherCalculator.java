@@ -62,15 +62,15 @@ public class WeatherCalculator {
     }
     //internal lookup
     public String getWeatherCategory(int weatherSymbolNumber) {
-        return weatherSymbols.get(weatherSymbolNumber+1).getCategory();
+        return weatherSymbols.get(weatherSymbolNumber-1).getCategory(); //list starts with 0
     }
     //internal lookup
     public String getWeatherCategoryImage(int weatherSymbolNumber) {
-        return weatherSymbols.get(weatherSymbolNumber+1).getImage();
+        return weatherSymbols.get(weatherSymbolNumber-1).getImage();  //list starts with 0
     }
     //internal lookup
     public String getCurrentWeatherSymbolText(int weatherSymbolNumber) {
-        return weatherSymbols.get(weatherSymbolNumber+1).getName();
+        return weatherSymbols.get(weatherSymbolNumber-1).getName();  //list starts with 0
     }
 
 
@@ -78,7 +78,7 @@ public class WeatherCalculator {
     private Parameters getWeatherStatusParameter(TimeSeries timeSery) {
         for (int i=0; i < timeSery.getParameters().length;i++){
             if (timeSery.getParameters()[i].getName().equals("Wsymb2")) {
-                System.out.println("weatherstatus parameter "+ i);
+
                 return timeSery.getParameters()[i];
             }
         }
@@ -91,7 +91,7 @@ public class WeatherCalculator {
 
         for (int i=0; i < timeSery.getParameters().length;i++){
             if (timeSery.getParameters()[i].getName().equals("t")){
-                System.out.println("temperature parameter "+ i);
+
                 return timeSery.getParameters()[i];
             }
 
@@ -105,7 +105,7 @@ public class WeatherCalculator {
 
         for (int i=0; i < timeSery.getParameters().length;i++){
             if (timeSery.getParameters()[i].getName().equals("ws")){
-                System.out.println("Wind Speed parameter "+ i);
+
                 return timeSery.getParameters()[i];
             }
 
