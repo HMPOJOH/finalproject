@@ -131,4 +131,35 @@ Jättekallt	- -10 ->
     }
 
 
+    public String getTempCategory(Float currentTemp) {
+        if (currentTemp>=28)
+            return "Hot";
+        else if (currentTemp>=22 && currentTemp<28)
+            return "Warm";
+        else if (currentTemp>=14 && currentTemp<22)
+            return "Calm";
+        else if (currentTemp>=4 && currentTemp<14)
+            return "Average";
+        else if (currentTemp>=-3 && currentTemp<4)
+            return "Cold";
+        else
+            return "Very cold";
+
+
+            /*
+
+    INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Hot');
+INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Warm');
+INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Cold');
+INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Very cold');
+INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Average');
+
+Jättevarmt	- 28+
+Varmt		- 22 - 27
+Lite varmt	- 14 - 21
+Lite kallt	- 4 - 13
+Kallt		- 3 - -9
+Jättekallt	- -10 ->
+     */
+    }
 }

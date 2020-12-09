@@ -55,8 +55,8 @@ public class WeatherbasedcontentController {
         String currentWeatherCategory = weatherCalc.getWeatherCategory(currentWeatherSymbolnr);
         String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
         String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
-
-
+        String getTemperatureCategory = weatherCalc.getTempCategory(currentTemp);
+        System.out.println(getTemperatureCategory);
 
        // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,department,)
         //test contentcall
