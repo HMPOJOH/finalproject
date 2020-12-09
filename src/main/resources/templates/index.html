@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+ 
+
+  <div class="login" align="right">
+    <form action="" method="post">
+        <input type="image" id="image" alt="Login"
+       src="settings.png" height="24px" width="24x">
+    </form>
+  </div>
+
+<div id="imageBox" align="center">
+
+
+  <header>
+    <style type="text/css">
+    .header{
+    position: relative;;
+    }
+    a{
+    position:absolute;
+    right:100;
+    top:0;
+    padding: 20px;
+    }
+    .nav{
+    position:absolute;
+    right: 100;
+    top:100;
+    padding: 20px;
+    }
+    </style>
+    </header>
+ 
+
+  <div class="w3-content w3-section" style="max-width: 500px; float: top;">
+      <img class="mySlides w3-animate-fading" src="swimshorts1.jfif" style="width:100%" >
+    <a href="index.html" id= "logo">
+      <h1>Swimshorts </h1>
+      <h2>199 SEK</h2>   
+  </a>
+    <img class="mySlides w3-animate-fading" src="swimshorts2.jfif" style="width:100%">
+    <img class="mySlides w3-animate-fading" src="swimshorts3.jfif" style="width:100%">
+    <img class="mySlides w3-animate-fading" src="swimshorts4.jfif" style="width:100%">
+  </div>
+
+
+  <div class="w3-content w3-section" style="max-width: 500px; float: top;">
+    <img class="mySlides2 w3-animate-fading" src="swimshorts1.jfif" style="width:100%">
+    <img class="mySlides2 w3-animate-fading" src="swimshorts2.jfif" style="width:100%">
+    <img class="mySlides2 w3-animate-fading" src="swimshorts3.jfif" style="width:100%">
+    <img class="mySlides2 w3-animate-fading" src="swimshorts4.jfif" style="width:100%">
+  </div>
+
+  <div class="w3-content w3-section" style="max-width: 500px; float: top;">
+    <img class="mySlides3 w3-animate-fading" src="swimshorts1.jfif" style="width:100%">
+    <img class="mySlides3 w3-animate-fading" src="swimshorts2.jfif" style="width:100%">
+    <img class="mySlides3 w3-animate-fading" src="swimshorts3.jfif" style="width:100%">
+    <img class="mySlides3 w3-animate-fading" src="swimshorts4.jfif" style="width:100%">
+  </div>
+ 
+
+
+  <script>
+  var myIndex = 0;
+  carousel();
+  
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 9000);    
+  }
+
+  var myIndex = 0;
+  carousel2();
+  
+  function carousel2() {
+    var i;
+    var x = document.getElementsByClassName("mySlides2");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel2, 9000);    
+  }
+
+  var myIndex = 0;
+  carousel3();
+  
+  function carousel3() {
+    var i;
+    var x = document.getElementsByClassName("mySlides3");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel3, 9000);    
+  }
+  </script>
+
+
+</body>
+</html>
