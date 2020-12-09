@@ -17,6 +17,25 @@ public class ParameterRepository {
     @Autowired
     private DataSource dataSource;
 
+    public int getSeason(String chosenDate, String country) {
+        int season = 1;
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select ID FROM SEASONBYCOUNTRY WHERE \n" +
+                     "COUNTRYID=" + country + " AND \n" +
+                     "DATEFROM <=" + chosenDate + " AND \n" +
+                     "DATETO >=" + chosenDate)) {
+
+            while (rs.next()) {
+                season = rs.getInt("ID");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return season;
+    }
     public List<Department> getDepList() {
         List<Department> department = new ArrayList<>();
 

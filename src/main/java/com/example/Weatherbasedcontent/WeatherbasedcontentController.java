@@ -27,13 +27,15 @@ public class WeatherbasedcontentController {
     private Weather weather = new Weather();
     private List<City> possibleLocations = new ArrayList<City>();
     private List<Department> departments = new ArrayList<Department>();
-
+    private int season = 0;
 
     @GetMapping("/setuppanel")
     public String setupPanel(HttpSession session, Model model){
 
         possibleLocations = locationRep.getLocationsList();
         departments = prmRep.getDepList();
+        //season = prmRep.getSeason('2020-12-08','SE');
+        System.out.println("season " + season);
         model.addAttribute("weather", weather);
         model.addAttribute("locations", possibleLocations);
         model.addAttribute("departments", departments);
