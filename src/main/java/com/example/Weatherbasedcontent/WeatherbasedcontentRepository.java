@@ -17,6 +17,10 @@ public class WeatherbasedcontentRepository {
     @Autowired
     private DataSource dataSource;
 
+
+
+
+
     public List<Content> getContentList(int searchScenario) {
         List<Content> content = new ArrayList<>();
         searchScenario = 1; /* set to 1 during test */
@@ -26,7 +30,7 @@ public class WeatherbasedcontentRepository {
                      "FROM CONTENTBYSCENARIO \n" +
                      "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
                      "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
-                     "WHERE CONTENTBYSCENARIO.ID = searchScenario")) {
+                     "WHERE CONTENTBYSCENARIO.ID =" + searchScenario)) {
 
             while (rs.next()) {
                 content.add(rsContent(rs));

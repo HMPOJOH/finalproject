@@ -56,7 +56,13 @@ public class WeatherbasedcontentController {
         String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
         String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
 
-        //Just to show the values - will rather be used in the Content lookup 
+
+
+       // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,department,)
+        //test contentcall
+        List<Content> contentList = productRepos.getContentList(1);
+
+        //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
         model.addAttribute("weather", weather);
         model.addAttribute("currentTemp", currentTemp);
@@ -65,6 +71,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("currentWeatherCategory", currentWeatherCategory);
         model.addAttribute("currentWeatherImage", currentWeatherImager);
         model.addAttribute("currentWeatherSymbolText", currentSymbolText);
+        model.addAttribute("contentimage", contentList.get(0).getImage());
 
 
         return "panel";

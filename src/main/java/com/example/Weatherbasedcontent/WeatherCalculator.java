@@ -13,6 +13,22 @@ public class WeatherCalculator {
         setupWeatherSymbols();
     }
 
+
+    /*
+
+    INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Hot');
+INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Warm');
+INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Cold');
+INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Very cold');
+INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Average');
+
+Jättevarmt	- 28+
+Varmt		- 22 - 27
+Lite varmt	- 14 - 21
+Lite kallt	- 4 - 13
+Kallt		- 3 - -9
+Jättekallt	- -10 ->
+     */
     private void setupWeatherSymbols() {
 
         weatherSymbols.add(new WeatherSymbols("Sunny","https://img.icons8.com/office/30/000000/summer.png","Clear sky"));//1
