@@ -48,11 +48,13 @@ public class WeatherbasedcontentController {
 
         System.out.println(city);
 
-        longitude= locationRep.getLongitudeByCity(city);
-        latitude= locationRep.getLatitudeByCity(city);
+        longitude=possibleLocations.stream()
+                .filter(x -> city.equals(x.getName())).findAny().orElse(null).getLongitude(); //locationRep.getLongitudeByCity(city);
+        latitude= possibleLocations.stream()
+                .filter(x -> city.equals(x.getName())).findAny().orElse(null).getLatitude();//locationRep.getLatitudeByCity(city);
+
         String countryID = locationRep.getCountryIDByCity(city);
-        System.out.println("long:" +longitude);
-        System.out.println("lat:" +latitude);
+
         weather = restTemplate.getForObject("https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/"+longitude +"/lat/" + latitude+"/data.json", Weather.class);
         WeatherCalculator weatherCalc = new WeatherCalculator(weather);
         //SMHI
