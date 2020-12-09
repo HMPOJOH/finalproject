@@ -24,29 +24,29 @@ INSERT INTO SEASON (DESCRIPTION) VALUES ('Winter');
 INSERT INTO SEASON (DESCRIPTION) VALUES ('Spring');
 INSERT INTO SEASON (DESCRIPTION) VALUES ('Autumn');
 
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Hot, Men',1,1,1,2);
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Warm, Men',1,1,2,2);
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Spring, Sunny, average temperature, Men',1,1,4,2);
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Autumn, cold, Men',2,3,3,2);
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Winter, very cold, Men',2,3,3,2);
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Hot, women',1,1,1,1);
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Warm, women',1,1,2,1);
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Spring, Sunny, average temperature, women',1,1,4,1);
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Autumn, cold, women',2,3,3,1);
-INSERT INTO SCENARIO (DESCRIPTION,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Winter, very cold, women',2,3,3,1);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Hot, Men',' ',1,1,1,2);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Warm, Men',' ',1,1,2,2);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Spring, Sunny, average temperature, Men',' ',1,1,4,2);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Autumn, cold, Men',' ',2,3,3,2);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Winter, very cold, Men',' ',2,3,3,2);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Hot, women',' ',1,1,1,1);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Warm, women',' ',1,1,2,1);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Spring, Sunny, average temperature, women',' ',1,1,4,1);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Autumn, cold, women',' ',2,3,3,1);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Winter, very cold, women',' ',2,3,3,1);
 
 INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('SE',1,'2020-06-01','2020-08-31');
 INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('SE',2,'2020-12-01','2020-03-31');
 INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('SE',3,'2020-04-01','2020-05-31');
 INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('SE',4,'2020-09-01','2020-11-30');
 
-INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/21/f8/21f8033ed4cd662d8e4464abbab57bd353de12dc.jpg],origin[dam],category[men_swimweear],type[LOOKBOOK],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0769483005.html');
-INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/d5/c2/d5c2edea1733d101e38b6891a9b5dda6843a3846.jpg],origin[dam],category[men_accessories_sunglasses],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0888077002.html');
-INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/15/d1/15d1feb2c8a630be596f7b880ecd235cbe91007c.jpg],origin[dam],category[men_jacketscoats_jackets],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0905401003.html');
-INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F20%2Fc0%2F20c01d9317b8b6ad199c6a3468c0fa53236698b1.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_hoodiessweatshirts_hoodies%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0917818001.html');
-INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F44%2F11%2F4411906142799cd6d7a9a5f9fafe3325b9281624.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_accessories_hatsandgloves%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0557048001.html');
-INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F17%2F1e%2F171ee680ed7f25efa9936d7e658b4f825dd7aac0.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_jacketscoats_jackets%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0819500006.html');
-INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/ed/9a/ed9a41fb39cd7f8be80629a18c89560b1e9e916d.jpg],origin[dam],category[ladies_swimwear_swimsuits],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0636505001.html');
+INSERT INTO CONTENT (IMAGE,URL,TEXT) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/21/f8/21f8033ed4cd662d8e4464abbab57bd353de12dc.jpg],origin[dam],category[men_swimweear],type[LOOKBOOK],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0769483005.html','Text to show');
+INSERT INTO CONTENT (IMAGE,URL,TEXT) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/d5/c2/d5c2edea1733d101e38b6891a9b5dda6843a3846.jpg],origin[dam],category[men_accessories_sunglasses],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0888077002.html','Text2 to show');
+INSERT INTO CONTENT (IMAGE,URL,TEXT) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/15/d1/15d1feb2c8a630be596f7b880ecd235cbe91007c.jpg],origin[dam],category[men_jacketscoats_jackets],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0905401003.html','Text3 to show');
+INSERT INTO CONTENT (IMAGE,URL,TEXT) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F20%2Fc0%2F20c01d9317b8b6ad199c6a3468c0fa53236698b1.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_hoodiessweatshirts_hoodies%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0917818001.html','Text4 to show');
+INSERT INTO CONTENT (IMAGE,URL,TEXT) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F44%2F11%2F4411906142799cd6d7a9a5f9fafe3325b9281624.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_accessories_hatsandgloves%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0557048001.html','Text5 to show');
+INSERT INTO CONTENT (IMAGE,URL,TEXT) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F17%2F1e%2F171ee680ed7f25efa9936d7e658b4f825dd7aac0.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_jacketscoats_jackets%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0819500006.html','Text6 to show');
+INSERT INTO CONTENT (IMAGE,URL,TEXT) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/ed/9a/ed9a41fb39cd7f8be80629a18c89560b1e9e916d.jpg],origin[dam],category[ladies_swimwear_swimsuits],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0636505001.html','Text7 to show');
 
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (1,1);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (2,2);

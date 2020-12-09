@@ -26,7 +26,7 @@ public class WeatherbasedcontentRepository {
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, SCENARIO.DESCRIPTION AS SCENARIO\n" +
+             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
                      "FROM CONTENTBYSCENARIO \n" +
                      "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
                      "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
@@ -46,6 +46,7 @@ public class WeatherbasedcontentRepository {
         return new Content(
                 rs.getInt("CONTENTID"),
                 rs.getString("IMAGE"),
-                rs.getString("URL"));
+                rs.getString("URL"),
+                rs.getString("TEXT"));
     }
 }
