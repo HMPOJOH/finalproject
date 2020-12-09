@@ -5,9 +5,10 @@
     <title>Dummy weather Page</title>
 </head>
 <body>
-<h1 th:text="${city}"></h1>
+<h1 th:text="${city}+' ' +${country}"></h1>
 <h2>Current values:</h2>
 <h3 th:text="'temp: ' + ${currentTemp}+' C'"></h3>
+<h3 th:text="'temp cat: ' + ${tempcat}"></h3>
 <h3 th:text="'wind: ' + ${currentWindSpeed} + ' m/s'"></h3>
 <h3 th:text="'category: ' + ${currentWeatherCategory}"></h3>
 <h3 th:text="'symbolnr: ' + ${currentWeatherSymbolnr}"></h3>

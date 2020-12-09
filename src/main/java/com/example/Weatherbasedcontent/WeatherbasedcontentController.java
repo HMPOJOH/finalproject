@@ -19,16 +19,19 @@ public class WeatherbasedcontentController {
 
     @Autowired
     private WeatherbasedcontentRepository productRepos;
+    @Autowired
+    private LocationRepository locationRep;
+
     private Weather weather = new Weather();
-    private List<Locations> possibleLocations = new ArrayList<Locations>();
-    private LocationRepository rep = new LocationRepository();
+    private List<City> possibleLocations = new ArrayList<City>();
+
 
 
 
     @GetMapping("/setuppanel")
     public String setupPanel(HttpSession session, Model model){
 
-        possibleLocations = rep.getLocationsList();
+        possibleLocations = locationRep.getLocationsList();
         model.addAttribute("weather", weather);
         model.addAttribute("locations", possibleLocations);
         return "setuppanel";
@@ -42,14 +45,18 @@ public class WeatherbasedcontentController {
 
         System.out.println(city);
 
-        longitude= rep.getLongitudeByCity(city);
-        latitude= rep.getLatitudeByCity(city);
+        longitude= locationRep.getLongitudeByCity(city);
+        latitude= locationRep.getLatitudeByCity(city);
+        String countryID = locationRep.getCountryIDByCity(city);
+        System.out.println("long:" +longitude);
+        System.out.println("lat:" +latitude);
         weather = restTemplate.getForObject("https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/"+longitude +"/lat/" + latitude+"/data.json", Weather.class);
         WeatherCalculator weatherCalc = new WeatherCalculator(weather);
         //SMHI
         Float currentTemp = weatherCalc.getCurrentTemp();
         Float currentWindSpeed = weatherCalc.getCurrentWindSpeed();
         int currentWeatherSymbolnr = weatherCalc.getCurrentWeatherSymbolNumber();
+
 
         //internal loolup
         String currentWeatherCategory = weatherCalc.getWeatherCategory(currentWeatherSymbolnr);
@@ -72,6 +79,9 @@ public class WeatherbasedcontentController {
         model.addAttribute("currentWeatherImage", currentWeatherImager);
         model.addAttribute("currentWeatherSymbolText", currentSymbolText);
         model.addAttribute("contentimage", contentList.get(0).getImage());
+        model.addAttribute("country", countryID);
+        model.addAttribute("tempcat", temperatureCategory);
+
 
 
         return "panel";
