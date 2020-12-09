@@ -56,6 +56,7 @@ public class WeatherbasedcontentController {
         String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
         String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
 
+        //Just to show the values - will rather be used in the Content lookup 
         model.addAttribute("city", city);
         model.addAttribute("weather", weather);
         model.addAttribute("currentTemp", currentTemp);
