@@ -37,16 +37,36 @@ public class WeatherbasedcontentController {
 
 
 
-    @PostMapping("/dummyweather")
+    @PostMapping("/panel")
     public String testSMHI(HttpSession session, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
-        //Stockholm geocode 59.325117	",	"Longitude"	:"	18.071093
+
         System.out.println(city);
+
+        longitude= rep.getLongitudeByCity(city);
+        latitude= rep.getLatitudeByCity(city);
         weather = restTemplate.getForObject("https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/"+longitude +"/lat/" + latitude+"/data.json", Weather.class);
         WeatherCalculator weatherCalc = new WeatherCalculator(weather);
-        weatherCalc.getCurrentTemp();
-        model.addAttribute("location", "Home");
+        //SMHI
+        Float currentTemp = weatherCalc.getCurrentTemp();
+        Float currentWindSpeed = weatherCalc.getCurrentWindSpeed();
+        int currentWeatherSymbolnr = weatherCalc.getCurrentWeatherSymbolNumber();
+
+        //internal loolup
+        String currentWeatherCategory = weatherCalc.getWeatherCategory(currentWeatherSymbolnr);
+        String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
+        String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
+
+        model.addAttribute("city", city);
         model.addAttribute("weather", weather);
-        return "redirect:/setuppanel";
+        model.addAttribute("currentTemp", currentTemp);
+        model.addAttribute("currentWindSpeed", currentWindSpeed);
+        model.addAttribute("currentWeatherSymbolnr", currentWeatherSymbolnr);
+        model.addAttribute("currentWeatherCategory", currentWeatherCategory);
+        model.addAttribute("currentWeatherImage", currentWeatherImager);
+        model.addAttribute("currentWeatherSymbolText", currentSymbolText);
+
+
+        return "panel";
     }
 
 }

@@ -19,4 +19,21 @@ public class LocationRepository {
     public List<Locations> getLocationsList() {
         return locationsList;
     }
+
+    public double getLongitudeByCity(String city) {
+        for (int i=0;i<locationsList.size();i++)
+            if (city.equals(locationsList.get(i).getCity()))
+                return locationsList.get(i).getLongitude();
+
+            return 0.0;
+
+    }
+
+    public double getLatitudeByCity(String city) {
+        for (int i=0;i<locationsList.size();i++)
+            if (city.equals(locationsList.get(i).getCity()))
+                return locationsList.get(i).getLatitude();
+
+        return 0.0;
+    }
 }

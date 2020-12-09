@@ -5,7 +5,18 @@
     <title>Dummy weather Page</title>
 </head>
 <body>
-<h1>TEst</h1>
+<h1 th:text="${city}"></h1>
+<h2>Current values:</h2>
+<h3 th:text="'temp: ' + ${currentTemp}+' C'"></h3>
+<h3 th:text="'wind: ' + ${currentWindSpeed} + ' m/s'"></h3>
+<h3 th:text="'category: ' + ${currentWeatherCategory} + ' m/s'"></h3>
+<h3 th:text="'symbolnr: ' + ${currentWeatherSymbolnr}"></h3>
+<h3 th:text="'symboltext: ' + ${currentWeatherSymbolText}"></h3>
+<img th:src="${currentWeatherImage}"/>
+<!--
+model.addAttribute("currentWeatherImage", currentWeatherImager);
+        model.addAttribute("currentWeatherSymbolText", currentSymbolText);
+-->
 <table border="1">
     <tr>
         <th>Time</th>
@@ -16,8 +27,7 @@
         <td th:text="${time.validTime}"></td>
         <td th:each="parameter : ${time.parameters}" th:if="${parameter.name} == 't'"><span th:text="${parameter.getValue()}"></span></td>
         <td th:each="parameter : ${time.parameters}" th:if="${parameter.name} == 'Wsymb2'">
-            <span th:if="${parameter.getValue()} == 1">☀️</span>
-            <span th:if="${parameter.getValue()} == 2">🌤️</span>
+
             <span th:text="${parameter.getValue()}"></span>
         </td>
     </tr>

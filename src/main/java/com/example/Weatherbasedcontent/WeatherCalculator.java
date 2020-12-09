@@ -1,79 +1,80 @@
 package com.example.Weatherbasedcontent;
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
 
 public class WeatherCalculator {
-
-    public String[] weatherSymbolText = {"Clearsky",
-            "Nearlyclearsky",
-            "Variablecloudiness",
-            "Halfclearsky",
-            "Cloudysky",
-            "Overcast",
-            "Fog",
-            "Lightrainshowers",
-            "Moderaterainshowers",
-            "Heavyrainshowers",
-            "Thunderstorm",
-            "Lightsleetshowers",
-            "Moderatesleetshowers",
-            "Heavysleetshowers",
-            "Lightsnowshowers",
-            "Moderatesnowshowers",
-            "Heavysnowshowers",
-            "Lightrain",
-            "Moderaterain",
-            "Heavyrain",
-            "Thunder",
-            "Lightsleet",
-            "Moderatesleet",
-            "Heavysleet",
-            "Lightsnowfall",
-            "Moderatesnowfall",
-            "Heavysnowfall"};
-
     private Weather weather;
+    private List<WeatherSymbols> weatherSymbols = new ArrayList<WeatherSymbols>();
 
     public WeatherCalculator(Weather weather) {
         this.weather = weather;
+        setupWeatherSymbols();
+    }
+
+    private void setupWeatherSymbols() {
+
+        weatherSymbols.add(new WeatherSymbols("Sunny","https://img.icons8.com/office/30/000000/summer.png","Clear sky"));//1
+        weatherSymbols.add(new WeatherSymbols("Sunny","https://img.icons8.com/office/30/000000/summer.png","Nearly clear sky"));//2
+        weatherSymbols.add(new WeatherSymbols("Sunny","https://img.icons8.com/office/30/000000/summer.png","Variable cloudiness"));//3
+        weatherSymbols.add(new WeatherSymbols("Sunny","https://img.icons8.com/office/30/000000/summer.png","Halfclear sky"));//4
+        weatherSymbols.add(new WeatherSymbols("Cloud","https://img.icons8.com/office/30/000000/partly-cloudy-day--v1.png","Cloudy sky"));//5
+        weatherSymbols.add(new WeatherSymbols("Cloud","https://img.icons8.com/office/30/000000/clouds.png","Overcast"));//6
+        weatherSymbols.add(new WeatherSymbols("Cloud","https://img.icons8.com/office/30/000000/fog-night.png","Fog"));//7
+        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/light-rain-2.png","Light rain showers"));//8
+        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/moderate-rain.png","Moderate rain showers"));//9
+        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/downpour.png","Heavy rain showers"));//10
+        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/storm.png","Thunderstorm"));//11
+        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Light sleet showers"));//12
+        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Moderate sleet showers"));//13
+        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Heavy sleet showers"));//14
+        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/light-snow.png","Light snow showers"));//15
+        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/snow.png","Moderate snow showers"));//16
+        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/snow-storm.png","Heavy snow showers"));//17
+        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/light-rain-2.png","Light rain"));//18
+        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/moderate-rain.png","Moderate rain"));//19
+        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/downpour.png","Heavy rain"));//20
+        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/storm.png","Thunder"));//21
+        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Light sleet"));//22
+        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Moderate sleet"));//23
+        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Heavy sleet"));//24
+        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/light-snow.png","Light snowfall"));//25
+        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/snow.png","Moderate snowfall"));//26
+        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/snow-storm.png","Heavy snowfall"));//27
+
+    }
+    //from SMHI
+    public Float getCurrentTemp() {
+        Date date  =  weather.getTimeSeries()[0].getValidTime();
+        return  getTemperatureParameter(weather.getTimeSeries()[0]).getValue();
     }
 
 
-    public void getCurrentTemp() {
 
-
-
-
-
-
-
-        Date date  =  weather.getTimeSeries()[0].getValidTime(); //Tue Dec 08 12:00:00 CET 2020
-        Float currentTemp =  getTemperatureParameter(weather.getTimeSeries()[0]).getValue();
-
-        Float currentWeatherStatusNumber = getWeatherStatusParameter(weather.getTimeSeries()[0]).getValues()[0];
-
-        Float currentWindSpeedNumber = getWindSpeedParameter(weather.getTimeSeries()[0]).getValues()[0];
-
-
-
-        System.out.println(date + " temp: " + currentTemp + " | symbolnumber: " + currentWeatherStatusNumber + " | wind speed: " + currentWindSpeedNumber);
-        getWeatherCategory(currentWeatherStatusNumber);
+    //from SMHI
+    public Integer getCurrentWeatherSymbolNumber(){
+        return (int)(float)getWeatherStatusParameter(weather.getTimeSeries()[0]).getValues()[0];
+    }
+    //from SMHI
+    public Float getCurrentWindSpeed(){
+        return getWindSpeedParameter(weather.getTimeSeries()[0]).getValues()[0];
+    }
+    //internal lookup
+    public String getWeatherCategory(int weatherSymbolNumber) {
+        return weatherSymbols.get(weatherSymbolNumber+1).getCategory();
+    }
+    //internal lookup
+    public String getWeatherCategoryImage(int weatherSymbolNumber) {
+        return weatherSymbols.get(weatherSymbolNumber+1).getImage();
+    }
+    //internal lookup
+    public String getCurrentWeatherSymbolText(int weatherSymbolNumber) {
+        return weatherSymbols.get(weatherSymbolNumber+1).getName();
     }
 
-    private void getWeatherCategory(Float currentWeatherStatusNumber) {
 
-
-        float x = (Float)currentWeatherStatusNumber;
-
-        if (currentWeatherStatusNumber<=4.0 && currentWeatherStatusNumber>=1.0)
-            System.out.println("Sunny");
-        else if (currentWeatherStatusNumber<=11.0 && currentWeatherStatusNumber>=8)
-            System.out.println("Rain");
-        else
-            System.out.println(weatherSymbolText[(int)x-1]);
-    }
-
+    //help method SMHI
     private Parameters getWeatherStatusParameter(TimeSeries timeSery) {
         for (int i=0; i < timeSery.getParameters().length;i++){
             if (timeSery.getParameters()[i].getName().equals("Wsymb2")) {
@@ -85,6 +86,7 @@ public class WeatherCalculator {
         return null;
     }
 
+    //help method SMHI
     private Parameters getTemperatureParameter(TimeSeries timeSery) {
 
         for (int i=0; i < timeSery.getParameters().length;i++){
@@ -98,7 +100,7 @@ public class WeatherCalculator {
         return null;
     }
 
-
+    //help method SMHI
     private Parameters getWindSpeedParameter(TimeSeries timeSery) {
 
         for (int i=0; i < timeSery.getParameters().length;i++){
@@ -111,4 +113,6 @@ public class WeatherCalculator {
 
         return null;
     }
+
+
 }
