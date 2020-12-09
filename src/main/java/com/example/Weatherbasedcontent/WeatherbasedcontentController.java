@@ -55,8 +55,8 @@ public class WeatherbasedcontentController {
         String currentWeatherCategory = weatherCalc.getWeatherCategory(currentWeatherSymbolnr);
         String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
         String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
-        String getTemperatureCategory = weatherCalc.getTempCategory(currentTemp);
-        System.out.println(getTemperatureCategory);
+        int temperatureCategory = weatherCalc.getTempCategory(currentTemp);
+        System.out.println(temperatureCategory);
 
        // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,department,)
         //test contentcall
@@ -75,6 +75,18 @@ public class WeatherbasedcontentController {
 
 
         return "panel";
+    }
+
+    @PostMapping("/index")
+    public String index(HttpSession session, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
+
+        List<Content> contentList = productRepos.getContentList(3);
+
+
+        model.addAttribute("contentList", contentList);
+
+
+        return "index";
     }
 
 }

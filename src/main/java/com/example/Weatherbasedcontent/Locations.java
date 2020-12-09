@@ -4,12 +4,14 @@ public class Locations {
 
     private Double longitude;
     private Double latitude;
-    private String City;
+    private String city;
+    private String country;
 
-    public Locations(String city,  Double latitude, Double longitude) {
+    public Locations(String city,  Double latitude, Double longitude, String country) {
         this.longitude = longitude;
         this.latitude = latitude;
-        City = city;
+        this.city = city;
+        this.country =country;
     }
 
     public Double getLongitude() {
@@ -29,11 +31,11 @@ public class Locations {
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        City = city;
+        city = city;
     }
 
 

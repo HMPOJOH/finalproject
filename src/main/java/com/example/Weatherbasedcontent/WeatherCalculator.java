@@ -131,28 +131,28 @@ Jättekallt	- -10 ->
     }
 
 
-    public String getTempCategory(Float currentTemp) {
+    public int getTempCategory(Float currentTemp) {
         if (currentTemp>=28)
-            return "Hot";
+            return 1;
         else if (currentTemp>=22 && currentTemp<28)
-            return "Warm";
-        else if (currentTemp>=14 && currentTemp<22)
-            return "Calm";
-        else if (currentTemp>=4 && currentTemp<14)
-            return "Average";
+            return 2;
+        else if (currentTemp>=4 && currentTemp<22)
+            return 5;
         else if (currentTemp>=-3 && currentTemp<4)
-            return "Cold";
+            return 3;
         else
-            return "Very cold";
+            return 4;
 
 
             /*
 
-    INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Hot');
-INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Warm');
-INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Cold');
-INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Very cold');
-INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Average');
+
+1	Hot
+2	Warm
+3	Cold
+4	Very cold
+5	Average
+
 
 Jättevarmt	- 28+
 Varmt		- 22 - 27

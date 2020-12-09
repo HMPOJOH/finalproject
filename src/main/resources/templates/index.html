@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
@@ -39,7 +39,10 @@
     }
     </style>
     </header>
- 
+
+
+
+
 
   <div class="w3-content w3-section" style="max-width: 500px; float: top;">
       <img class="mySlides w3-animate-fading" src="swimshorts1.jfif" style="width:100%" >
@@ -60,13 +63,10 @@
     <img class="mySlides2 w3-animate-fading" src="swimshorts4.jfif" style="width:100%">
   </div>
 
-  <div class="w3-content w3-section" style="max-width: 500px; float: top;">
-    <img class="mySlides3 w3-animate-fading" src="swimshorts1.jfif" style="width:100%">
-    <img class="mySlides3 w3-animate-fading" src="swimshorts2.jfif" style="width:100%">
-    <img class="mySlides3 w3-animate-fading" src="swimshorts3.jfif" style="width:100%">
-    <img class="mySlides3 w3-animate-fading" src="swimshorts4.jfif" style="width:100%">
+  <div class="w3-content w3-section" style="max-width: 500px; float: top;" >
+    <img th:each="contentItem : ${contentList}" class="mySlides3 w3-animate-fading" th:src="${contentItem.image}" style="width:100%">
   </div>
- 
+
 
 
   <script>

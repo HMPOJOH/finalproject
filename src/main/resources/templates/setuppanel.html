@@ -31,6 +31,20 @@
 </form>
 
 
+<form th:action="@{/index}" method="POST" >
+
+
+
+    <select th:name="city">
+        <option th:each="location : ${locations}"
+                th:value="${location.city}"
+                th:text="${location.city}"></option>
+    </select>
+
+    <input type="submit" value="Start Index">
+</form>
+
+
 
 </body>
 </html>

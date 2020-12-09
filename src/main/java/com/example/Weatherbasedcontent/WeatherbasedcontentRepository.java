@@ -23,14 +23,14 @@ public class WeatherbasedcontentRepository {
 
     public List<Content> getContentList(int searchScenario) {
         List<Content> content = new ArrayList<>();
-        searchScenario = 1; /* set to 1 during test */
+
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, SCENARIO.DESCRIPTION AS SCENARIO\n" +
                      "FROM CONTENTBYSCENARIO \n" +
                      "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
                      "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
-                     "WHERE CONTENTBYSCENARIO.ID =" + searchScenario)) {
+                     "WHERE CONTENTBYSCENARIO.SCENARIOID =" + searchScenario)) {
 
             while (rs.next()) {
                 content.add(rsContent(rs));
