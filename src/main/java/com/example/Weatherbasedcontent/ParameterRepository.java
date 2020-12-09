@@ -16,7 +16,7 @@ public class ParameterRepository {
 
     @Autowired
     private DataSource dataSource;
-
+/*
     public int getSeason(String chosenDate, String country) {
         int season = 1;
 
@@ -35,7 +35,7 @@ public class ParameterRepository {
             e.printStackTrace();
         }
         return season;
-    }
+    }*/
     public List<Department> getDepList() {
         List<Department> department = new ArrayList<>();
 

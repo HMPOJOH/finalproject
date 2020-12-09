@@ -38,8 +38,8 @@ public class WeatherbasedcontentController {
 
         possibleLocations = locationRep.getLocationsList();
         departments = prmRep.getDepList();
-        //season = prmRep.getSeason('2020-12-08','SE');
-        System.out.println("season " + season);
+        //season = prmRep.getSeason('2020-12-08','SE'); I did the same in weatchercalc :) But i use date from timeseries instead..  //pJ
+        //System.out.println("season " + season);
         model.addAttribute("weather", weather);
         model.addAttribute("locations", possibleLocations);
         model.addAttribute("departments", departments);
@@ -77,7 +77,7 @@ public class WeatherbasedcontentController {
 
 
          int getCurrentSeasonId = productRepos.getCurrentSeasonId(currentDate, countryID);
-        System.out.println("seasonid"+ getCurrentSeasonId);
+        System.out.println("seasonid "+ getCurrentSeasonId);
         String currentWeatherCategory = weatherCalc.getWeatherCategory(currentWeatherSymbolnr);
         String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
         String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
