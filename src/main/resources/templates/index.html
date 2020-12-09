@@ -8,7 +8,8 @@
 </head>
 
 <body>
- 
+
+
 
   <div class="login" align="right">
     <form action="" method="post">
@@ -17,7 +18,18 @@
     </form>
   </div>
 
+
+
 <div id="imageBox" align="center">
+  
+  <div class="header" align="left">
+    <img th:src="${currentWeatherImage}"><h1 th:text="${city}+' ' +${country}"></h1>
+    <h3 th:text="'temp: ' + ${currentTemp}+' C'"></h3>
+    <h3 th:text="'wind: ' + ${currentWindSpeed} + ' m/s'"></h3>
+
+
+
+  </div>
 
 
   <header>
@@ -41,30 +53,28 @@
     </header>
 
 
-
-
-
-  <div class="w3-content w3-section" style="max-width: 500px; float: top;">
-      <img class="mySlides w3-animate-fading" src="swimshorts1.jfif" style="width:100%" >
-    <a href="index.html" id= "logo">
-      <h1>Swimshorts </h1>
-      <h2>199 SEK</h2>   
-  </a>
+  <div class="w3-content w3-section" style="width: 50%; float: right;">
+    <img class="mySlides w3-animate-fading" src="swimshorts1.jfif" style="width:100%">
     <img class="mySlides w3-animate-fading" src="swimshorts2.jfif" style="width:100%">
     <img class="mySlides w3-animate-fading" src="swimshorts3.jfif" style="width:100%">
     <img class="mySlides w3-animate-fading" src="swimshorts4.jfif" style="width:100%">
+
   </div>
 
 
-  <div class="w3-content w3-section" style="max-width: 500px; float: top;">
+  <div class="w3-content w3-section" style="width: 50%; float: left;">
     <img class="mySlides2 w3-animate-fading" src="swimshorts1.jfif" style="width:100%">
     <img class="mySlides2 w3-animate-fading" src="swimshorts2.jfif" style="width:100%">
     <img class="mySlides2 w3-animate-fading" src="swimshorts3.jfif" style="width:100%">
     <img class="mySlides2 w3-animate-fading" src="swimshorts4.jfif" style="width:100%">
   </div>
 
-  <div class="w3-content w3-section" style="max-width: 500px; float: top;" >
-    <img class="mySlides3 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%">
+  <div class="w3-content w3-section" style="max-width: 50%; float: top;" >
+    <img class="mySlides3 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%" src="">
+  </div>
+
+  <div class="w3-content w3-section" style="max-width: 50%; float: top;" >
+    <img class="mySlides3 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%" src="">
   </div>
 
 
