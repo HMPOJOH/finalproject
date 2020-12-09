@@ -43,8 +43,14 @@ INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=sourc
 INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/d5/c2/d5c2edea1733d101e38b6891a9b5dda6843a3846.jpg],origin[dam],category[men_accessories_sunglasses],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0888077002.html');
 INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/15/d1/15d1feb2c8a630be596f7b880ecd235cbe91007c.jpg],origin[dam],category[men_jacketscoats_jackets],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0905401003.html');
 INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F20%2Fc0%2F20c01d9317b8b6ad199c6a3468c0fa53236698b1.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_hoodiessweatshirts_hoodies%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0917818001.html');
+INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F44%2F11%2F4411906142799cd6d7a9a5f9fafe3325b9281624.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_accessories_hatsandgloves%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0557048001.html');
+INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F17%2F1e%2F171ee680ed7f25efa9936d7e658b4f825dd7aac0.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_jacketscoats_jackets%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0819500006.html');
+INSERT INTO CONTENT (IMAGE,URL) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/ed/9a/ed9a41fb39cd7f8be80629a18c89560b1e9e916d.jpg],origin[dam],category[ladies_swimwear_swimsuits],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0636505001.html');
 
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (1,1);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (2,2);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (3,3);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (4,3);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (5,4);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (6,5);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (7,6);
