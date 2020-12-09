@@ -23,8 +23,8 @@
 
     <select th:name="city">
         <option th:each="location : ${locations}"
-                th:value="${location.city}"
-                th:text="${location.city}"></option>
+                th:value="${location.name}"
+                th:text="${location.name}"></option>
     </select>
 
     <input type="submit" value="Start Panel">
@@ -37,8 +37,8 @@
 
     <select th:name="city">
         <option th:each="location : ${locations}"
-                th:value="${location.city}"
-                th:text="${location.city}"></option>
+                th:value="${location.name}"
+                th:text="${location.name}"></option>
     </select>
 
     <input type="submit" value="Start Index">
