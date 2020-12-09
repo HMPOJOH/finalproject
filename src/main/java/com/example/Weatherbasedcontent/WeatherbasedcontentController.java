@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+
+import static java.util.Calendar.YEAR;
 
 @Controller
 public class WeatherbasedcontentController {
@@ -41,6 +45,8 @@ public class WeatherbasedcontentController {
 
 
     @PostMapping("/panel")
+
+    //this is just for testing that we have all values we want
     public String testSMHI(HttpSession session, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
 
         System.out.println(city);
@@ -60,14 +66,22 @@ public class WeatherbasedcontentController {
         int currentWeatherSymbolnr = weatherCalc.getCurrentWeatherSymbolNumber();
 
 
-        //internal loolup
+        //internal loolup time.format(DateTimeFormatter.ISO_DATE_TIME);
+        Date currentDate = weatherCalc.getCurrentDate();
+        System.out.println(currentDate);
+
+
+         int getCurrentSeasonId = productRepos.getCurrentSeasonId(currentDate, countryID);
+        System.out.println("seasonid"+ getCurrentSeasonId);
         String currentWeatherCategory = weatherCalc.getWeatherCategory(currentWeatherSymbolnr);
         String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
         String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
         int temperatureCategory = weatherCalc.getTempCategory(currentTemp);
         System.out.println(temperatureCategory);
+        //desc, seasonid, weathersymbolid, tempid, department =
 
-       // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,department,)
+
+        // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,1,)
         //test contentcall
         List<Content> contentList = productRepos.getContentList(1);
 

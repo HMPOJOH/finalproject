@@ -89,6 +89,10 @@ Jättekallt	- -10 ->
         return weatherSymbols.get(weatherSymbolNumber-1).getName();  //list starts with 0
     }
 
+    public Date getCurrentDate (){
+        return weather.getTimeSeries()[0].getValidTime();
+    }
+
 
     //help method SMHI
     private Parameters getWeatherStatusParameter(TimeSeries timeSery) {

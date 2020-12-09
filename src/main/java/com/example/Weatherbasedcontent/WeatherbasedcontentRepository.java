@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -48,5 +50,28 @@ public class WeatherbasedcontentRepository {
                 rs.getString("IMAGE"),
                 rs.getString("URL"),
                 rs.getString("TEXT"));
+    }
+
+    public int getCurrentSeasonId(Date currentDate, String isoCountry) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+
+
+        String date= dateFormat.format(currentDate);
+        System.out.println(date);
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date+"' AND DATETO>='"+date+"'") ) {
+//SELECT * FROM SEASONPERCOUNTRY WHERE COUNTRYID='SE' AND DATEFROM<='2020-12-09' AND DATETO>='2020-12-09'
+            if (rs.next()) {
+                return rs.getInt("ID");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return 1;
     }
 }
