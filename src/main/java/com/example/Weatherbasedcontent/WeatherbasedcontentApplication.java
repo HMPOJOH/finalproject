@@ -20,3 +20,4 @@ public class WeatherbasedcontentApplication {
 }
 
 //Championi TEST
+//Hasse test
