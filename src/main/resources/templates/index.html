@@ -64,8 +64,9 @@
   </div>
 
   <div class="w3-content w3-section" style="max-width: 500px; float: top;" >
-    <img th:each="contentItem : ${contentList}" class="mySlides3 w3-animate-fading" th:src="${contentItem.image}" style="width:100%">
+    <img class="mySlides3 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%">
   </div>
+
 
 
 
@@ -74,8 +75,8 @@
   carousel();
   
   function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
+    let i;
+    let x = document.getElementsByClassName("mySlides");
     for (i = 0; i < x.length; i++) {
       x[i].style.display = "none";  
     }
@@ -85,36 +86,38 @@
     setTimeout(carousel, 9000);    
   }
 
-  var myIndex = 0;
+  var myIndex2 = 0;
   carousel2();
   
   function carousel2() {
-    var i;
-    var x = document.getElementsByClassName("mySlides2");
+    let i;
+    let x = document.getElementsByClassName("mySlides2");
     for (i = 0; i < x.length; i++) {
       x[i].style.display = "none";  
     }
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}    
-    x[myIndex-1].style.display = "block";  
+    myIndex2++;
+    if (myIndex2 > x.length) {myIndex2 = 1}
+    x[myIndex2-1].style.display = "block";
     setTimeout(carousel2, 9000);    
   }
 
-  var myIndex = 0;
+  var myIndex3 = 0;
   carousel3();
   
   function carousel3() {
-    var i;
-    var x = document.getElementsByClassName("mySlides3");
+    let i;
+    let x = document.getElementsByClassName("mySlides3");
     for (i = 0; i < x.length; i++) {
       x[i].style.display = "none";  
     }
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}    
-    x[myIndex-1].style.display = "block";  
+    myIndex3++;
+    if (myIndex3 > x.length) {myIndex3 = 1}
+    x[myIndex3-1].style.display = "block";
     setTimeout(carousel3, 9000);    
   }
   </script>
+
+</div>
 
 
 </body>
