@@ -91,6 +91,12 @@ public class WeatherbasedcontentController {
             weatherCategoryId = 1;
             weatherImage = "https://img.icons8.com/office/30/000000/summer.png";
             symbolText = "Clear sky";
+
+            weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
+
+            temperature = (float)weatherOutsideSE.getMain().getTemp();
+            windSpeed = (float)weatherOutsideSE.getWind().getSpeed();
+            weatherImage = "http://openweathermap.org/img/wn/"+weatherOutsideSE.getWeather().get(0).getIcon()+ "@2x.png";
         }
      else if (countryID.equals("UK")) {
         //get parameters
@@ -127,6 +133,11 @@ public class WeatherbasedcontentController {
         weatherCategoryId = 4;
         weatherImage = "https://img.icons8.com/office/30/000000/snow.png";
         symbolText = "Moderate snowfall";
+            weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
+
+            temperature = (float)weatherOutsideSE.getMain().getTemp();
+            windSpeed = (float)weatherOutsideSE.getWind().getSpeed();
+            weatherImage = "http://openweathermap.org/img/wn/"+weatherOutsideSE.getWeather().get(0).getIcon()+ "@2x.png";
     }
 
 
