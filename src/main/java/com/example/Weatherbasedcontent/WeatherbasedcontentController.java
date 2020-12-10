@@ -1,5 +1,6 @@
 package com.example.Weatherbasedcontent;
 
+import com.example.Weatherbasedcontent.InternationalWeather.WeatherOutsideSE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -24,6 +24,7 @@ public class WeatherbasedcontentController {
     private ParameterRepository prmRep;
 
     private Weather weatherFromSMHI = new Weather();
+    private WeatherOutsideSE weatherOutsideSE;
     private List<City> possibleLocations = new ArrayList<City>();
     private List<Department> departments = new ArrayList<Department>();
     private int season = 0;
@@ -98,7 +99,12 @@ public class WeatherbasedcontentController {
         weatherCategoryId = 2;
         weatherImage = "https://img.icons8.com/office/30/000000/downpour.png";
         symbolText = "Heavy rain";
-    }
+
+        //just for testing!
+            weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
+            System.out.println(weatherOutsideSE.getMain().getTemp());
+
+     }
 
      else if (countryID.equals("CA")) {
         //get parameters
