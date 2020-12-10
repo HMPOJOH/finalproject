@@ -58,35 +58,19 @@ public class WeatherbasedcontentController {
         //Analyze SMHI weather for a specific day
         WeatherAnalyzerBySMHIDay weatherOfToDay = new WeatherAnalyzerBySMHIDay(weatherFromSMHI, SMHIDays.TODAY); //Two inputs, SMHI weather + which day to analyze
 
-
+        //get parameters
         Float currentTemp = weatherOfToDay.getTemp();
-        Float currentWindSpeed = weatherOfToDay.getCurrentWindSpeed();
-        int currentWeatherSymbolnr = weatherOfToDay.getCurrentWeatherSymbolNumber();
+        int temperatureCategory = weatherOfToDay.getTempCategory(currentTemp);
+        Float currentwindSpeed = weatherOfToDay.getWindSpeed();
+        int currentWeatherSymbolnr = weatherOfToDay.getWeatherSymbolNumber();
 
-
-        //internal loolup time.format(DateTimeFormatter.ISO_DATE_TIME);
-        Date currentDate = weatherOfToDay.getCurrentDate();
-        System.out.println(currentDate);
-
-
-        int getCurrentSeasonId = prmRep.getSeasonIdbyDateAndCountry(currentDate, countryID);
-        System.out.println("dep: "+department);
-        System.out.println("seasonid "+ getCurrentSeasonId);
-        System.out.println("weatherSymbolnr:"+currentWeatherSymbolnr);
+        int getCurrentSeasonId = prmRep.getSeasonIdbyDateAndCountry(weatherOfToDay.getDateFromTimeSerieOfChoice(), countryID);
         String currentWeatherCategory = weatherOfToDay.getWeatherCategory(currentWeatherSymbolnr);
-
-        System.out.println("weatherCategoryName:"+ currentWeatherCategory);
         int currentWeatherCategoryId = weatherOfToDay.getWeatherCategoryId(currentWeatherSymbolnr);
-        System.out.println("weatherCategoryId:"+ currentWeatherCategoryId);
         String currentWeatherImager = weatherOfToDay.getWeatherCategoryImage(currentWeatherSymbolnr);
         String currentSymbolText = weatherOfToDay.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
-        int temperatureCategory = weatherOfToDay.getTempCategory(currentTemp);
 
-
-        System.out.println("tempcat:" + temperatureCategory);
         //desc, seasonid, weathersymbolid, tempid, department =
-
-
         int scenarioId = prmRep.getScenarioId(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
         System.out.println("scenarioId:" + scenarioId);
         Scenario scenario = prmRep.getScenario(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
@@ -98,12 +82,11 @@ public class WeatherbasedcontentController {
         model.addAttribute("city", city);
         model.addAttribute("weather", weatherFromSMHI);
         model.addAttribute("currentTemp", currentTemp);
-        model.addAttribute("currentWindSpeed", currentWindSpeed);
+        model.addAttribute("currentWindSpeed", currentwindSpeed);
         model.addAttribute("currentWeatherSymbolnr", currentWeatherSymbolnr);
         model.addAttribute("currentWeatherCategory", currentWeatherCategory);
         model.addAttribute("currentWeatherImage", currentWeatherImager);
         model.addAttribute("currentWeatherSymbolText", currentSymbolText);
-        model.addAttribute("contentimage", contentList.get(0).getImage());
         model.addAttribute("country", countryID);
         model.addAttribute("tempcat", temperatureCategory);
         model.addAttribute("contentList", contentList);

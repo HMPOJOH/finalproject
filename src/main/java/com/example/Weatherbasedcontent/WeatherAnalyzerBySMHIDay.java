@@ -9,11 +9,13 @@ public class WeatherAnalyzerBySMHIDay {
     private Weather weather;
     private List<WeatherSymbols> weatherSymbols = new ArrayList<WeatherSymbols>();
     private SMHIDays smhiDay;
+    private int timeSerieIndex;
 
     public WeatherAnalyzerBySMHIDay(Weather weather, SMHIDays smhiDay ) {
         this.weather = weather;
         this.smhiDay=smhiDay;
         setupWeatherSymbols();
+        timeSerieIndex=getTimeSerieIndex(smhiDay);
     }
 
 
@@ -75,7 +77,7 @@ Jättekallt	- -10 ->
     }
     //from SMHI
     public Float getTemp() {
-        int timeSerieIndex = getTimeSerieIndex(smhiDay);
+
 
         Date date  =  weather.getTimeSeries()[timeSerieIndex].getValidTime();
         return  getTemperatureParameter(weather.getTimeSeries()[timeSerieIndex]).getValue();
@@ -167,12 +169,12 @@ Jättekallt	- -10 ->
 
 
     //from SMHI
-    public Integer getCurrentWeatherSymbolNumber(){
-        return (int)(float)getWeatherStatusParameter(weather.getTimeSeries()[0]).getValues()[0];
+    public Integer getWeatherSymbolNumber(){
+        return (int)(float)getWeatherStatusParameter(weather.getTimeSeries()[timeSerieIndex]).getValues()[0];
     }
     //from SMHI
-    public Float getCurrentWindSpeed(){
-        return getWindSpeedParameter(weather.getTimeSeries()[0]).getValues()[0];
+    public Float getWindSpeed(){
+        return getWindSpeedParameter(weather.getTimeSeries()[timeSerieIndex]).getValues()[0];
     }
     //internal lookup
     public String getWeatherCategory(int weatherSymbolNumber) {
@@ -192,9 +194,10 @@ Jättekallt	- -10 ->
         return weatherSymbols.get(weatherSymbolNumber-1).getName();  //list starts with 0
     }
 
-    public Date getCurrentDate (){
-        return weather.getTimeSeries()[0].getValidTime();
+    public Date getDateFromTimeSerieOfChoice(){
+        return weather.getTimeSeries()[timeSerieIndex].getValidTime();
     }
+
 
 
     //help method SMHI
