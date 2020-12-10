@@ -36,7 +36,14 @@ public class LocationRepository {
 
     }
 
-    public double getLongitudeByCity(String city) {
+    public double getLongitudeByCity(List<City> cities, String city) {
+
+        Double longitude;
+
+        longitude = cities.stream()
+                    .filter(x -> city.equals(x.getName())).findAny().orElse(null).getLongitude();
+
+/*
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("select LONGITUDE FROM CITY WHERE NAME='" + city + "'") ) {
@@ -50,12 +57,15 @@ public class LocationRepository {
         }
 
 
-            return 0.0;
+ */
+
+
+            return longitude;
 
     }
 
-    public double getLatitudeByCity(String city) {
-        try (Connection conn = dataSource.getConnection();
+    public double getLatitudeByCity(List<City> cities, String city) {
+       /* try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("select LATITUDE FROM CITY WHERE NAME='" + city + "'") ) {
 
@@ -66,10 +76,25 @@ public class LocationRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0.0;
+        return 0.0;*/
+
+        Double latitude;
+
+        latitude = cities.stream()
+                .filter(x -> city.equals(x.getName())).findAny().orElse(null).getLatitude();
+        return latitude;
     }
 
-    public String getCountryIDByCity(String city) {
+    public String getCountryIDByCity(List<City> cities,String city) {
+
+
+       String isoCountry;
+
+        isoCountry = cities.stream()
+                .filter(x -> city.equals(x.getName())).findAny().orElse(null).getCountryid();
+
+        return isoCountry;
+       /*
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("select COUNTRYID FROM CITY WHERE NAME='" + city + "'") ) {
@@ -81,7 +106,7 @@ public class LocationRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return null;*/
     }
 
 
