@@ -85,6 +85,8 @@ public class WeatherbasedcontentController {
 
         int scenarioId = prmRep.getScenarioId(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
         System.out.println("scenarioId:" + scenarioId);
+        Scenario scenario = prmRep.getScenario(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
+        System.out.println(scenario.getDescription());
         //test contentcall
         List<Content> contentList = productRepos.getContentList(scenarioId);
 
@@ -101,6 +103,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("country", countryID);
         model.addAttribute("tempcat", temperatureCategory);
         model.addAttribute("contentList", contentList);
+        model.addAttribute("scenario", scenario.getDescription());
 
 
 
