@@ -5,12 +5,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class WeatherAnalyzer {
+public class WeatherAnalyzerBySMHIDay {
     private Weather weather;
     private List<WeatherSymbols> weatherSymbols = new ArrayList<WeatherSymbols>();
+    private SMHIDays smhiDay;
 
-    public WeatherAnalyzer(Weather weather) {
+    public WeatherAnalyzerBySMHIDay(Weather weather, SMHIDays smhiDay ) {
         this.weather = weather;
+        this.smhiDay=smhiDay;
         setupWeatherSymbols();
     }
 
@@ -72,7 +74,7 @@ Jättekallt	- -10 ->
 
     }
     //from SMHI
-    public Float getTempByDay(SMHIDays smhiDay) {
+    public Float getTemp() {
         int timeSerieIndex = getTimeSerieIndex(smhiDay);
 
         Date date  =  weather.getTimeSeries()[timeSerieIndex].getValidTime();
@@ -83,28 +85,6 @@ Jättekallt	- -10 ->
         int index = 0;
         //create a variable to compare
         LocalDateTime today13 = LocalDate.now().atTime(13,0);
-
-        /*
-        System.out.println("plus1: "+today13.plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
-        System.out.println("plus1: "+today13.plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
-        System.out.println("plus1: "+today13.plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
-        System.out.println("plus1: "+today13.plusDays(4).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
-        System.out.println("plus1: "+today13.plusDays(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
-        System.out.println("plus1: "+today13.plusDays(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
-        System.out.println("plus1: "+today13.plusDays(7).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
-
-
-
-
-        SimpleDateFormat comparePattern = new SimpleDateFormat ("yyyy-MM-dd:HH");
-        System.out.println("format SMHIDATE0: " + comparePattern.format(weather.getTimeSeries()[0].getValidTime()));
-        System.out.println("format SMHIDATE10: " + comparePattern.format(weather.getTimeSeries()[10].getValidTime()));
-        System.out.println("format SMHIDATE20: " + comparePattern.format(weather.getTimeSeries()[20].getValidTime()));
-
-
-         */
-
-
 
         switch (smhiDay) {
             case TODAY:
