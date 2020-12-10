@@ -4,11 +4,11 @@ import java.util.Date;
 
 import java.util.List;
 
-public class WeatherCalculator {
+public class WeatherAnalyzer {
     private Weather weather;
     private List<WeatherSymbols> weatherSymbols = new ArrayList<WeatherSymbols>();
 
-    public WeatherCalculator(Weather weather) {
+    public WeatherAnalyzer(Weather weather) {
         this.weather = weather;
         setupWeatherSymbols();
     }
