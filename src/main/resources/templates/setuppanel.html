@@ -37,6 +37,12 @@
                 th:value="${dep.id}"
                 th:text="${dep.description}"></option>
     </select>
+        <select name ="smhidays" id="smhidays">
+            <option th:each="day : ${T(com.example.Weatherbasedcontent.SMHIDays).values()}"
+                    th:value="${day}"
+                    th:text="${day}"></option>
+        </select>
+
 
     <input type="submit" id ="submit" value="Start Index" align="center">
 </form>

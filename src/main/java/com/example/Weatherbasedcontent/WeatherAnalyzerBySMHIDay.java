@@ -1,16 +1,21 @@
 package com.example.Weatherbasedcontent;
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
-import java.util.List;
-
-public class WeatherAnalyzer {
+public class WeatherAnalyzerBySMHIDay {
     private Weather weather;
     private List<WeatherSymbols> weatherSymbols = new ArrayList<WeatherSymbols>();
+    private SMHIDays smhiDay;
+    private int timeSerieIndex;
 
-    public WeatherAnalyzer(Weather weather) {
+    public WeatherAnalyzerBySMHIDay(Weather weather, SMHIDays smhiDay ) {
         this.weather = weather;
+        this.smhiDay=smhiDay;
         setupWeatherSymbols();
+        timeSerieIndex=getTimeSerieIndex(smhiDay);
     }
 
 
@@ -71,20 +76,105 @@ Jättekallt	- -10 ->
 
     }
     //from SMHI
-    public Float getCurrentTemp() {
-        Date date  =  weather.getTimeSeries()[0].getValidTime();
-        return  getTemperatureParameter(weather.getTimeSeries()[0]).getValue();
+    public Float getTemp() {
+
+
+        Date date  =  weather.getTimeSeries()[timeSerieIndex].getValidTime();
+        return  getTemperatureParameter(weather.getTimeSeries()[timeSerieIndex]).getValue();
+    }
+
+    private int getTimeSerieIndex(SMHIDays smhiDay) {
+        int index = 0;
+        //create a variable to compare
+        LocalDateTime today13 = LocalDate.now().atTime(13,0);
+
+        switch (smhiDay) {
+            case TODAY:
+                index= 0;
+               break;
+            case TOMORROW:
+                System.out.println();
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 1).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_THREE:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 2).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_FOUR:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 5).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_FIVE:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 6).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_SIX:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 7).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_SEVEN:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 8).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_EIGHT:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 9).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+        }
+
+        System.out.println("index: " +index );
+        return index;
+    }
+
+    private String formatDate(TimeSeries timeSery) {
+
+        SimpleDateFormat comparePattern = new SimpleDateFormat ("yyyy-MM-dd:HH");
+        return comparePattern.format(timeSery.getValidTime());
+    }
+
+    private String formatDateTime(LocalDateTime today13, int days) {
+
+        return today13.plusDays(days).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH"));
+
     }
 
 
-
     //from SMHI
-    public Integer getCurrentWeatherSymbolNumber(){
-        return (int)(float)getWeatherStatusParameter(weather.getTimeSeries()[0]).getValues()[0];
+    public Integer getWeatherSymbolNumber(){
+        return (int)(float)getWeatherStatusParameter(weather.getTimeSeries()[timeSerieIndex]).getValues()[0];
     }
     //from SMHI
-    public Float getCurrentWindSpeed(){
-        return getWindSpeedParameter(weather.getTimeSeries()[0]).getValues()[0];
+    public Float getWindSpeed(){
+        return getWindSpeedParameter(weather.getTimeSeries()[timeSerieIndex]).getValues()[0];
     }
     //internal lookup
     public String getWeatherCategory(int weatherSymbolNumber) {
@@ -100,13 +190,14 @@ Jättekallt	- -10 ->
         return weatherSymbols.get(weatherSymbolNumber-1).getImage();  //list starts with 0
     }
     //internal lookup
-    public String getCurrentWeatherSymbolText(int weatherSymbolNumber) {
+    public String getWeatherSymbolText(int weatherSymbolNumber) {
         return weatherSymbols.get(weatherSymbolNumber-1).getName();  //list starts with 0
     }
 
-    public Date getCurrentDate (){
-        return weather.getTimeSeries()[0].getValidTime();
+    public Date getDateFromTimeSerieOfChoice(){
+        return weather.getTimeSeries()[timeSerieIndex].getValidTime();
     }
+
 
 
     //help method SMHI
