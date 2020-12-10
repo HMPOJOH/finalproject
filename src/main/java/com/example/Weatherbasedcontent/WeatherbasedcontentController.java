@@ -38,6 +38,8 @@ public class WeatherbasedcontentController {
         model.addAttribute("weather", weather);
         model.addAttribute("locations", possibleLocations);
         model.addAttribute("departments", departments);
+        
+
         return "setuppanel";
     }
 
@@ -129,6 +131,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("country", countryID);
         model.addAttribute("tempcat", temperatureCategory);
         model.addAttribute("contentList", contentList);
+
 
 
 

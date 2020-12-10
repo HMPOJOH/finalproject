@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
 <!DOCTYPE html>
@@ -12,32 +13,35 @@
     <title>Dummy weather Page</title>
 </head>
 <body>
-<h1>Admin page - setup panel</h1>
+<div id="imageBox" align="center">
+
+    <div class="login" align="left">
+        <form action="" method="post">
+            <input type="image" id="image" alt="Login"
+                   src="hmLogo.png" height="10%" width="10%">
+        </form>
+    </div>
+    <h1>Admin page - setup panel</h1>
+
+
+    <form th:action="@{/index}" method="POST" >
 
 
 
-
-
-
-
-<form th:action="@{/index}" method="POST" >
-
-
-
-    <select th:name="city">
+    <select th:name ="city" id="city">
         <option th:each="location : ${locations}"
                 th:value="${location.name}"
                 th:text="${location.name}"></option>
     </select>
-    <select th:name="department">
+    <select th:name ="department" id="department">
         <option th:each="dep : ${departments}"
                 th:value="${dep.id}"
                 th:text="${dep.description}"></option>
     </select>
 
-    <input type="submit" value="Start Index">
+    <input type="submit" id ="submit" value="Start Index" align="center">
 </form>
-
+    </div>
 
 
 </body>
