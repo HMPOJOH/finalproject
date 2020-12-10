@@ -23,7 +23,7 @@ public class WeatherbasedcontentRepository {
 
 
 
-    public List<Content> getContentList(int searchScenario, int seasonId) {
+    public List<Content> getContentList(int searchScenario, int seasonId, int departmentId, int weatherCatId) {
         List<Content> content = new ArrayList<>();
         int contentCount = 0;
         try (Connection conn = dataSource.getConnection();
@@ -42,36 +42,71 @@ public class WeatherbasedcontentRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("Content count 1: " + contentCount);
+        // fetch fallback content if not enough content
+        if (contentCount < 5 ) {
+            List<Content> contentTemp = new ArrayList<>();
+            if (departmentId == 7) //All departments, fetch content by season and weathersymbol
+                contentTemp = getContentWeatherFallback(seasonId, weatherCatId);
+            else                    //fetch content by season and department
+                contentTemp = getContentDepFallback(seasonId, departmentId);
+            for (int i=0;i<(contentTemp.size()-1);i++) {
+                content.add(contentTemp.get(i));
+                contentCount +=1;
+                if (contentCount == 5)
+                    break;
+            }
+            System.out.println("Content count 2: " + contentCount);
+        }
         // fetch fallback content from season if not enough content
         if (contentCount < 5 ) {
             List<Content> contentTemp = getSeasonFallback(seasonId);
             for (int i=0;i<(contentTemp.size()-1);i++) {
                 content.add(contentTemp.get(i));
                 contentCount +=1;
+                if (contentCount == 5)
+                    break;
             }
+            System.out.println("Content count 3: " + contentCount);
         }
-        System.out.println("Content count: " + contentCount);
         return content;
     }
 
-    public List<Content> getSeasonFallback(int seasonId) {
+    //fetch all content with correct season and department. Dont care about weathersymbol or temperature
+    public List<Content> getContentDepFallback(int seasonId, int departmentId) {
         List<Content> content = new ArrayList<>();
-        int searchScenario = 2;
-        if (seasonId == 1) // summer
-            searchScenario = 6;
-        else if (seasonId == 2) // winter
-            searchScenario = 11;
-        else if (seasonId == 3) // spring
-            searchScenario = 8;
-        else
-            searchScenario = 9;
+
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
                      "FROM CONTENTBYSCENARIO \n" +
                      "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
                      "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
-                     "WHERE CONTENTBYSCENARIO.SCENARIOID =" + searchScenario)) {
+                     "WHERE SCENARIO.SEASONID =" + seasonId + "\n" +
+                     "AND SCENARIO.DEPARTMENTID =" + departmentId)) {
+
+            while (rs.next()) {
+                content.add(rsContent(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return content;
+    }
+
+    //fetch all content with correct season and weathersymbol (snow, rain etc). Dont care about deprtment or temperature
+    public List<Content> getContentWeatherFallback(int seasonId, int weatherCat) {
+        List<Content> content = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
+                     "FROM CONTENTBYSCENARIO \n" +
+                     "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                     "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                     "WHERE SCENARIO.SEASONID =" + seasonId + "\n" +
+                     "AND SCENARIO.WEATHERSYMBOLID =" + weatherCat)) {
 
             while (rs.next()) {
                 content.add(rsContent(rs));
@@ -91,5 +126,25 @@ public class WeatherbasedcontentRepository {
                 rs.getString("TEXT"));
     }
 
+    //Last fallback. fetch all content with correct season. dont care about other parameters
+    public List<Content> getSeasonFallback(int seasonId) {
+        List<Content> content = new ArrayList<>();
 
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
+                     "FROM CONTENTBYSCENARIO \n" +
+                     "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                     "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                     "WHERE SCENARIO.SEASONID =" + seasonId)) {
+
+            while (rs.next()) {
+                content.add(rsContent(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return content;
+    }
 }
