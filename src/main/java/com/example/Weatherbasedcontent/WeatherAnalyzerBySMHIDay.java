@@ -190,7 +190,7 @@ Jättekallt	- -10 ->
         return weatherSymbols.get(weatherSymbolNumber-1).getImage();  //list starts with 0
     }
     //internal lookup
-    public String getCurrentWeatherSymbolText(int weatherSymbolNumber) {
+    public String getWeatherSymbolText(int weatherSymbolNumber) {
         return weatherSymbols.get(weatherSymbolNumber-1).getName();  //list starts with 0
     }
 
