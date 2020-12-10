@@ -41,23 +41,24 @@ public class ParameterRepository {
                 rs.getInt("ID"),
                 rs.getString("DESCRIPTION"));
     }
-}
 
 
     public int getSeasonIdbyDateAndCountry(Date date, String isoCountry) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-
-        String dateFormatted= dateFormat.format(date);
+        String dateFormatted = dateFormat.format(date);
         System.out.println(dateFormatted);
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+dateFormatted+"' AND DATETO>='"+dateFormatted+"'") ) {
+             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='" + isoCountry + "' AND DATEFROM<='" + dateFormatted + "' AND DATETO>='" + dateFormatted + "'")) {
 //SELECT * FROM SEASONPERCOUNTRY WHERE COUNTRYID='SE' AND DATEFROM<='2020-12-09' AND DATETO>='2020-12-09'
             if (rs.next()) {
                 return rs.getInt("ID");
             }
+        }
+        return 1;
+    }
 
     public Scenario getScenario(int seasonId, int weatherId, int tempId, int depId) {
         Scenario scenario = new Scenario(1,"no scenario");
