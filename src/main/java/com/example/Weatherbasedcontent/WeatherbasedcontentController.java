@@ -56,7 +56,9 @@ public class WeatherbasedcontentController {
         System.out.println("get weather end..");
 
         //Analyze SMHI weather for a specific day
-        WeatherAnalyzerBySMHIDay weatherOfToDay = new WeatherAnalyzerBySMHIDay(weatherFromSMHI, SMHIDays.TODAY); //Two inputs, SMHI weather + which day to analyze
+        //Two inputs, SMHI weather + which day to analyze
+        WeatherAnalyzerBySMHIDay weatherOfToDay = new WeatherAnalyzerBySMHIDay(weatherFromSMHI, SMHIDays.TODAY);
+
 
         //get parameters
         Float currentTemp = weatherOfToDay.getTemp();
