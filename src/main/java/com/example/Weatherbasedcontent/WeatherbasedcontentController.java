@@ -51,6 +51,20 @@ public class WeatherbasedcontentController {
 
     @PostMapping("/panel")
 
+    /*@PostMapping("/index")
+    public String index(HttpSession session, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
+
+        List<Content> contentList = productRepos.getContentList(3);
+
+
+        model.addAttribute("contentList", contentList);
+
+
+        return "index";
+    }*/
+
+    @PostMapping("/index")
+    public String index(HttpSession session, @RequestParam String city, int department, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
     //this is just for testing that we have all values we want
     public String testSMHI(HttpSession session,@RequestParam String department, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
 
@@ -87,7 +101,7 @@ public class WeatherbasedcontentController {
         System.out.println(currentDate);
 
 
-         int getCurrentSeasonId = productRepos.getCurrentSeasonId(currentDate, countryID);
+        int getCurrentSeasonId = prmRep.getSeasonIdbyDateAndCountry(currentDate, countryID);
         System.out.println("dep: "+department);
         System.out.println("seasonid "+ getCurrentSeasonId);
         System.out.println("weatherSymbolnr:"+currentWeatherSymbolnr);
@@ -108,7 +122,7 @@ public class WeatherbasedcontentController {
         int scenarioId = productRepos.getScenarioId(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
         System.out.println("scenarioId:" + scenarioId);
         //test contentcall
-        List<Content> contentList = productRepos.getContentList(1);
+        List<Content> contentList = productRepos.getContentList(scenarioId);
 
         //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
@@ -168,11 +182,8 @@ public class WeatherbasedcontentController {
         int temperatureCategory = weatherCalc.getTempCategory(currentTemp);
         System.out.println("tempcat:" + temperatureCategory);
 
-        Date currentDate = weatherCalc.getCurrentDate();
-        int getCurrentSeasonId = productRepos.getCurrentSeasonId(currentDate, countryID);
-        Scenario scenario = prmRep.getScenario(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
-        System.out.println("scenarioId:" + scenario.getId());
-        System.out.println("scenario description:" + scenario.getDescription());
+        // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,department,)
+        //test contentcall
         List<Content> contentList = productRepos.getContentList(3);
 
         //Just to show the values - will rather be used in the Content lookup
@@ -187,7 +198,6 @@ public class WeatherbasedcontentController {
         model.addAttribute("contentimage", contentList.get(0).getImage());
         model.addAttribute("country", countryID);
         model.addAttribute("tempcat", temperatureCategory);
-        model.addAttribute("scenario", scenario.getDescription());
         model.addAttribute("contentList", contentList);
 
 

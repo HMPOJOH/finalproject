@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -39,6 +41,23 @@ public class ParameterRepository {
                 rs.getInt("ID"),
                 rs.getString("DESCRIPTION"));
     }
+}
+
+
+    public int getSeasonIdbyDateAndCountry(Date date, String isoCountry) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+
+
+        String dateFormatted= dateFormat.format(date);
+        System.out.println(dateFormatted);
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+dateFormatted+"' AND DATETO>='"+dateFormatted+"'") ) {
+//SELECT * FROM SEASONPERCOUNTRY WHERE COUNTRYID='SE' AND DATEFROM<='2020-12-09' AND DATETO>='2020-12-09'
+            if (rs.next()) {
+                return rs.getInt("ID");
+            }
 
     public Scenario getScenario(int seasonId, int weatherId, int tempId, int depId) {
         Scenario scenario = new Scenario(1,"no scenario");

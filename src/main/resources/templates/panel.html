@@ -15,6 +15,7 @@
 <h3 th:text="'symboltext: ' + ${currentWeatherSymbolText}"></h3>
 <img th:src="${currentWeatherImage}"/>
 <img th:src="${contentimage}"/>
+<img th:each="contentItem : ${contentList}" th:src="${contentItem.image}">
 
 <!--
 model.addAttribute("currentWeatherImage", currentWeatherImager);
