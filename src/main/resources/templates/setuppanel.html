@@ -27,7 +27,6 @@
     <form th:action="@{/index}" method="POST" >
 
 
-
     <select th:name ="city" id="city">
         <option th:each="location : ${locations}"
                 th:value="${location.name}"

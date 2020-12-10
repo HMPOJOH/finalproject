@@ -11,15 +11,6 @@
 
 
 
-  <div class="login" align="right">
-    <form action="" method="post">
-        <input type="image" id="image" alt="Login"
-       src="settings.png" height="24px" width="24x">
-    </form>
-  </div>
-
-
-
 <div id="imageBox" align="center">
   
   <div class="header" align="left">
@@ -32,7 +23,13 @@
   <div align="right" float="top">
     <h1 th:text="${scenario}+' ' +${getDescription}"></h1>
   </div>
-  </div>
+
+    <div class="login" align="right">
+      <form action="" method="post">
+        <input type="image" id="image" alt="Login"
+               src="settings.png" height="24px" width="24x">
+      </form>
+    </div>
 
   <header>
     <style type="text/css">
