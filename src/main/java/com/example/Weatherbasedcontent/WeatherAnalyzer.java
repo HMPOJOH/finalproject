@@ -1,8 +1,9 @@
 package com.example.Weatherbasedcontent;
-import java.util.ArrayList;
-import java.util.Date;
-
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class WeatherAnalyzer {
     private Weather weather;
@@ -71,11 +72,118 @@ Jättekallt	- -10 ->
 
     }
     //from SMHI
-    public Float getCurrentTemp() {
-        Date date  =  weather.getTimeSeries()[0].getValidTime();
-        return  getTemperatureParameter(weather.getTimeSeries()[0]).getValue();
+    public Float getTempByDay(SMHIDays smhiDay) {
+        int timeSerieIndex = getTimeSerieIndex(smhiDay);
+
+        Date date  =  weather.getTimeSeries()[timeSerieIndex].getValidTime();
+        return  getTemperatureParameter(weather.getTimeSeries()[timeSerieIndex]).getValue();
     }
 
+    private int getTimeSerieIndex(SMHIDays smhiDay) {
+        int index = 0;
+        //create a variable to compare
+        LocalDateTime today13 = LocalDate.now().atTime(13,0);
+
+        /*
+        System.out.println("plus1: "+today13.plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
+        System.out.println("plus1: "+today13.plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
+        System.out.println("plus1: "+today13.plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
+        System.out.println("plus1: "+today13.plusDays(4).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
+        System.out.println("plus1: "+today13.plusDays(5).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
+        System.out.println("plus1: "+today13.plusDays(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
+        System.out.println("plus1: "+today13.plusDays(7).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH")));
+
+
+
+
+        SimpleDateFormat comparePattern = new SimpleDateFormat ("yyyy-MM-dd:HH");
+        System.out.println("format SMHIDATE0: " + comparePattern.format(weather.getTimeSeries()[0].getValidTime()));
+        System.out.println("format SMHIDATE10: " + comparePattern.format(weather.getTimeSeries()[10].getValidTime()));
+        System.out.println("format SMHIDATE20: " + comparePattern.format(weather.getTimeSeries()[20].getValidTime()));
+
+
+         */
+
+
+
+        switch (smhiDay) {
+            case TODAY:
+                index= 0;
+               break;
+            case TOMORROW:
+                System.out.println();
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 1).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_THREE:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 2).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_FOUR:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 5).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_FIVE:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 6).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_SIX:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 7).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_SEVEN:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 8).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+            case DAY_EIGHT:
+                for (int i=0; i<weather.getTimeSeries().length;i++){
+                    if(formatDateTime(today13, 9).equals(formatDate(weather.getTimeSeries()[i]))) {
+                        index = i;
+                        break;
+                    }
+                }
+                break;
+        }
+
+        System.out.println("index: " +index );
+        return index;
+    }
+
+    private String formatDate(TimeSeries timeSery) {
+
+        SimpleDateFormat comparePattern = new SimpleDateFormat ("yyyy-MM-dd:HH");
+        return comparePattern.format(timeSery.getValidTime());
+    }
+
+    private String formatDateTime(LocalDateTime today13, int days) {
+
+        return today13.plusDays(days).format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH"));
+
+    }
 
 
     //from SMHI

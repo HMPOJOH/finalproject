@@ -55,7 +55,12 @@ public class WeatherbasedcontentController {
 
         WeatherAnalyzer analyzeWeather = new WeatherAnalyzer(weatherFromSMHI);
 
-        Float currentTemp = analyzeWeather.getCurrentTemp();
+
+
+
+
+
+        Float currentTemp = analyzeWeather.getTempByDay(SMHIDays.DAY_EIGHT);
         Float currentWindSpeed = analyzeWeather.getCurrentWindSpeed();
         int currentWeatherSymbolnr = analyzeWeather.getCurrentWeatherSymbolNumber();
 
