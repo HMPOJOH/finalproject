@@ -25,7 +25,39 @@ public class WeatherbasedcontentRepository {
 
     public List<Content> getContentList(int searchScenario) {
         List<Content> content = new ArrayList<>();
+        int contentCount = 0;
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
+                     "FROM CONTENTBYSCENARIO \n" +
+                     "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                     "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                     "WHERE CONTENTBYSCENARIO.SCENARIOID =" + searchScenario)) {
 
+            while (rs.next()) {
+                content.add(rsContent(rs));
+                contentCount +=1;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (contentCount > 0 && contentCount < 5 ) {
+            List<Content> contentTemp = getSeasonFallback(1);
+            for (int i=0;i<(content.size()-1);i++) {
+                content.add(contentTemp.get(i));
+            }
+        }
+        return content;
+    }
+
+    public List<Content> getSeasonFallback(int seasonId) {
+        List<Content> content = new ArrayList<>();
+        int searchScenario = 2;
+        if (seasonId == 1) // summer
+            searchScenario = 12;
+        else
+            searchScenario = 10;
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
