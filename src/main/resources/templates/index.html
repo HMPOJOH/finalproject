@@ -11,7 +11,7 @@
 
 
 
-<div id="imageBox" align="center">
+<div class="imageBox" align="center" >
   
   <div class="header" align="left">
     <div align="left">
@@ -21,7 +21,7 @@
   </div>
 
   <div align="right" float="top">
-    <h1 th:text="${scenario}+' ' +${getDescription}"></h1>
+    <h1 th:text="${scenario}"></h1>
   </div>
 
     <div class="login" align="right">
@@ -30,6 +30,7 @@
                src="settings.png" height="24px" width="24x">
       </form>
     </div>
+  </div>
 
   <header>
     <style type="text/css">
@@ -52,7 +53,7 @@
     </header>
 
 
-  <div class="w3-content w3-section" style="width: 50%; float: right;">
+  <div class="w3-content w3-section" style="width: 50px; float: right;">
     <img class="mySlides w3-animate-fading" src="swimshorts1.jfif" style="width:100%">
     <img class="mySlides w3-animate-fading" src="swimshorts2.jfif" style="width:100%">
     <img class="mySlides w3-animate-fading" src="swimshorts3.jfif" style="width:100%">
@@ -61,20 +62,17 @@
   </div>
 
 
-  <div class="w3-content w3-section" style="width: 50%; float: left;">
+  <div class="w3-content w3-section" style="width: 50px; float: left;">
     <img class="mySlides2 w3-animate-fading" src="swimshorts1.jfif" style="width:100%">
     <img class="mySlides2 w3-animate-fading" src="swimshorts2.jfif" style="width:100%">
     <img class="mySlides2 w3-animate-fading" src="swimshorts3.jfif" style="width:100%">
     <img class="mySlides2 w3-animate-fading" src="swimshorts4.jfif" style="width:100%">
   </div>
 
-  <div class="w3-content w3-section" style="max-width: 50%; float: top;" >
+  <div class="w3-content w3-section" style="max-width: 50px; float: top;" >
     <img class="mySlides3 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%" src="">
   </div>
 
-  <div class="w3-content w3-section" style="max-width: 50%; float: top;" >
-    <img class="mySlides3 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%" src="">
-  </div>
 
 
 
@@ -126,6 +124,7 @@
   }
   </script>
 
+</div>
 </div>
 
 
