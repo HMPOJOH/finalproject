@@ -23,7 +23,7 @@ public class WeatherbasedcontentRepository {
 
 
 
-    public List<Content> getContentList(int searchScenario) {
+    public List<Content> getContentList(int searchScenario, int seasonId) {
         List<Content> content = new ArrayList<>();
         int contentCount = 0;
         try (Connection conn = dataSource.getConnection();
@@ -42,12 +42,15 @@ public class WeatherbasedcontentRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (contentCount > 0 && contentCount < 5 ) {
-            List<Content> contentTemp = getSeasonFallback(1);
-            for (int i=0;i<(content.size()-1);i++) {
+        // fetch fallback content from season if not enough content
+        if (contentCount < 5 ) {
+            List<Content> contentTemp = getSeasonFallback(seasonId);
+            for (int i=0;i<(contentTemp.size()-1);i++) {
                 content.add(contentTemp.get(i));
+                contentCount +=1;
             }
         }
+        System.out.println("Content count: " + contentCount);
         return content;
     }
 
@@ -55,9 +58,13 @@ public class WeatherbasedcontentRepository {
         List<Content> content = new ArrayList<>();
         int searchScenario = 2;
         if (seasonId == 1) // summer
-            searchScenario = 12;
+            searchScenario = 6;
+        else if (seasonId == 2) // winter
+            searchScenario = 11;
+        else if (seasonId == 3) // spring
+            searchScenario = 8;
         else
-            searchScenario = 10;
+            searchScenario = 9;
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
