@@ -102,8 +102,9 @@ public class WeatherbasedcontentController {
 
         //just for testing!
             weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
+            System.out.println(weatherOutsideSE.getName() + " " + weatherOutsideSE.getSys().getCountry());
             System.out.println(weatherOutsideSE.getMain().getTemp());
-
+            System.out.println(weatherOutsideSE.getWeather().get(0).getMain() + " " + weatherOutsideSE.getWeather().get(0).getDescription() );
      }
 
      else if (countryID.equals("CA")) {
