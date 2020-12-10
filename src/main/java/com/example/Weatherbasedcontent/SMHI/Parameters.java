@@ -1,4 +1,4 @@
-package com.example.Weatherbasedcontent;
+package com.example.Weatherbasedcontent.SMHI;
 
 public class Parameters {
     private String name;

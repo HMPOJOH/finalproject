@@ -1,4 +1,4 @@
-package com.example.Weatherbasedcontent;
+package com.example.Weatherbasedcontent.SMHI;
 
 public enum SMHIDays {
     TODAY,

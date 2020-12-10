@@ -1,6 +1,10 @@
 package com.example.Weatherbasedcontent;
 
 import com.example.Weatherbasedcontent.InternationalWeather.WeatherOutsideSE;
+import com.example.Weatherbasedcontent.Repositories.*;
+import com.example.Weatherbasedcontent.SMHI.SMHIDays;
+import com.example.Weatherbasedcontent.SMHI.Weather;
+import com.example.Weatherbasedcontent.SMHI.WeatherAnalyzerBySMHIDay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,6 +106,11 @@ public class WeatherbasedcontentController {
 
         //just for testing!
             weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
+
+            temperature = (float)weatherOutsideSE.getMain().getTemp();
+            windSpeed = (float)weatherOutsideSE.getWind().getSpeed();
+            weatherImage = "http://openweathermap.org/img/wn/"+weatherOutsideSE.getWeather().get(0).getIcon()+ "@2x.png";
+
             System.out.println(weatherOutsideSE.getName() + " " + weatherOutsideSE.getSys().getCountry());
             System.out.println(weatherOutsideSE.getMain().getTemp());
             System.out.println(weatherOutsideSE.getWeather().get(0).getMain() + " " + weatherOutsideSE.getWeather().get(0).getDescription() );

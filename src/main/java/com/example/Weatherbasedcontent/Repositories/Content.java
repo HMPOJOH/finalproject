@@ -1,4 +1,4 @@
-package com.example.Weatherbasedcontent;
+package com.example.Weatherbasedcontent.Repositories;
 
 public class Content {
     private int id;

@@ -38,7 +38,7 @@
                 th:text="${dep.description}"></option>
     </select>
         <select name ="smhidays" id="smhidays">
-            <option th:each="day : ${T(com.example.Weatherbasedcontent.SMHIDays).values()}"
+            <option th:each="day : ${T(com.example.Weatherbasedcontent.SMHI.SMHIDays).values()}"
                     th:value="${day}"
                     th:text="${day}"></option>
         </select>
