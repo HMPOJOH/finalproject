@@ -78,7 +78,7 @@ public class WeatherbasedcontentController {
         Scenario scenario = prmRep.getScenario(seasonIdbyDateAndCountry,weatherCategoryId,tempCategory,department);
         System.out.println(scenario.getDescription());
         //test contentcall
-        List<Content> contentList = productRepos.getContentList(scenarioId,getCurrentSeasonId);
+        List<Content> contentList = productRepos.getContentList(scenarioId,seasonIdbyDateAndCountry,department, weatherCategoryId);
 
         //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
