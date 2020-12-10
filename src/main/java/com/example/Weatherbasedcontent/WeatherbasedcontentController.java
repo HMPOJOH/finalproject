@@ -4,19 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import static java.util.Calendar.YEAR;
 
 @Controller
 public class WeatherbasedcontentController {
@@ -98,7 +93,7 @@ public class WeatherbasedcontentController {
         System.out.println(currentDate);
 
 
-        int getCurrentSeasonId = prmRep.getCurrentSeasonId(currentDate, countryID);
+        int getCurrentSeasonId = prmRep.getSeasonIdbyDateAndCountry(currentDate, countryID);
         System.out.println("dep: "+department);
         System.out.println("seasonid "+ getCurrentSeasonId);
         System.out.println("weatherSymbolnr:"+currentWeatherSymbolnr);

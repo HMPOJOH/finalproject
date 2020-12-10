@@ -18,26 +18,7 @@ public class ParameterRepository {
 
     @Autowired
     private DataSource dataSource;
-/*
-    public int getSeason(String chosenDate, String country) {
-        int season = 1;
 
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select ID FROM SEASONBYCOUNTRY WHERE \n" +
-                     "COUNTRYID=" + country + " AND \n" +
-                     "DATEFROM <=" + chosenDate + " AND \n" +
-                     "DATETO >=" + chosenDate)) {
-
-            while (rs.next()) {
-                season = rs.getInt("ID");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return season;
-    }*/
     public List<Department> getDepList() {
         List<Department> department = new ArrayList<>();
 
@@ -62,16 +43,16 @@ public class ParameterRepository {
     }
 
 
-    public int getCurrentSeasonId(Date currentDate, String isoCountry) {
+    public int getSeasonIdbyDateAndCountry(Date date, String isoCountry) {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
 
 
-        String date= dateFormat.format(currentDate);
-        System.out.println(date);
+        String dateFormatted= dateFormat.format(date);
+        System.out.println(dateFormatted);
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date+"' AND DATETO>='"+date+"'") ) {
+             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+dateFormatted+"' AND DATETO>='"+dateFormatted+"'") ) {
 //SELECT * FROM SEASONPERCOUNTRY WHERE COUNTRYID='SE' AND DATEFROM<='2020-12-09' AND DATETO>='2020-12-09'
             if (rs.next()) {
                 return rs.getInt("ID");
