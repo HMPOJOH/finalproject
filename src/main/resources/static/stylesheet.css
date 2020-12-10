@@ -13,7 +13,7 @@ body {
 .imageBox {
     width: 80%;
     height: 100%;
-    background-image: url("FinalProjectOverlay.png");
+    background:#f4f4f4;
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .2);
     border: 1px;
     border-radius: 3;
