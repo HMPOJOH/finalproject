@@ -26,7 +26,11 @@
                 th:value="${location.name}"
                 th:text="${location.name}"></option>
     </select>
-
+    <select th:name="department">
+        <option th:each="dep : ${departments}"
+                th:value="${dep.id}"
+                th:text="${dep.description}"></option>
+    </select>
     <input type="submit" value="Start Panel">
 </form>
 
@@ -40,7 +44,7 @@
                 th:value="${location.name}"
                 th:text="${location.name}"></option>
     </select>
-    <select th:name="Department">
+    <select th:name="department">
         <option th:each="dep : ${departments}"
                 th:value="${dep.id}"
                 th:text="${dep.description}"></option>

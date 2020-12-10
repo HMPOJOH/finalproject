@@ -30,34 +30,44 @@ Kallt		- 3 - -9
 Jättekallt	- -10 ->
      */
     private void setupWeatherSymbols() {
+        /*
 
-        weatherSymbols.add(new WeatherSymbols("Sunny","https://img.icons8.com/office/30/000000/summer.png","Clear sky"));//1
-        weatherSymbols.add(new WeatherSymbols("Sunny","https://img.icons8.com/office/30/000000/summer.png","Nearly clear sky"));//2
-        weatherSymbols.add(new WeatherSymbols("Sunny","https://img.icons8.com/office/30/000000/summer.png","Variable cloudiness"));//3
-        weatherSymbols.add(new WeatherSymbols("Sunny","https://img.icons8.com/office/30/000000/summer.png","Halfclear sky"));//4
-        weatherSymbols.add(new WeatherSymbols("Cloud","https://img.icons8.com/office/30/000000/partly-cloudy-day--v1.png","Cloudy sky"));//5
-        weatherSymbols.add(new WeatherSymbols("Cloud","https://img.icons8.com/office/30/000000/clouds.png","Overcast"));//6
-        weatherSymbols.add(new WeatherSymbols("Cloud","https://img.icons8.com/office/30/000000/fog-night.png","Fog"));//7
-        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/light-rain-2.png","Light rain showers"));//8
-        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/moderate-rain.png","Moderate rain showers"));//9
-        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/downpour.png","Heavy rain showers"));//10
-        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/storm.png","Thunderstorm"));//11
-        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Light sleet showers"));//12
-        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Moderate sleet showers"));//13
-        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Heavy sleet showers"));//14
-        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/light-snow.png","Light snow showers"));//15
-        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/snow.png","Moderate snow showers"));//16
-        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/snow-storm.png","Heavy snow showers"));//17
-        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/light-rain-2.png","Light rain"));//18
-        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/moderate-rain.png","Moderate rain"));//19
-        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/downpour.png","Heavy rain"));//20
-        weatherSymbols.add(new WeatherSymbols("Rain","https://img.icons8.com/office/30/000000/storm.png","Thunder"));//21
-        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Light sleet"));//22
-        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Moderate sleet"));//23
-        weatherSymbols.add(new WeatherSymbols("Sleet","https://img.icons8.com/office/30/000000/sleet.png","Heavy sleet"));//24
-        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/light-snow.png","Light snowfall"));//25
-        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/snow.png","Moderate snowfall"));//26
-        weatherSymbols.add(new WeatherSymbols("Snow","https://img.icons8.com/office/30/000000/snow-storm.png","Heavy snowfall"));//27
+        	Sunny
+2	Rain
+3	Snow
+4	Windy
+5	Sleet
+6	All
+         */
+
+        weatherSymbols.add(new WeatherSymbols("Sunny",1,"https://img.icons8.com/office/30/000000/summer.png","Clear sky"));//1
+        weatherSymbols.add(new WeatherSymbols("Sunny",1,"https://img.icons8.com/office/30/000000/summer.png","Nearly clear sky"));//2
+        weatherSymbols.add(new WeatherSymbols("Sunny",1,"https://img.icons8.com/office/30/000000/summer.png","Variable cloudiness"));//3
+        weatherSymbols.add(new WeatherSymbols("Sunny",1,"https://img.icons8.com/office/30/000000/summer.png","Halfclear sky"));//4
+        weatherSymbols.add(new WeatherSymbols("Cloud",6,"https://img.icons8.com/office/30/000000/partly-cloudy-day--v1.png","Cloudy sky"));//5
+        weatherSymbols.add(new WeatherSymbols("Cloud",6,"https://img.icons8.com/office/30/000000/clouds.png","Overcast"));//6
+        weatherSymbols.add(new WeatherSymbols("Cloud",6,"https://img.icons8.com/office/30/000000/fog-night.png","Fog"));//7
+        weatherSymbols.add(new WeatherSymbols("Rain",2,"https://img.icons8.com/office/30/000000/light-rain-2.png","Light rain showers"));//8
+        weatherSymbols.add(new WeatherSymbols("Rain",2,"https://img.icons8.com/office/30/000000/moderate-rain.png","Moderate rain showers"));//9
+        weatherSymbols.add(new WeatherSymbols("Rain",2,"https://img.icons8.com/office/30/000000/downpour.png","Heavy rain showers"));//10
+        weatherSymbols.add(new WeatherSymbols("Rain",2,"https://img.icons8.com/office/30/000000/storm.png","Thunderstorm"));//11
+        weatherSymbols.add(new WeatherSymbols("Sleet",5,"https://img.icons8.com/office/30/000000/sleet.png","Light sleet showers"));//12
+        weatherSymbols.add(new WeatherSymbols("Sleet",5,"https://img.icons8.com/office/30/000000/sleet.png","Moderate sleet showers"));//13
+        weatherSymbols.add(new WeatherSymbols("Sleet",5,"https://img.icons8.com/office/30/000000/sleet.png","Heavy sleet showers"));//14
+        weatherSymbols.add(new WeatherSymbols("Snow",3,"https://img.icons8.com/office/30/000000/light-snow.png","Light snow showers"));//15
+        weatherSymbols.add(new WeatherSymbols("Snow",3,"https://img.icons8.com/office/30/000000/snow.png","Moderate snow showers"));//16
+        weatherSymbols.add(new WeatherSymbols("Snow",3,"https://img.icons8.com/office/30/000000/snow-storm.png","Heavy snow showers"));//17
+        weatherSymbols.add(new WeatherSymbols("Rain",2,"https://img.icons8.com/office/30/000000/light-rain-2.png","Light rain"));//18
+        weatherSymbols.add(new WeatherSymbols("Rain",2,"https://img.icons8.com/office/30/000000/moderate-rain.png","Moderate rain"));//19
+        weatherSymbols.add(new WeatherSymbols("Rain",2,"https://img.icons8.com/office/30/000000/downpour.png","Heavy rain"));//20
+        weatherSymbols.add(new WeatherSymbols("Rain",2,"https://img.icons8.com/office/30/000000/storm.png","Thunder"));//21
+        weatherSymbols.add(new WeatherSymbols("Sleet",5,"https://img.icons8.com/office/30/000000/sleet.png","Light sleet"));//22
+        weatherSymbols.add(new WeatherSymbols("Sleet",5,"https://img.icons8.com/office/30/000000/sleet.png","Moderate sleet"));//23
+        weatherSymbols.add(new WeatherSymbols("Sleet",5,"https://img.icons8.com/office/30/000000/sleet.png","Heavy sleet"));//24
+        weatherSymbols.add(new WeatherSymbols("Snow",4,"https://img.icons8.com/office/30/000000/light-snow.png","Light snowfall"));//25
+        weatherSymbols.add(new WeatherSymbols("Snow",4,"https://img.icons8.com/office/30/000000/snow.png","Moderate snowfall"));//26
+        weatherSymbols.add(new WeatherSymbols("Snow",4,"https://img.icons8.com/office/30/000000/snow-storm.png","Heavy snowfall"));//27
+
 
     }
     //from SMHI
@@ -80,6 +90,11 @@ Jättekallt	- -10 ->
     public String getWeatherCategory(int weatherSymbolNumber) {
         return weatherSymbols.get(weatherSymbolNumber-1).getCategory(); //list starts with 0
     }
+
+    public int getWeatherCategoryId(int weatherSymbolNumber){
+        return weatherSymbols.get(weatherSymbolNumber-1).getCategoryId(); //list starts with 0
+    }
+
     //internal lookup
     public String getWeatherCategoryImage(int weatherSymbolNumber) {
         return weatherSymbols.get(weatherSymbolNumber-1).getImage();  //list starts with 0

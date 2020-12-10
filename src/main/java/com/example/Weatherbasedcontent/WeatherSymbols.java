@@ -2,13 +2,22 @@ package com.example.Weatherbasedcontent;
 
 public class WeatherSymbols {
     private String category;
+
+
+
+    private Integer categoryId;
     private String image;
     private String name;
 
-    public WeatherSymbols(String category, String image, String name) {
+    public WeatherSymbols(String category, int categoryId, String image, String name) {
         this.category = category;
+        this.categoryId=categoryId;
         this.image = image;
         this.name = name;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
     public String getCategory() {

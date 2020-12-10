@@ -52,7 +52,7 @@ public class WeatherbasedcontentController {
     @PostMapping("/panel")
 
     //this is just for testing that we have all values we want
-    public String testSMHI(HttpSession session, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
+    public String testSMHI(HttpSession session,@RequestParam String department, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
 
         System.out.println(city);
 
@@ -77,16 +77,25 @@ public class WeatherbasedcontentController {
 
 
          int getCurrentSeasonId = productRepos.getCurrentSeasonId(currentDate, countryID);
+        System.out.println("dep: "+department);
         System.out.println("seasonid "+ getCurrentSeasonId);
+        System.out.println("weatherSymbolnr:"+currentWeatherSymbolnr);
         String currentWeatherCategory = weatherCalc.getWeatherCategory(currentWeatherSymbolnr);
+
+        System.out.println("weatherCategoryName:"+ currentWeatherCategory);
+        int currentWeatherCategoryId = weatherCalc.getWeatherCategoryId(currentWeatherSymbolnr);
+        System.out.println("weatherCategoryId:"+ currentWeatherCategoryId);
         String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
         String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
         int temperatureCategory = weatherCalc.getTempCategory(currentTemp);
-        System.out.println(temperatureCategory);
+
+
+        System.out.println("tempcat:" + temperatureCategory);
         //desc, seasonid, weathersymbolid, tempid, department =
 
 
-        // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,1,)
+         int scenarioId = productRepos.getScenarioId(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
+        System.out.println("scenarioId:" + scenarioId);
         //test contentcall
         List<Content> contentList = productRepos.getContentList(1);
 
@@ -121,7 +130,7 @@ public class WeatherbasedcontentController {
     }*/
 
     @PostMapping("/index")
-    public String index(HttpSession session, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
+    public String index(HttpSession session, @RequestParam String city, int department, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
 
         System.out.println(city);
 
@@ -142,10 +151,11 @@ public class WeatherbasedcontentController {
 
         //internal loolup
         String currentWeatherCategory = weatherCalc.getWeatherCategory(currentWeatherSymbolnr);
+        int currentWeatherCategoryId = weatherCalc.getWeatherCategoryId(currentWeatherSymbolnr);
         String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
         String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
         int temperatureCategory = weatherCalc.getTempCategory(currentTemp);
-        System.out.println(temperatureCategory);
+        System.out.println("tempcat:" + temperatureCategory);
 
         // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,department,)
         //test contentcall
