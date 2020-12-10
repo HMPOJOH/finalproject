@@ -23,14 +23,16 @@
 <div id="imageBox" align="center">
   
   <div class="header" align="left">
+    <div align="left">
     <img th:src="${currentWeatherImage}"><h1 th:text="${city}+' ' +${country}"></h1>
     <h3 th:text="'temp: ' + ${currentTemp}+' C'"></h3>
     <h3 th:text="'wind: ' + ${currentWindSpeed} + ' m/s'"></h3>
-
-
-
   </div>
 
+  <div align="right" float="top">
+    <h1 th:text="${scenario}+' ' +${getDescription}"></h1>
+  </div>
+  </div>
 
   <header>
     <style type="text/css">

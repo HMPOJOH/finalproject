@@ -35,6 +35,8 @@ public class WeatherbasedcontentController {
         model.addAttribute("weather", weatherFromSMHI);
         model.addAttribute("locations", possibleLocations);
         model.addAttribute("departments", departments);
+        
+
         return "setuppanel";
     }
 
@@ -104,6 +106,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("tempcat", temperatureCategory);
         model.addAttribute("contentList", contentList);
         model.addAttribute("scenario", scenario.getDescription());
+
 
 
 
