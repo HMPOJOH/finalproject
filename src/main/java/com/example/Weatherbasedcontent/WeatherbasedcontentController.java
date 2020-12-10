@@ -49,10 +49,21 @@ public class WeatherbasedcontentController {
 
 
 
-    @PostMapping("/panel")
 
-    //this is just for testing that we have all values we want
-    public String testSMHI(HttpSession session,@RequestParam String department, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
+    /*@PostMapping("/index")
+    public String index(HttpSession session, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
+
+        List<Content> contentList = productRepos.getContentList(3);
+
+
+        model.addAttribute("contentList", contentList);
+
+
+        return "index";
+    }*/
+
+    @PostMapping("/index")
+    public String index(HttpSession session, @RequestParam String city, int department, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
 
         System.out.println(city);
 
@@ -87,7 +98,7 @@ public class WeatherbasedcontentController {
         System.out.println(currentDate);
 
 
-         int getCurrentSeasonId = productRepos.getCurrentSeasonId(currentDate, countryID);
+        int getCurrentSeasonId = prmRep.getCurrentSeasonId(currentDate, countryID);
         System.out.println("dep: "+department);
         System.out.println("seasonid "+ getCurrentSeasonId);
         System.out.println("weatherSymbolnr:"+currentWeatherSymbolnr);
@@ -105,72 +116,10 @@ public class WeatherbasedcontentController {
         //desc, seasonid, weathersymbolid, tempid, department =
 
 
-         int scenarioId = productRepos.getScenarioId(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
+        int scenarioId = prmRep.getScenarioId(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
         System.out.println("scenarioId:" + scenarioId);
         //test contentcall
-        List<Content> contentList = productRepos.getContentList(1);
-
-        //Just to show the values - will rather be used in the Content lookup
-        model.addAttribute("city", city);
-        model.addAttribute("weather", weather);
-        model.addAttribute("currentTemp", currentTemp);
-        model.addAttribute("currentWindSpeed", currentWindSpeed);
-        model.addAttribute("currentWeatherSymbolnr", currentWeatherSymbolnr);
-        model.addAttribute("currentWeatherCategory", currentWeatherCategory);
-        model.addAttribute("currentWeatherImage", currentWeatherImager);
-        model.addAttribute("currentWeatherSymbolText", currentSymbolText);
-        model.addAttribute("contentimage", contentList.get(0).getImage());
-        model.addAttribute("country", countryID);
-        model.addAttribute("tempcat", temperatureCategory);
-
-
-
-        return "panel";
-    }
-
-    /*@PostMapping("/index")
-    public String index(HttpSession session, @RequestParam String city, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
-
-        List<Content> contentList = productRepos.getContentList(3);
-
-
-        model.addAttribute("contentList", contentList);
-
-
-        return "index";
-    }*/
-
-    @PostMapping("/index")
-    public String index(HttpSession session, @RequestParam String city, int department, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
-
-        System.out.println(city);
-
-        longitude=possibleLocations.stream()
-                .filter(x -> city.equals(x.getName())).findAny().orElse(null).getLongitude(); //locationRep.getLongitudeByCity(city);
-        latitude= possibleLocations.stream()
-                .filter(x -> city.equals(x.getName())).findAny().orElse(null).getLatitude();//locationRep.getLatitudeByCity(city);
-
-        String countryID = locationRep.getCountryIDByCity(city);
-
-        weather = restTemplate.getForObject("https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/"+longitude +"/lat/" + latitude+"/data.json", Weather.class);
-        WeatherCalculator weatherCalc = new WeatherCalculator(weather);
-        //SMHI
-        Float currentTemp = weatherCalc.getCurrentTemp();
-        Float currentWindSpeed = weatherCalc.getCurrentWindSpeed();
-        int currentWeatherSymbolnr = weatherCalc.getCurrentWeatherSymbolNumber();
-
-
-        //internal loolup
-        String currentWeatherCategory = weatherCalc.getWeatherCategory(currentWeatherSymbolnr);
-        int currentWeatherCategoryId = weatherCalc.getWeatherCategoryId(currentWeatherSymbolnr);
-        String currentWeatherImager = weatherCalc.getWeatherCategoryImage(currentWeatherSymbolnr);
-        String currentSymbolText = weatherCalc.getCurrentWeatherSymbolText(currentWeatherSymbolnr);
-        int temperatureCategory = weatherCalc.getTempCategory(currentTemp);
-        System.out.println("tempcat:" + temperatureCategory);
-
-        // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,department,)
-        //test contentcall
-        List<Content> contentList = productRepos.getContentList(3);
+        List<Content> contentList = productRepos.getContentList(scenarioId);
 
         //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
@@ -185,6 +134,9 @@ public class WeatherbasedcontentController {
         model.addAttribute("country", countryID);
         model.addAttribute("tempcat", temperatureCategory);
         model.addAttribute("contentList", contentList);
+
+
+
 
 
         return "index";
