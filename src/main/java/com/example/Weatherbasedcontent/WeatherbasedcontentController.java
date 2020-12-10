@@ -105,7 +105,7 @@ public class WeatherbasedcontentController {
         //desc, seasonid, weathersymbolid, tempid, department =
 
 
-         int scenarioId = productRepos.getScenarioId(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
+        int scenarioId = productRepos.getScenarioId(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
         System.out.println("scenarioId:" + scenarioId);
         //test contentcall
         List<Content> contentList = productRepos.getContentList(1);
@@ -168,8 +168,11 @@ public class WeatherbasedcontentController {
         int temperatureCategory = weatherCalc.getTempCategory(currentTemp);
         System.out.println("tempcat:" + temperatureCategory);
 
-        // int scenarioId = productRepos.getScenarioId(currentWeatherCategory,department,)
-        //test contentcall
+        Date currentDate = weatherCalc.getCurrentDate();
+        int getCurrentSeasonId = productRepos.getCurrentSeasonId(currentDate, countryID);
+        Scenario scenario = prmRep.getScenario(getCurrentSeasonId,currentWeatherCategoryId,temperatureCategory,department);
+        System.out.println("scenarioId:" + scenario.getId());
+        System.out.println("scenario description:" + scenario.getDescription());
         List<Content> contentList = productRepos.getContentList(3);
 
         //Just to show the values - will rather be used in the Content lookup
@@ -184,6 +187,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("contentimage", contentList.get(0).getImage());
         model.addAttribute("country", countryID);
         model.addAttribute("tempcat", temperatureCategory);
+        model.addAttribute("scenario", scenario.getDescription());
         model.addAttribute("contentList", contentList);
 
 
