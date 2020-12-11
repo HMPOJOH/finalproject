@@ -1,55 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="stylesheet.css">
-</head>
-<body>
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Dummy weather Page</title>
+    <title>Setup panel</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
+
 <body>
 <div class="imageBox" align="center">
 
-    <div class="login" align="left">
-        <form action="" method="post">
-            <input type="image" id="image" alt="Login"
-                   src="hmLogo.png" height="10%" width="10%">
-        </form>
+    <div class="header-setupPanel" align="left">
+        <img src="hmLogo.png" height="7%" width="7%">
+        <h1 align="center">Admin page - setup panel</h1>
     </div>
-    <h1>Admin page - setup panel</h1>
 
 
-    <form th:action="@{/index}" method="POST" >
+    <form th:action="@{/index}" method="POST">
+
+        <h3 align="left" style="padding-left:25px">City</h3>
+
+        <select th:name="city" class="city-dropdown">
+            <option th:each="location : ${locations}"
+                    th:value="${location.name}"
+                    th:text="${location.name}"></option>
+        </select>
 
 
-    <select th:name ="city" id="city">
-        <option th:each="location : ${locations}"
-                th:value="${location.name}"
-                th:text="${location.name}"></option>
-    </select>
-    <select th:name ="department" id="department">
-        <option th:each="dep : ${departments}"
-                th:value="${dep.id}"
-                th:text="${dep.description}"></option>
-    </select>
-        <select name ="smhidays" id="smhidays">
-            <option th:each="day : ${T(com.example.Weatherbasedcontent.SMHI.SMHIDays).values()}"
+        <h3 align="left" style="padding-left:25px">Department</h3>
+
+        <select th:name="department" class="department-dropdown">
+            <option th:each="dep : ${departments}"
+                    th:value="${dep.id}"
+                    th:text="${dep.description}"></option>
+        </select>
+
+
+        <h3 align="left" style="padding-left:25px">Time frame</h3>
+
+        <select name="smhidays" class="smhidays-dropdown">
+            <option th:each="day : ${T(com.example.Weatherbasedcontent.SMHIDays).values()}"
                     th:value="${day}"
                     th:text="${day}"></option>
         </select>
 
+        <input type="submit" class="startPanel-btn" value="Start panel" align="center">
 
-    <input type="submit" id ="submit" value="Start Index" align="center">
-</form>
-    </div>
+    </form>
 
 
-</body>
-</html>
+</div>
+
+
 </body>
 </html>
