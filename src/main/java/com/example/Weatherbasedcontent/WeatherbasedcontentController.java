@@ -82,9 +82,11 @@ public class WeatherbasedcontentController {
         model.addAttribute("tempcat", tempCategory);
         System.out.println("tempcat" + tempCategory);
         model.addAttribute("contentList", contentList);
+        System.out.println("country" + weatherFromAPI.getCity().getCountry());
         model.addAttribute("scenario", scenario.getDescription());
         System.out.println("scenarioid" + scenario.getId());
         System.out.println("weathercat" + weatherCategoryId);
+        System.out.println("seasonid; "+seasonIdbyDateAndCountry );
         return "index";
     }
 
