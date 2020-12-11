@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -106,7 +107,9 @@ public class WeatherbasedcontentController {
         System.out.println("add into scenario " + scenarioId);
         int contentId = productRepos.addContent(content);
         System.out.println("contentId added: " + contentId);
-        return "redirect:/addcontent";
+        return "redirect:/addcontent/{scenarioId}";
+
+
     }
 
     @GetMapping("/scenarios")
