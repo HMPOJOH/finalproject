@@ -38,7 +38,7 @@
         <h3 align="left" style="padding-left:25px">Time frame</h3>
 
         <select name="smhidays" class="smhidays-dropdown">
-            <option th:each="day : ${T(com.example.Weatherbasedcontent.SMHIDays).values()}"
+            <option th:each="day : ${T(com.example.Weatherbasedcontent.SMHI.SMHIDays).values()}"
                     th:value="${day}"
                     th:text="${day}"></option>
         </select>
