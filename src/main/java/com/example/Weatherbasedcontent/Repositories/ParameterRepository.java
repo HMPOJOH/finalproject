@@ -84,6 +84,9 @@ public class ParameterRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("seasonId:" + seasonId);
+        System.out.println("weatherId:" + weatherId);
+        System.out.println("depId:" + depId);
         scenario.setDescription("Show: " + getSeasonDesc(seasonId) + ", " + getWeatherDesc(weatherId) + ", " + getDepDesc(depId));
         return scenario;
     }
@@ -162,10 +165,10 @@ public class ParameterRepository {
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date.substring(0,9)+"' AND DATETO>='"+date.substring(0,9)+"'") ) {
+             ResultSet rs = stmt.executeQuery("select SEASONID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date.substring(0,9)+"' AND DATETO>='"+date.substring(0,9)+"'") ) {
 //SELECT * FROM SEASONPERCOUNTRY WHERE COUNTRYID='SE' AND DATEFROM<='2020-12-09' AND DATETO>='2020-12-09'
             if (rs.next()) {
-                return rs.getInt("ID");
+                return rs.getInt("SEASONID");
             }
 
         } catch (SQLException e) {
