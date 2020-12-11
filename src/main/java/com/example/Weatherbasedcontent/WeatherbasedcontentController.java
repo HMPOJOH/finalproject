@@ -5,6 +5,7 @@ import com.example.Weatherbasedcontent.Repositories.*;
 import com.example.Weatherbasedcontent.SMHI.SMHIDays;
 import com.example.Weatherbasedcontent.SMHI.Weather;
 import com.example.Weatherbasedcontent.SMHI.WeatherAnalyzerBySMHIDay;
+import com.example.Weatherbasedcontent.WWWeatherMultipleDays.WeatherRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -120,6 +121,10 @@ public class WeatherbasedcontentController {
             System.out.println(weatherOutsideSE.getName() + " " + weatherOutsideSE.getSys().getCountry());
             System.out.println(weatherOutsideSE.getMain().getTemp());
             System.out.println(weatherOutsideSE.getWeather().get(0).getMain() + " " + weatherOutsideSE.getWeather().get(0).getDescription() );
+
+            WeatherRoot anotherWeatherAPI =restTemplate.getForObject("api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherRoot.class);
+            //temperature = (float)anotherWeatherAPI.list.get(0)
+
      }
 
      else if (countryID.equals("CA")) {
