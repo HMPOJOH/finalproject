@@ -1,4 +1,4 @@
-package com.example.Weatherbasedcontent;
+package com.example.Weatherbasedcontent.Repositories;
 
 import com.example.Weatherbasedcontent.Repositories.Content;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class WeatherbasedcontentRepository {
+public class ContentRepository {
 
     @Autowired
     private DataSource dataSource;
