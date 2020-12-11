@@ -1,5 +1,7 @@
 package com.example.Weatherbasedcontent.WeatherAPIWW;
 
+
+
 public enum ForecastDays {
     TODAY,
     TOMORROW,
