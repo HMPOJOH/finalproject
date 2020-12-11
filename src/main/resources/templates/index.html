@@ -3,7 +3,6 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 
@@ -16,6 +15,7 @@
   <div class="header" align="left">
     <div align="left">
     <img th:src="${currentWeatherImage}" src=""><h1 th:text="${city}+' ' +${country}"></h1>
+      <h3 th:text="${weatherdesc}"></h3>
     <h3 th:text="'temp: ' + ${temperature}+' C'"></h3>
     <h3 th:text="'wind: ' + ${currentWindSpeed} + ' m/s'"></h3>
   </div>
@@ -52,7 +52,7 @@
     </style>
     </header>
 
-
+<!--
   <div class="w3-content w3-section" style="width: 30%; float: right;">
     <img class="mySlides w3-animate-fading" src="swimshorts1.jfif" style="width:100%">
     <img class="mySlides w3-animate-fading" src="swimshorts2.jfif" style="width:100%">
@@ -69,7 +69,22 @@
 
   <div class="w3-content w3-section" style="max-width: 30%; float: top;" >
     <img class="mySlides3 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%" src="">
+    box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.9);
   </div>
+-->
+
+  <div class="w3-content w3-section" style="max-width: 30%; float: top;" >
+    <img class="mySlides w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%; clip-path: inset(15% 0% 15% 0%);" src="">
+  </div>
+
+  <div class="w3-content w3-section" style="max-width: 30%; float: top;clip-path: inset(15% 0% 15% 0%); " >
+    <img class="mySlides2 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%; margin-top:-47%;" src="">
+  </div>
+
+  <div class="w3-content w3-section" style="max-width: 30%; float: top;" >
+    <img class="mySlides3 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%; clip-path: inset(15% 0% 15% 0%);margin-top:-47%" src="">
+  </div>
+
 
 
 
@@ -86,13 +101,13 @@
       x[i].style.display = "none";  
     }
     myIndex++;
-    if (myIndex > x.length) {myIndex = 1}    
+    if (myIndex > x.length) {myIndex = 1}
     x[myIndex-1].style.display = "block";  
-    setTimeout(carousel, 9000);
+    setTimeout(carousel, 4500);
   }
 
-  var myIndex2 = 0;
-  carousel2();
+  var myIndex2 = 2;
+  setTimeout(carousel2, 900);
   
   function carousel2() {
     let i;
@@ -103,11 +118,12 @@
     myIndex2++;
     if (myIndex2 > x.length) {myIndex2 = 1}
     x[myIndex2-1].style.display = "block";
-    setTimeout(carousel2, 9000);
+    setTimeout(carousel2, 4500);
+
   }
 
-  var myIndex3 = 0;
-  carousel3();
+  var myIndex3 = 4;
+  setTimeout(carousel3, 1800);
   
   function carousel3() {
     let i;
@@ -118,7 +134,8 @@
     myIndex3++;
     if (myIndex3 > x.length) {myIndex3 = 1}
     x[myIndex3-1].style.display = "block";
-    setTimeout(carousel3, 9000);
+    setTimeout(carousel3, 4500);
+
   }
   </script>
 
