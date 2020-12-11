@@ -77,14 +77,14 @@ public class ParameterRepository {
 
             if (rs.next()) {
                 scenario.setId(rs.getInt("ID"));
-                scenario.setDescription(rs.getString("DESCRIPTION"));
+                scenario.setDescription("Scenario: " + rs.getString("DESCRIPTION"));
                 return scenario;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        scenario.setDescription("Show: " + getSeasonDesc(seasonId) + ", " + getWeatherDesc(weatherId) + ", " + getDepDesc(depId));
         return scenario;
     }
 
@@ -106,6 +106,54 @@ public class ParameterRepository {
         }
 
         return scenario;
+    }
+
+    public String getSeasonDesc(int seasonId) {
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT DESCRIPTION FROM SEASON WHERE ID="+seasonId) ) {
+
+            if (rs.next()) {
+                return rs.getString("DESCRIPTION");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return " ";
+    }
+
+    public String getDepDesc(int depId) {
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT DESCRIPTION FROM DEPARTMENT WHERE ID="+depId) ) {
+
+            if (rs.next()) {
+                return rs.getString("DESCRIPTION");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return " ";
+    }
+
+    public String getWeatherDesc(int weatherSymbolId) {
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT DESCRIPTION FROM WEATHERSYMBOL WHERE ID="+weatherSymbolId) ) {
+
+            if (rs.next()) {
+                return rs.getString("DESCRIPTION");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return " ";
     }
 
     //ny

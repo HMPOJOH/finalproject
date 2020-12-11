@@ -99,12 +99,14 @@ public class WeatherbasedcontentController {
         return "addcontent";
     }
 
-    @PostMapping("/saveContent/{scenarioId}")
+    @PostMapping("/savecontent/{scenarioId}")
     public String set(@ModelAttribute Content content, @PathVariable int scenarioId) {
         System.out.println("add into scenario " + scenarioId);
+        System.out.println("content text 1 " + content.getText());
         int contentId = productRepos.addContent(content);
+        productRepos.addContentByScenario(contentId,scenarioId);
         System.out.println("contentId added: " + contentId);
-        return "addcontent";
+        return "scenarios";
     }
 
     @GetMapping("/scenarios")

@@ -183,4 +183,25 @@ public class ContentRepository {
         }
         return generatedId;
     }
+    public void addContentByScenario(int contentId, int scenarioId) {
+        Connection conn = null;
+        String SqlStatement = "INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) \n" +
+                " VALUES(" + contentId + "," + scenarioId + ")";
+
+        try {
+            conn = dataSource.getConnection();
+
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(SqlStatement);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
