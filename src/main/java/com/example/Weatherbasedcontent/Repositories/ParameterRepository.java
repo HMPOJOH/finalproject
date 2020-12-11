@@ -45,7 +45,7 @@ public class ParameterRepository {
 
 
 
-    public Scenario getScenario(int seasonId, int weatherId, int tempId, int depId) {
+    public Scenario getScenariobyValues(int seasonId, int weatherId, int tempId, int depId) {
         Scenario scenario = new Scenario(1,"no scenario");
 
         try (Connection conn = dataSource.getConnection();
@@ -65,6 +65,25 @@ public class ParameterRepository {
         return scenario;
     }
 
+    public Scenario getScenario(int scenarioId) {
+        Scenario scenario = new Scenario(1,"no scenario");
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM SCENARIO WHERE ID="+scenarioId) ) {
+
+            if (rs.next()) {
+                scenario.setId(rs.getInt("ID"));
+                scenario.setDescription(rs.getString("DESCRIPTION"));
+                return scenario;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return scenario;
+    }
 
     //ny
     public int getSeasonIdbyDateAndCountry(String date, String isoCountry) {

@@ -24,23 +24,8 @@ public class ContentRepository {
 
     public List<Content> getContentList(int searchScenario, int seasonId, int departmentId, int weatherCatId) {
         List<Content> content = new ArrayList<>();
-        int contentCount = 0;
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
-                     "FROM CONTENTBYSCENARIO \n" +
-                     "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
-                     "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
-                     "WHERE CONTENTBYSCENARIO.SCENARIOID =" + searchScenario)) {
-
-            while (rs.next()) {
-                content.add(rsContent(rs));
-                contentCount +=1;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        content = getContentListbyId(searchScenario);
+        int contentCount = content.size();
         System.out.println("Content count 1: " + contentCount);
         // fetch fallback content if not enough content
         if (contentCount < 5 ) {
@@ -67,6 +52,27 @@ public class ContentRepository {
                     break;
             }
             System.out.println("Content count 3: " + contentCount);
+        }
+        return content;
+    }
+
+    // fetch content with correct scenarioId
+    public List<Content> getContentListbyId(int searchScenario) {
+        List<Content> content = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
+                     "FROM CONTENTBYSCENARIO \n" +
+                     "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                     "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                     "WHERE CONTENTBYSCENARIO.SCENARIOID =" + searchScenario)) {
+
+            while (rs.next()) {
+                content.add(rsContent(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return content;
     }
@@ -145,5 +151,36 @@ public class ContentRepository {
             e.printStackTrace();
         }
         return content;
+    }
+
+    public int addContent(Content content) {
+        int generatedId = 0;
+        Connection conn = null;
+        System.out.println("text to add: " + content.getText());
+        System.out.println("image to add: " + content.getImage());
+        System.out.println("url to add: " + content.getUrl());
+        String SqlStatement = "INSERT INTO CONTENT (TEXT,IMAGE,URL) \n" +
+                " VALUES(" + content.getText() + "," + content.getImage() + "," + content.getUrl() + ")";
+
+        try {
+            conn = dataSource.getConnection();
+
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(SqlStatement);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return generatedId;
     }
 }
