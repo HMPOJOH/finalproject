@@ -21,9 +21,9 @@ import java.util.List;
 public class WeatherbasedcontentController {
 
     @Autowired
-    private WeatherbasedcontentRepository productRepos;
+    private ContentRepository productRepos;
     @Autowired
-    private LocationRepository locationRep;
+    private CityRepository locationRep;
     @Autowired
     private ParameterRepository prmRep;
 
