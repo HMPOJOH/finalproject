@@ -81,6 +81,15 @@ background-color: #f4f4f4;
 }
 
 
+/*Below is where you set the fading timer for carousels (fading #s infinite..)*/
+/*You will need to change the "setTimeout" for the carousel in HTML <script> as well.*/
+/*For every second of fading, add 900 to the carousel timeout.*/
+.w3-animate-fading{animation:fading 5s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+
+.w3-content,.w3-auto{margin-left:auto;margin-right:auto}.w3-content{max-width:980px}.w3-auto{max-width:1140px}
+
+.w3-section,.w3-code{margin-top:16px!important;margin-bottom:16px!important}
+
 
 
 
