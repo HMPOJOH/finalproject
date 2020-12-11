@@ -1,4 +1,10 @@
-package com.example.Weatherbasedcontent;
+package com.example.Weatherbasedcontent.SMHI;
+import com.example.Weatherbasedcontent.SMHI.Parameters;
+import com.example.Weatherbasedcontent.SMHI.SMHIDays;
+import com.example.Weatherbasedcontent.SMHI.TimeSeries;
+import com.example.Weatherbasedcontent.SMHI.Weather;
+import com.example.Weatherbasedcontent.WeatherSymbols;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

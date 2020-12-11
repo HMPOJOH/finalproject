@@ -1,5 +1,10 @@
 package com.example.Weatherbasedcontent;
 
+import com.example.Weatherbasedcontent.InternationalWeather.WeatherOutsideSE;
+import com.example.Weatherbasedcontent.Repositories.*;
+import com.example.Weatherbasedcontent.SMHI.SMHIDays;
+import com.example.Weatherbasedcontent.SMHI.Weather;
+import com.example.Weatherbasedcontent.SMHI.WeatherAnalyzerBySMHIDay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -24,6 +28,7 @@ public class WeatherbasedcontentController {
     private ParameterRepository prmRep;
 
     private Weather weatherFromSMHI = new Weather();
+    private WeatherOutsideSE weatherOutsideSE;
     private List<City> possibleLocations = new ArrayList<City>();
     private List<Department> departments = new ArrayList<Department>();
     private int season = 0;
@@ -86,6 +91,12 @@ public class WeatherbasedcontentController {
             weatherCategoryId = 1;
             weatherImage = "https://img.icons8.com/office/30/000000/summer.png";
             symbolText = "Clear sky";
+
+            weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
+
+            temperature = (float)weatherOutsideSE.getMain().getTemp();
+            windSpeed = (float)weatherOutsideSE.getWind().getSpeed();
+            weatherImage = "http://openweathermap.org/img/wn/"+weatherOutsideSE.getWeather().get(0).getIcon()+ "@2x.png";
         }
      else if (countryID.equals("UK")) {
         //get parameters
@@ -98,7 +109,18 @@ public class WeatherbasedcontentController {
         weatherCategoryId = 2;
         weatherImage = "https://img.icons8.com/office/30/000000/downpour.png";
         symbolText = "Heavy rain";
-    }
+
+        //just for testing!
+            weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
+
+            temperature = (float)weatherOutsideSE.getMain().getTemp();
+            windSpeed = (float)weatherOutsideSE.getWind().getSpeed();
+            weatherImage = "http://openweathermap.org/img/wn/"+weatherOutsideSE.getWeather().get(0).getIcon()+ "@2x.png";
+
+            System.out.println(weatherOutsideSE.getName() + " " + weatherOutsideSE.getSys().getCountry());
+            System.out.println(weatherOutsideSE.getMain().getTemp());
+            System.out.println(weatherOutsideSE.getWeather().get(0).getMain() + " " + weatherOutsideSE.getWeather().get(0).getDescription() );
+     }
 
      else if (countryID.equals("CA")) {
         //get parameters
@@ -111,6 +133,11 @@ public class WeatherbasedcontentController {
         weatherCategoryId = 4;
         weatherImage = "https://img.icons8.com/office/30/000000/snow.png";
         symbolText = "Moderate snowfall";
+            weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
+
+            temperature = (float)weatherOutsideSE.getMain().getTemp();
+            windSpeed = (float)weatherOutsideSE.getWind().getSpeed();
+            weatherImage = "http://openweathermap.org/img/wn/"+weatherOutsideSE.getWeather().get(0).getIcon()+ "@2x.png";
     }
 
 
