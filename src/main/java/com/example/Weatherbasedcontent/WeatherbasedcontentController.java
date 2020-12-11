@@ -106,6 +106,7 @@ public class WeatherbasedcontentController {
     public String set(@ModelAttribute Content content, @PathVariable int scenarioId) {
         System.out.println("add into scenario " + scenarioId);
         int contentId = productRepos.addContent(content);
+        productRepos.addContentToScenario(contentId,scenarioId);
         System.out.println("contentId added: " + contentId);
         return "redirect:/addcontent/{scenarioId}";
 
