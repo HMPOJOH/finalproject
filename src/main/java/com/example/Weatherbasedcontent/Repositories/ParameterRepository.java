@@ -42,10 +42,33 @@ public class ParameterRepository {
                 rs.getString("DESCRIPTION"));
     }
 
+    public List<Scenario> getAllScenarios() {
+        List<Scenario> scenarios = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select ID, DESCRIPTION FROM SCENARIO")) {
+
+            while (rs.next()) {
+                scenarios.add(rsScenario(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return scenarios;
+    }
+
+    private Scenario rsScenario(ResultSet rs) throws SQLException {
+        return new Scenario(
+                rs.getInt("ID"),
+                rs.getString("DESCRIPTION"));
+    }
 
 
 
-    public Scenario getScenario(int seasonId, int weatherId, int tempId, int depId) {
+
+    public Scenario getScenariobyValues(int seasonId, int weatherId, int tempId, int depId) {
         Scenario scenario = new Scenario(1,"no scenario");
 
         try (Connection conn = dataSource.getConnection();
@@ -65,18 +88,33 @@ public class ParameterRepository {
         return scenario;
     }
 
+    public Scenario getScenario(int scenarioId) {
+        Scenario scenario = new Scenario(1,"no scenario");
 
-    //ny
-    public int getSeasonIdbyDateAndCountry(Date date, String isoCountry) {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
-
-
-        String dateFormatted= dateFormat.format(date);
-        System.out.println(dateFormatted);
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+dateFormatted+"' AND DATETO>='"+dateFormatted+"'") ) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM SCENARIO WHERE ID="+scenarioId) ) {
+
+            if (rs.next()) {
+                scenario.setId(rs.getInt("ID"));
+                scenario.setDescription(rs.getString("DESCRIPTION"));
+                return scenario;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return scenario;
+    }
+
+    //ny
+    public int getSeasonIdbyDateAndCountry(String date, String isoCountry) {
+
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date.substring(0,9)+"' AND DATETO>='"+date.substring(0,9)+"'") ) {
 //SELECT * FROM SEASONPERCOUNTRY WHERE COUNTRYID='SE' AND DATEFROM<='2020-12-09' AND DATETO>='2020-12-09'
             if (rs.next()) {
                 return rs.getInt("ID");
