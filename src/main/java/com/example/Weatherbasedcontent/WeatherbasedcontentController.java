@@ -109,7 +109,7 @@ public class WeatherbasedcontentController {
         int contentId = productRepos.addContent(content);
         productRepos.addContentByScenario(contentId,scenarioId);
         System.out.println("contentId added: " + contentId);
-        return "scenarios";
+        return "redirect:/addcontent/{scenarioId}";
     }
 
     @GetMapping("/scenarios")
