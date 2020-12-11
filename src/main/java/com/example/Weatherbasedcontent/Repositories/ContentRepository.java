@@ -160,7 +160,7 @@ public class ContentRepository {
         System.out.println("image to add: " + content.getImage());
         System.out.println("url to add: " + content.getUrl());
         String SqlStatement = "INSERT INTO CONTENT (TEXT,IMAGE,URL) \n" +
-                " VALUES(" + content.getText() + "," + content.getImage() + "," + content.getUrl() + ")";
+                " VALUES('" + content.getText() + "','" + content.getImage() + "','" + content.getUrl() + "')";
 
         try {
             conn = dataSource.getConnection();
