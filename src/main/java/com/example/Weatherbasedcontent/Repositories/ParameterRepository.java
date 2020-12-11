@@ -109,16 +109,12 @@ public class ParameterRepository {
     }
 
     //ny
-    public int getSeasonIdbyDateAndCountry(Date date, String isoCountry) {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+    public int getSeasonIdbyDateAndCountry(String date, String isoCountry) {
 
 
-        String dateFormatted= dateFormat.format(date);
-        System.out.println(dateFormatted);
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+dateFormatted+"' AND DATETO>='"+dateFormatted+"'") ) {
+             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date.substring(0,9)+"' AND DATETO>='"+date.substring(0,9)+"'") ) {
 //SELECT * FROM SEASONPERCOUNTRY WHERE COUNTRYID='SE' AND DATEFROM<='2020-12-09' AND DATETO>='2020-12-09'
             if (rs.next()) {
                 return rs.getInt("ID");

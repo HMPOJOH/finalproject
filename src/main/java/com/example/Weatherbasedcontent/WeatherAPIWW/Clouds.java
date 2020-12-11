@@ -1,4 +1,4 @@
-package com.example.Weatherbasedcontent.InternationalWeather;
+package com.example.Weatherbasedcontent.WeatherAPIWW;
 
 public class Clouds{
     private int all;

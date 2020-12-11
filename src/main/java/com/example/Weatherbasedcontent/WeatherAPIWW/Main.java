@@ -1,13 +1,16 @@
-package com.example.Weatherbasedcontent.InternationalWeather;
+package com.example.Weatherbasedcontent.WeatherAPIWW;
 
 
 public class Main{
     private double temp;
     private double feels_like;
-    private int temp_min;
+    private double temp_min;
     private double temp_max;
     private int pressure;
+    private int sea_level;
+    private int grnd_level;
     private int humidity;
+    private double temp_kf;
 
     public double getTemp() {
         return temp;
@@ -17,7 +20,7 @@ public class Main{
         return feels_like;
     }
 
-    public int getTemp_min() {
+    public double getTemp_min() {
         return temp_min;
     }
 
@@ -29,7 +32,19 @@ public class Main{
         return pressure;
     }
 
+    public int getSea_level() {
+        return sea_level;
+    }
+
+    public int getGrnd_level() {
+        return grnd_level;
+    }
+
     public int getHumidity() {
         return humidity;
+    }
+
+    public double getTemp_kf() {
+        return temp_kf;
     }
 }
