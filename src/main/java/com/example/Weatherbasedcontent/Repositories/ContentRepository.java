@@ -160,13 +160,13 @@ public class ContentRepository {
         System.out.println("image to add: " + content.getImage());
         System.out.println("url to add: " + content.getUrl());
         String SqlStatement = "INSERT INTO CONTENT (TEXT,IMAGE,URL) \n" +
-                " VALUES(" + content.getText() + "," + content.getImage() + "," + content.getUrl() + ")";
+                " VALUES('" + content.getText() + "','" + content.getImage() + "','" + content.getUrl() + "')";
 
         try {
             conn = dataSource.getConnection();
 
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate(SqlStatement);
+            stmt.executeUpdate(SqlStatement, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 generatedId = rs.getInt(1);
@@ -181,7 +181,37 @@ public class ContentRepository {
                 e.printStackTrace();
             }
         }
+
+
+
+
         return generatedId;
+    } public void addContentToScenario(int contentId, int scenarioId) {
+
+        Connection conn = null;
+
+        String SqlStatement = "INSERT INTO CONTENTBYSCENARIO  (CONTENTID,SCENARIOID) \n" +
+                " VALUES('" + contentId + "','" + scenarioId +"')";
+
+        try {
+            conn = dataSource.getConnection();
+
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(SqlStatement);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
     }
     public void addContentByScenario(int contentId, int scenarioId) {
         Connection conn = null;

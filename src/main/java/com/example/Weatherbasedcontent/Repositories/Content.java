@@ -15,6 +15,22 @@ public class Content {
         this.text = text;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public int getId() {
         return id;
     }

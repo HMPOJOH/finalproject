@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -82,9 +83,11 @@ public class WeatherbasedcontentController {
         model.addAttribute("tempcat", tempCategory);
         System.out.println("tempcat" + tempCategory);
         model.addAttribute("contentList", contentList);
+        System.out.println("country" + weatherFromAPI.getCity().getCountry());
         model.addAttribute("scenario", scenario.getDescription());
         System.out.println("scenarioid" + scenario.getId());
         System.out.println("weathercat" + weatherCategoryId);
+        System.out.println("seasonid; "+seasonIdbyDateAndCountry );
         return "index";
     }
 
