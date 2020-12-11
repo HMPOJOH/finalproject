@@ -109,4 +109,12 @@ public class WeatherbasedcontentController {
         return "addcontent";
     }
 
+    @GetMapping("/scenarios")
+    public String scenarios(HttpSession session, Model model) {
+        List<Scenario> scenarios = prmRep.getAllScenarios();
+        model.addAttribute("scenarios", scenarios);
+
+        return "scenarios";
+    }
+
 }
