@@ -166,7 +166,7 @@ public class ContentRepository {
             conn = dataSource.getConnection();
 
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate(SqlStatement);
+            stmt.executeUpdate(SqlStatement, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 generatedId = rs.getInt(1);
