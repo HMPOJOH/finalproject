@@ -3,9 +3,6 @@ import com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays;
 import com.example.Weatherbasedcontent.WeatherAPIWW.WeatherAnalyzer;
 
 import com.example.Weatherbasedcontent.Repositories.*;
-import com.example.Weatherbasedcontent.SMHI.SMHIDays;
-import com.example.Weatherbasedcontent.SMHI.Weather;
-import com.example.Weatherbasedcontent.SMHI.WeatherAnalyzerBySMHIDay;
 import com.example.Weatherbasedcontent.WeatherAPIWW.WeatherRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +35,7 @@ public class WeatherbasedcontentController {
 
     private WeatherRoot weatherFromAPI = new WeatherRoot();
 
-    private List<City> possibleLocations = new ArrayList<City>();
+    private List<String> possibleLocations = new ArrayList<String>();
     private List<Department> departments = new ArrayList<Department>();
     private int season = 0;
 
@@ -65,7 +62,7 @@ public class WeatherbasedcontentController {
         int  seasonIdbyDateAndCountry = prmRep.getSeasonIdbyDateAndCountry(analyzeWeatherAPI.getDateForSpecificDay(), weatherFromAPI.getCity().getCountry());
         int weatherCategoryId = analyzeWeatherAPI.getWeatherCategory();
         String  weatherImage = analyzeWeatherAPI.getWeatherCategoryImage(); //http://openweathermap.org/img/wn/10d@2x.png
-        String  symbolText = analyzeWeatherAPI.getWeatherSymbolText();
+        String  weatherDesc = analyzeWeatherAPI.getWeatherDesc();
 
 
         //desc, seasonid, weathersymbolid, tempid, department =
@@ -80,7 +77,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("temperature", temperature);
         model.addAttribute("currentWindSpeed", windSpeed);
         model.addAttribute("currentWeatherImage", weatherImage);
-        model.addAttribute("currentWeatherSymbolText", symbolText);
+        model.addAttribute("weatherdesc", weatherDesc);
         model.addAttribute("country", weatherFromAPI.getCity().getCountry());
         model.addAttribute("tempcat", tempCategory);
         System.out.println("tempcat" + tempCategory);
@@ -111,24 +108,5 @@ public class WeatherbasedcontentController {
     }
 
 
-    private ForecastDays setTempForcastDay(SMHIDays smhidays) {
-        switch (smhidays) {
-            case TODAY:
-                return ForecastDays.TODAY;
 
-            case TOMORROW:
-                return ForecastDays.TOMORROW;
-
-            case DAY_THREE:
-                return ForecastDays.DAY_THREE;
-
-            case DAY_FOUR:
-                return ForecastDays.DAY_FOUR;
-
-
-        }
-           return ForecastDays.DAY_FIVE;
-
-
-    }
 }

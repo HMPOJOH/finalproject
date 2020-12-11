@@ -21,8 +21,8 @@
 
         <select th:name="city" class="city-dropdown">
             <option th:each="location : ${locations}"
-                    th:value="${location.name}"
-                    th:text="${location.name}"></option>
+                    th:value="${location}"
+                    th:text="${location}"></option>
         </select>
 
 

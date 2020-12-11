@@ -19,14 +19,14 @@ public class CityRepository {
     @Autowired
     private DataSource dataSource;
 
-    public List<City> getLocationsList() {
-        List<City> cities = new ArrayList<City>();
+    public List<String> getLocationsList() {
+        List<String> cities = new ArrayList<String>();
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select * FROM CITY") ) {
+             ResultSet rs = stmt.executeQuery("select NAME FROM CITY") ) {
 
             while (rs.next()) {
-                cities.add(rsCity(rs));
+                cities.add(rs.getString("NAME"));
             }
 
         } catch (SQLException e) {
@@ -36,89 +36,5 @@ public class CityRepository {
 
     }
 
-    public double getLongitudeByCity(List<City> cities, String city) {
 
-        Double longitude;
-
-        longitude = cities.stream()
-                    .filter(x -> city.equals(x.getName())).findAny().orElse(null).getLongitude();
-
-
-
-/*
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select LONGITUDE FROM CITY WHERE NAME='" + city + "'") ) {
-
-            if(rs.next()) {
-                return  rs.getDouble("LONGITUDE");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
- */
-
-
-            return longitude;
-
-    }
-
-    public double getLatitudeByCity(List<City> cities, String city) {
-       /* try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select LATITUDE FROM CITY WHERE NAME='" + city + "'") ) {
-
-            if(rs.next()) {
-                return  rs.getDouble("LATITUDE");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0.0;*/
-
-        Double latitude;
-
-        latitude = cities.stream()
-                .filter(x -> city.equals(x.getName())).findAny().orElse(null).getLatitude();
-        return latitude;
-    }
-
-    public String getCountryIDByCity(List<City> cities,String city) {
-
-
-       String isoCountry;
-
-        isoCountry = cities.stream()
-                .filter(x -> city.equals(x.getName())).findAny().orElse(null).getCountryid();
-
-        return isoCountry;
-       /*
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select COUNTRYID FROM CITY WHERE NAME='" + city + "'") ) {
-
-            if(rs.next()) {
-                return  rs.getString("COUNTRYID");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;*/
-    }
-
-
-    private City rsCity(ResultSet rs) throws SQLException {
-        return new City(
-                rs.getInt("ID"),
-                rs.getString("NAME"),
-                rs.getDouble("LONGITUDE"),
-                rs.getDouble("LATITUDE"),
-                rs.getString("COUNTRYID"));
-
-    }
 }

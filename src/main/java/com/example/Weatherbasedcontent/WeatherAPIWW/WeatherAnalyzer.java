@@ -180,7 +180,7 @@ if	781			4
         return "https://openweathermap.org/img/wn/" + weatherFromAPI.getList().get(listIndex).getWeather().get(0).getIcon()+ "@2x.png";
     }
 
-    public String getWeatherSymbolText() {
+    public String getWeatherDesc() {
         return weatherFromAPI.getList().get(listIndex).getWeather().get(0).getDescription();
     }
 }
