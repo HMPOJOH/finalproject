@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Scenarios</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css " integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div class="imageBox" align="center">
+    <div class="header-setupPanel" align="left">
+        <img src="hmLogo.png" height="7%" width="7%">
+        <h1 align="center">Scenarios</h1>
+    </div>
+
+    <form th:action="'/addContent/' +${scenarioId}" method="POST">
+        <table class="table table-light">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tr th:each="scenario,iter : ${scenarios}">
+                <td th:text="${scenario.id}">Id</td>
+                <td th:text="${scenario.description}">Description</td>
+                <td>
+                    <a th:href="'addcontent/' +${scenario.id}" class="btn btn-primary">Show content</a>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>
+
+</body>
+</html>

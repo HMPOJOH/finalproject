@@ -42,6 +42,29 @@ public class ParameterRepository {
                 rs.getString("DESCRIPTION"));
     }
 
+    public List<Scenario> getAllScenarios() {
+        List<Scenario> scenarios = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select ID, DESCRIPTION FROM SCENARIO")) {
+
+            while (rs.next()) {
+                scenarios.add(rsScenario(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return scenarios;
+    }
+
+    private Scenario rsScenario(ResultSet rs) throws SQLException {
+        return new Scenario(
+                rs.getInt("ID"),
+                rs.getString("DESCRIPTION"));
+    }
+
 
 
 
