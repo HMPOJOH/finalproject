@@ -9,9 +9,7 @@ import com.example.Weatherbasedcontent.WWWeatherMultipleDays.WeatherRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
@@ -147,12 +145,11 @@ public class WeatherbasedcontentController {
 
 
         //desc, seasonid, weathersymbolid, tempid, department =
-        int scenarioId = prmRep.getScenarioId(seasonIdbyDateAndCountry, weatherCategoryId, tempCategory, department);
-        System.out.println("scenarioId:" + scenarioId);
-        Scenario scenario = prmRep.getScenario(seasonIdbyDateAndCountry, weatherCategoryId, tempCategory, department);
+        Scenario scenario = prmRep.getScenariobyValues(seasonIdbyDateAndCountry, weatherCategoryId, tempCategory, department);
+        System.out.println(scenario.getId());
         System.out.println(scenario.getDescription());
         //test contentcall
-        List<Content> contentList = productRepos.getContentList(scenarioId, seasonIdbyDateAndCountry, department, weatherCategoryId);
+        List<Content> contentList = productRepos.getContentList(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
 
         //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
@@ -170,6 +167,25 @@ public class WeatherbasedcontentController {
 
 
         return "index";
+    }
+
+    @GetMapping("/addcontent/{scenarioId}")
+    public String addContent(Model model, @PathVariable int scenarioId) {
+        Scenario scenario = prmRep.getScenario(scenarioId);
+        List<Content> contentList = productRepos.getContentListbyId(scenario.getId());
+        model.addAttribute("scenarioId", scenarioId);
+        model.addAttribute("scenarioDesc", scenario.getDescription());
+        model.addAttribute("contentList", contentList);
+        model.addAttribute("content", new Content());
+        return "addcontent";
+    }
+
+    @PostMapping("/saveContent/{scenarioId}")
+    public String set(@ModelAttribute Content content, @PathVariable int scenarioId) {
+        System.out.println("add into scenario " + scenarioId);
+        int contentId = productRepos.addContent(content);
+        System.out.println("contentId added: " + contentId);
+        return "addcontent";
     }
 
 }

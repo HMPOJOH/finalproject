@@ -6,6 +6,8 @@ public class Content {
     private String url;
     private String text;
 
+    public Content() {}
+
     public Content(int id, String image, String url, String text) {
         this.id = id;
         this.image = image;
