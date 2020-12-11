@@ -1,11 +1,12 @@
 package com.example.Weatherbasedcontent;
+import com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays;
+import com.example.Weatherbasedcontent.WeatherAPIWW.WeatherAnalyzer;
 
-import com.example.Weatherbasedcontent.InternationalWeather.WeatherOutsideSE;
 import com.example.Weatherbasedcontent.Repositories.*;
 import com.example.Weatherbasedcontent.SMHI.SMHIDays;
 import com.example.Weatherbasedcontent.SMHI.Weather;
 import com.example.Weatherbasedcontent.SMHI.WeatherAnalyzerBySMHIDay;
-import com.example.Weatherbasedcontent.WWWeatherMultipleDays.WeatherRoot;
+import com.example.Weatherbasedcontent.WeatherAPIWW.WeatherRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ import java.util.List;
 @Controller
 public class WeatherbasedcontentController {
 
+
+    private WeatherAnalyzer analyzeWeatherAPI;
+
     @Autowired
     private ContentRepository productRepos;
     @Autowired
@@ -28,8 +32,11 @@ public class WeatherbasedcontentController {
     @Autowired
     private ParameterRepository prmRep;
 
-    private Weather weatherFromSMHI = new Weather();
-    private WeatherOutsideSE weatherOutsideSE;
+
+
+
+    private WeatherRoot weatherFromAPI = new WeatherRoot();
+
     private List<City> possibleLocations = new ArrayList<City>();
     private List<Department> departments = new ArrayList<Department>();
     private int season = 0;
@@ -38,7 +45,7 @@ public class WeatherbasedcontentController {
     public String setupPanel(HttpSession session, Model model) {
         possibleLocations = locationRep.getLocationsList();
         departments = prmRep.getDepList();
-        model.addAttribute("weather", weatherFromSMHI);
+
         model.addAttribute("locations", possibleLocations);
         model.addAttribute("departments", departments);
 
@@ -49,6 +56,8 @@ public class WeatherbasedcontentController {
 
     @PostMapping("/index")
     public String index(SMHIDays smhidays, HttpSession session, @RequestParam String city, int department, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
+
+
         System.out.println(smhidays);
         //Location
         longitude = locationRep.getLongitudeByCity(possibleLocations, city);
@@ -65,85 +74,26 @@ public class WeatherbasedcontentController {
         String symbolText="";
         //Call SMHI API
         System.out.println("get weather start..");
-        if (countryID.equals("SE")) {
-            weatherFromSMHI = restTemplate.getForObject("https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/" + longitude + "/lat/" + latitude + "/data.json", Weather.class);
-            System.out.println("get weather end..");
-            //Analyze SMHI weather for a specific day
-            //Two inputs, SMHI weather + which day to analyze
-            //get parameters
-            WeatherAnalyzerBySMHIDay weatherByDay = new WeatherAnalyzerBySMHIDay(weatherFromSMHI, smhidays);
-            temperature = weatherByDay.getTemp();
-            tempCategory = weatherByDay.getTempCategory(temperature);
-            windSpeed = weatherByDay.getWindSpeed();
-            weatherSymbolNumber = weatherByDay.getWeatherSymbolNumber();
-            seasonIdbyDateAndCountry = prmRep.getSeasonIdbyDateAndCountry(weatherByDay.getDateFromTimeSerieOfChoice(), countryID);
-            weatherCategory = weatherByDay.getWeatherCategory(weatherSymbolNumber);
-            weatherCategoryId = weatherByDay.getWeatherCategoryId(weatherSymbolNumber);
-            weatherImage = weatherByDay.getWeatherCategoryImage(weatherSymbolNumber);
-            symbolText = weatherByDay.getWeatherSymbolText(weatherSymbolNumber);
-        } else if (countryID.equals("AU")) {
-            //get parameters
-            temperature = 40;
-            tempCategory = 1;
-            windSpeed = 2;
-            weatherSymbolNumber = 1;
-            seasonIdbyDateAndCountry = 1;
-            weatherCategory = "Sunny";
-            weatherCategoryId = 1;
-            weatherImage = "https://img.icons8.com/office/30/000000/summer.png";
-            symbolText = "Clear sky";
 
-            weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
 
-            temperature = (float)weatherOutsideSE.getMain().getTemp();
-            windSpeed = (float)weatherOutsideSE.getWind().getSpeed();
-            weatherImage = "http://openweathermap.org/img/wn/"+weatherOutsideSE.getWeather().get(0).getIcon()+ "@2x.png";
-        }
-     else if (countryID.equals("UK")) {
-        //get parameters
-        temperature = 4;
-        tempCategory = 3;
-        windSpeed = 2;
-        weatherSymbolNumber = 20;
-        seasonIdbyDateAndCountry = 4;
-        weatherCategory = "Rain";
-        weatherCategoryId = 2;
-        weatherImage = "https://img.icons8.com/office/30/000000/downpour.png";
-        symbolText = "Heavy rain";
+            //new API
+            WeatherRoot weatherFromAPI =restTemplate.getForObject("https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherRoot.class);
+            ForecastDays forecastDays = setTempForcastDay(smhidays); //should be deleted later
 
-        //just for testing!
-            weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
+            analyzeWeatherAPI = new WeatherAnalyzer(weatherFromAPI, forecastDays);
 
-            temperature = (float)weatherOutsideSE.getMain().getTemp();
-            windSpeed = (float)weatherOutsideSE.getWind().getSpeed();
-            weatherImage = "http://openweathermap.org/img/wn/"+weatherOutsideSE.getWeather().get(0).getIcon()+ "@2x.png";
+            temperature = analyzeWeatherAPI.getTemp();
+            tempCategory = analyzeWeatherAPI.getTempCategory(temperature);
 
-            System.out.println(weatherOutsideSE.getName() + " " + weatherOutsideSE.getSys().getCountry());
-            System.out.println(weatherOutsideSE.getMain().getTemp());
-            System.out.println(weatherOutsideSE.getWeather().get(0).getMain() + " " + weatherOutsideSE.getWeather().get(0).getDescription() );
 
-            WeatherRoot anotherWeatherAPI =restTemplate.getForObject("api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherRoot.class);
-            //temperature = (float)anotherWeatherAPI.list.get(0)
+            windSpeed = analyzeWeatherAPI.getWindSpeed();
 
-     }
+            //Här är jag..
+            seasonIdbyDateAndCountry = prmRep.getSeasonIdbyDateAndCountry(analyzeWeatherAPI.getDateForSpecificDay(), weatherFromAPI.getCity().getCountry());
 
-     else if (countryID.equals("CA")) {
-        //get parameters
-        temperature = -10;
-        tempCategory = 4;
-        windSpeed = 2;
-        weatherSymbolNumber = 26;
-        seasonIdbyDateAndCountry = 2;
-        weatherCategory = "Snow";
-        weatherCategoryId = 4;
-        weatherImage = "https://img.icons8.com/office/30/000000/snow.png";
-        symbolText = "Moderate snowfall";
-            weatherOutsideSE = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherOutsideSE.class);
-
-            temperature = (float)weatherOutsideSE.getMain().getTemp();
-            windSpeed = (float)weatherOutsideSE.getWind().getSpeed();
-            weatherImage = "http://openweathermap.org/img/wn/"+weatherOutsideSE.getWeather().get(0).getIcon()+ "@2x.png";
-    }
+            weatherCategoryId = analyzeWeatherAPI.getWeatherCategory();
+            weatherImage = analyzeWeatherAPI.getWeatherCategoryImage(); //http://openweathermap.org/img/wn/10d@2x.png
+            symbolText = analyzeWeatherAPI.getWeatherSymbolText();
 
 
         //desc, seasonid, weathersymbolid, tempid, department =
@@ -156,7 +106,7 @@ public class WeatherbasedcontentController {
 
         //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
-        model.addAttribute("weather", weatherFromSMHI);
+
         model.addAttribute("temperature", temperature);
         model.addAttribute("currentWindSpeed", windSpeed);
         model.addAttribute("weatherSymbolNumber", weatherSymbolNumber);
@@ -170,6 +120,27 @@ public class WeatherbasedcontentController {
 
 
         return "index";
+    }
+
+    private ForecastDays setTempForcastDay(SMHIDays smhidays) {
+        switch (smhidays) {
+            case TODAY:
+                return ForecastDays.TODAY;
+
+            case TOMORROW:
+                return ForecastDays.TOMORROW;
+
+            case DAY_THREE:
+                return ForecastDays.DAY_THREE;
+
+            case DAY_FOUR:
+                return ForecastDays.DAY_FOUR;
+
+
+        }
+           return ForecastDays.DAY_FIVE;
+
+
     }
 
 }

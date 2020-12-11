@@ -131,33 +131,10 @@ Jättekallt	- -10 ->
                     }
                 }
                 break;
-            case DAY_SIX:
-                for (int i=0; i<weather.getTimeSeries().length;i++){
-                    if(formatDateTime(today13, 7).equals(formatDate(weather.getTimeSeries()[i]))) {
-                        index = i;
-                        break;
-                    }
-                }
-                break;
-            case DAY_SEVEN:
-                for (int i=0; i<weather.getTimeSeries().length;i++){
-                    if(formatDateTime(today13, 8).equals(formatDate(weather.getTimeSeries()[i]))) {
-                        index = i;
-                        break;
-                    }
-                }
-                break;
-            case DAY_EIGHT:
-                for (int i=0; i<weather.getTimeSeries().length;i++){
-                    if(formatDateTime(today13, 9).equals(formatDate(weather.getTimeSeries()[i]))) {
-                        index = i;
-                        break;
-                    }
-                }
-                break;
+
         }
 
-        System.out.println("index: " +index );
+        System.out.println("SMHIindex: " +index );
         return index;
     }
 

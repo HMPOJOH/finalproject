@@ -43,6 +43,8 @@ public class CityRepository {
         longitude = cities.stream()
                     .filter(x -> city.equals(x.getName())).findAny().orElse(null).getLongitude();
 
+
+
 /*
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
