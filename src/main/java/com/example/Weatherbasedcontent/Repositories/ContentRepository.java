@@ -34,9 +34,13 @@ public class ContentRepository {
                 contentTemp = getContentWeatherFallback(seasonId, weatherCatId);
             else                    //fetch content by season and department
                 contentTemp = getContentDepFallback(seasonId, departmentId);
-            for (int i=0;i<(contentTemp.size()-1);i++) {
-                content.add(contentTemp.get(i));
-                contentCount +=1;
+            for (int i=0;i<(contentTemp.size());i++) {
+                System.out.println("(1) try to add contentid from temp-list: " +  contentTemp.get(i).getId());
+                if(!isContentInListAlready(content, contentTemp.get(i))) {
+                    content.add(contentTemp.get(i));
+                    System.out.println("added id " + contentTemp.get(i).getId());
+                    contentCount += 1;
+                }
                 if (contentCount == 5)
                     break;
             }
@@ -45,15 +49,29 @@ public class ContentRepository {
         // fetch fallback content from season if not enough content
         if (contentCount < 5 ) {
             List<Content> contentTemp = getSeasonFallback(seasonId);
-            for (int i=0;i<(contentTemp.size()-1);i++) {
-                content.add(contentTemp.get(i));
-                contentCount +=1;
+            for (int i=0;i<(contentTemp.size());i++) {
+                System.out.println("(2) try to add contentid from temp-list: " +  contentTemp.get(i).getId());
+                if(!isContentInListAlready(content, contentTemp.get(i))) {
+                    content.add(contentTemp.get(i));
+                    System.out.println("added id " + contentTemp.get(i).getId());
+                    contentCount += 1;
+                }
                 if (contentCount == 5)
                     break;
             }
             System.out.println("Content count 3: " + contentCount);
         }
         return content;
+    }
+
+    private boolean isContentInListAlready(List<Content> currentContentList, Content tempContent) {
+
+        for(int i=0;i<currentContentList.size();i++)
+           if(currentContentList.get(i).getId() == tempContent.getId())
+               return true;
+
+           return false;
+
     }
 
     // fetch content with correct scenarioId
