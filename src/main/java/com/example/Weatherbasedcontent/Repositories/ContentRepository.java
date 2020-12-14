@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class ContentRepository {
@@ -18,8 +20,93 @@ public class ContentRepository {
     @Autowired
     private DataSource dataSource;
 
+    List<Content> contentList2 = new ArrayList<>();
 
-//testing
+
+
+    public List<Content> getContentList2 (int searchScenario, int seasonId, int departmentId, int weatherCatId) {
+
+
+        String sqlGetContentByScenarioId="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '1st' as Priority\n" +
+                "FROM CONTENTBYSCENARIO \n" +
+                "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                "WHERE CONTENTBYSCENARIO.SCENARIOID =" + searchScenario;
+        String sqlGetContentBySeasonIdAndWeatherCat="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '2nd' as Priority\n" +
+                "FROM CONTENTBYSCENARIO \n" +
+                "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                "WHERE SCENARIO.SEASONID =" + seasonId + "\n" +
+                "AND SCENARIO.WEATHERSYMBOLID =" + weatherCatId;
+        String sqlGetContentBySeasonIdAndDepartmentId = "select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '2nd' as Priority\n" +
+                "FROM CONTENTBYSCENARIO \n" +
+                "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                "WHERE SCENARIO.SEASONID =" + seasonId + "\n" +
+                "AND SCENARIO.DEPARTMENTID =" + departmentId;
+
+        String secondFallback= (departmentId == 7)?sqlGetContentBySeasonIdAndWeatherCat:sqlGetContentBySeasonIdAndDepartmentId;
+
+        String sqlGetContentBySeasonId="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '3rd' as Priority\n" +
+                "FROM CONTENTBYSCENARIO \n" +
+                "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                "WHERE SCENARIO.SEASONID =" + seasonId;
+
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+
+
+             ResultSet rs = stmt.executeQuery(sqlGetContentByScenarioId +"\n UNION\n" + secondFallback +"\n UNION\n" + sqlGetContentBySeasonId)) {
+
+            while (rs.next() && contentList2.size()<=4) {
+
+                if(!isContentInListAlready2(contentList2, rs.getInt("CONTENTID"))) {
+                    contentList2.add(rsContent(rs));
+                    System.out.println("added id " + rs.getInt("CONTENTID"));
+
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contentList2;
+
+        /*
+
+        new solution
+      16
+11
+12
+13
+14
+
+
+        old solution
+        16
+11
+12
+13
+14
+tempcat5
+countryIN
+scenarioid1
+weathercat6
+seasonid; 1
+
+         */
+    }
+
+    private boolean isContentInListAlready2(List<Content> contentList2, int contentid) {
+        for(int i=0;i<contentList2.size();i++)
+            if(contentList2.get(i).getId() == contentid)
+                return true;
+
+        return false;
+    }
 
 
     public List<Content> getContentList(int searchScenario, int seasonId, int departmentId, int weatherCatId) {
