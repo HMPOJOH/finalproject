@@ -155,6 +155,11 @@ INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('SwimSuit', 'https://lp2.hm.com/hmg
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('SunHat', 'https://lp2.hm.com/hmgoepprod?set=source[/43/7b/437bc8e1294172c48f970f8f443cccc42ff8baa3.jpg],origin[dam],category[ladies_accessories_hatsscarvesgloves_hats],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]', 'https://www2.hm.com/en_gb/productpage.0616763007.html');
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('Sandals', 'https://lp2.hm.com/hmgoepprod?set=source[/90/f6/90f689ec40799d02723b88bb0a10f69ff358aff8.jpg],origin[dam],category[Ladies_shoes_flipflops],type[DESCRIPTIVESTILLLIFE],res[z],hmver[2]&call=url[file:/product/main]', 'https://www2.hm.com/sv_se/productpage.0892254002.html');
 
+--Summer Sunny Hot Men
+INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('Swim shorts', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F47%2Fcd%2F47cd9fa9e03e5888ed02f8d0b6687809525d44bc.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_swimweear%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]', 'https://www2.hm.com/en_asia2/productpage.0685604093.html');
+
+--Winter Very Cold Men
+INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('Winter Jacket', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F8c%2Fc5%2F8cc520662a7b88dc90b796072e8ce3ee91505843.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_jacketscoats_jackets%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]', 'https://www2.hm.com/sv_se/productpage.0762174001.html');
 
 --INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (1,1);
 --INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (2,2);
@@ -182,6 +187,11 @@ INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (12,6);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (13,6);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (14,6);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (15,6);
+-- Summer Sunny Hot Men ¨¨¨v
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (16,1);
+
+--Winter Very Cold Men
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (17,5);
 
 
 
