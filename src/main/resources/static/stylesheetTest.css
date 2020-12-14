@@ -1,0 +1,77 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: whitesmoke;
+    background-image: url("ShopWindow2.jpg");
+    background-size: cover;
+/*  If enabled, scroll sideways appears..
+    width: 100%;
+    height: 100%;
+*/
+
+
+/*
+    background-position: absolute;
+    background-repeat: no-repeat;
+*/
+
+}
+
+.portrait {
+    max-width: 30%;
+    height: 50%;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    clip-path: inset(0% 0% 2% 0%);
+    background-image: url("WinterDay.jpg");
+    background-size: cover;
+    background-clip: content-box;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: -2;
+}
+
+
+/*
+.imageBox {
+    height: 100%;
+    width: 10%;
+    display: block;
+    align: center;
+    clip-path: inset(0px 50% 0 50%);
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 25%;
+    top: 0%;
+    z-index: -1;
+
+}
+
+.productBox {
+    height: 110%;
+    width: 38.3%;
+  position: absolute;
+  left: 30.8%;
+  top: 23%;
+    z-index: 0;
+}*/
+
+.portrait3 {
+}
+
+.logo {
+max-width: 5%;
+}
+
+
+
+/*Below is where you set the fading timer for carousels (fading #s infinite..)*/
+/*You will need to change the "setTimeout" for the carousel in HTML <script> as well.*/
+/*For every second of fading, add 900 to the carousel timeout.*/
+.w3-animate-fading{animation:fading 5s infinite;}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+
+.w3-content,.w3-auto{margin-left:auto;margin-right:auto}.w3-content{max-width:980px}.w3-auto{max-width:1140px}
+
+.w3-section,.w3-code{margin-top:16px!important;margin-bottom:16px!important}
