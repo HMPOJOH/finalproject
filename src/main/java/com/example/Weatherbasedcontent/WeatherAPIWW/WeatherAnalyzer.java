@@ -180,13 +180,14 @@ if	781			4
     public String getWeatherCategoryImage() {
 
         String picture = "";
+        System.out.println("picture icon:"+ weatherFromAPI.getList().get(listIndex).getWeather().get(0).getIcon().equals("01n"));
 
         if (weatherFromAPI.getList().get(listIndex).getWeather().get(0).getIcon().equals("01n"))  //Converting night clear sky to day clear sky
             picture="01d";
         else
             picture = weatherFromAPI.getList().get(listIndex).getWeather().get(0).getIcon();
 
-        return "https://openweathermap.org/img/wn/" + weatherFromAPI.getList().get(listIndex).getWeather().get(0).getIcon()+ "@2x.png";
+        return "https://openweathermap.org/img/wn/" + picture+ "@2x.png";
     }
 
     public String getWeatherDesc() {

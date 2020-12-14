@@ -83,7 +83,7 @@ public class ParameterRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } //fallback in case no scenario..
         System.out.println("seasonId:" + seasonId);
         System.out.println("weatherId:" + weatherId);
         System.out.println("depId:" + depId);
