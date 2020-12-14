@@ -115,6 +115,13 @@ public class WeatherbasedcontentController {
         return "redirect:/addcontent/{scenarioId}";
     }
 
+    @GetMapping("/removecontent/{contentId}/{scenarioId}")
+    public String set(@PathVariable int contentId, @PathVariable int scenarioId) {
+        System.out.println("delete content " + contentId + " from scenario " + scenarioId);
+        productRepos.removeContentFromScenario(contentId,scenarioId);
+        return "redirect:/addcontent/{scenarioId}";
+    }
+
     @GetMapping("/scenarios")
     public String scenarios(HttpSession session, Model model) {
         List<Scenario> scenarios = prmRep.getAllScenarios();

@@ -154,14 +154,14 @@ public class ContentRepository {
         List<Content> content = new ArrayList<>();
 
         try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
-                     "FROM CONTENTBYSCENARIO \n" +
-                     "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
-                     "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
-                     "WHERE SCENARIO.SEASONID =" + seasonId)) {
+                        Statement stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
+                                "FROM CONTENTBYSCENARIO \n" +
+                                "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                                "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                                "WHERE SCENARIO.SEASONID =" + seasonId)) {
 
-            while (rs.next()) {
+                while (rs.next()) {
                 content.add(rsContent(rs));
             }
 
@@ -199,12 +199,11 @@ public class ContentRepository {
                 e.printStackTrace();
             }
         }
-
-
-
-
         return generatedId;
-    } public void addContentToScenario(int contentId, int scenarioId) {
+    }
+
+    /* duplicated code
+    public void addContentToScenario(int contentId, int scenarioId) {
 
         Connection conn = null;
 
@@ -226,11 +225,8 @@ public class ContentRepository {
                 e.printStackTrace();
             }
         }
+    } */
 
-
-
-
-    }
     public void addContentByScenario(int contentId, int scenarioId) {
         Connection conn = null;
         String SqlStatement = "INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) \n" +
@@ -251,5 +247,70 @@ public class ContentRepository {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void removeContentFromScenario(int contentId, int scenarioId) {
+        Connection conn = null;
+        System.out.println("remove 1: " + contentId + ", " + scenarioId);
+        try {
+            conn = dataSource.getConnection();
+
+            Statement stmt = conn.createStatement();
+            stmt.execute("DELETE FROM CONTENTBYSCENARIO WHERE CONTENTID=" + contentId + " AND SCENARIOID=" + scenarioId + ")");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("remove 2: " + contentId + ", " + scenarioId);
+        boolean contentExist = checkContentExist(contentId);
+        if (contentExist == false)
+            removeContent(contentId);
+    }
+
+    // does the content exist in any scenario?
+    public boolean checkContentExist(int contentId) {
+        boolean contentExist = false;
+        System.out.println("check content exist 1 " + contentId);
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT ID FROM CONTENTBYSCENARIO WHERE CONTENTID=" + contentId + ")")) {
+
+            if (rs.next()) {
+                contentExist = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("check content exist 2 " + contentExist);
+        return contentExist;
+    }
+
+    // remove the content from table Content
+    public void removeContent(int contentId) {
+        Connection conn = null;
+        System.out.println("delete from content 1: " + contentId);
+        try {
+            conn = dataSource.getConnection();
+
+            Statement stmt = conn.createStatement();
+            stmt.execute("DELETE FROM CONTENT WHERE ID=" + contentId + ")");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("delete from content 2: ");
     }
 }
