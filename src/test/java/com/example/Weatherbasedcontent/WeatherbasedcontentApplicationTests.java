@@ -78,5 +78,5 @@ class WeatherbasedcontentApplicationTests {
 		Assertions.assertTrue(content.size() > 0);
 	}
 	*/
-	 
+
 }
