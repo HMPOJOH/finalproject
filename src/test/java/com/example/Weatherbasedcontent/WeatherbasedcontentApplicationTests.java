@@ -65,18 +65,28 @@ class WeatherbasedcontentApplicationTests {
 	}
 
 	//check there is some content for each season
-	/* comment this out since we right now dont have content for all seasons in database. Needs to be added.
+	// comment this out since we right now dont have content for all seasons in database. Needs to be added.
 	@Test
 	void checkContentBySeason() {
-		List<Content> content = productRepos.getSeasonFallback(1); // summer content
+		List<Content> content = productRepos.getContentList2 ( -1, 1, -1, -1);// summer content
+
+
 		Assertions.assertTrue(content.size() > 0);
-		content = productRepos.getSeasonFallback(2); // winter content
+		/*
+		added id 11
+added id 12
+added id 13
+added id 14
+added id 15
+		 */
+
+		/*content = productRepos.getContentList2 ( -1, 2, -1, -1) // winter content
 		Assertions.assertTrue(content.size() > 0);
-		content = productRepos.getSeasonFallback(3); // spring content
+		content = productRepos.getSeasonFallback(3);  should be equal to getContentList2 ( -1, 3, -1, -1) // spring content
 		Assertions.assertTrue(content.size() > 0);
-		content = productRepos.getSeasonFallback(4); // autumn content
-		Assertions.assertTrue(content.size() > 0);
+		content = productRepos.getSeasonFallback(4);  should be equal to getContentList2 ( -1, 4, -1, -1) // autumn content
+		Assertions.assertTrue(content.size() > 0);*/
 	}
-	*/
+
 
 }
