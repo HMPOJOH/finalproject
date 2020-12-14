@@ -256,7 +256,7 @@ public class ContentRepository {
             conn = dataSource.getConnection();
 
             Statement stmt = conn.createStatement();
-            stmt.execute("DELETE FROM CONTENTBYSCENARIO WHERE CONTENTID=" + contentId + " AND SCENARIOID=" + scenarioId + ")");
+            stmt.execute("DELETE FROM CONTENTBYSCENARIO WHERE CONTENTID=" + contentId + " AND SCENARIOID=" + scenarioId);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -279,7 +279,7 @@ public class ContentRepository {
         System.out.println("check content exist 1 " + contentId);
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT ID FROM CONTENTBYSCENARIO WHERE CONTENTID=" + contentId + ")")) {
+             ResultSet rs = stmt.executeQuery("SELECT ID FROM CONTENTBYSCENARIO WHERE CONTENTID=" + contentId)) {
 
             if (rs.next()) {
                 contentExist = true;
@@ -300,7 +300,7 @@ public class ContentRepository {
             conn = dataSource.getConnection();
 
             Statement stmt = conn.createStatement();
-            stmt.execute("DELETE FROM CONTENT WHERE ID=" + contentId + ")");
+            stmt.execute("DELETE FROM CONTENT WHERE ID=" + contentId);
 
         } catch (SQLException e) {
             e.printStackTrace();
