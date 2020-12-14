@@ -45,12 +45,14 @@
             <div class="col-sm" th:each="contentItem : ${contentList}">
                 <img  th:src="${contentItem.image}" style="max-width:80%;" >
                 <h5 class="card-title" th:text="${contentItem.text}"></h5>
-                <a href="work.html" class="btn btn-outline-danger" style="font-size:13px; margin-bottom:10px;">Delete</a>
+                <a th:href="'/removecontent/'+${contentItem.id}+'/'+${scenarioId}" class="btn btn-outline-danger" style="font-size:13px; margin-bottom:10px;">Delete</a>
             </div>
         </div>
     </div>
 
 </div>
-
+<!--   model.addAttribute("scenarioId", scenarioId); /removecontent/{contentId}/{scenarioId}
+        model.addAttribute("scenarioDesc", scenario.getDescription());
+        model.addAttribute("contentList", contentList);-->
 </body>
 </html>
