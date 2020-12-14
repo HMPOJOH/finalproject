@@ -20,12 +20,12 @@ public class ContentRepository {
     @Autowired
     private DataSource dataSource;
 
-    List<Content> contentList2 = new ArrayList<>();
+
 
 
 
     public List<Content> getContentList2 (int searchScenario, int seasonId, int departmentId, int weatherCatId) {
-
+        List<Content> contentList2 = new ArrayList<>();
 
         String sqlGetContentByScenarioId="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '1st' as Priority\n" +
                 "FROM CONTENTBYSCENARIO \n" +
@@ -53,12 +53,17 @@ public class ContentRepository {
                 "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
                 "WHERE SCENARIO.SEASONID =" + seasonId;
 
+        String finalUnionQuery = sqlGetContentByScenarioId +"\n UNION\n" + secondFallback +"\n UNION\n" + sqlGetContentBySeasonId;
+        if(seasonId<0)
+            finalUnionQuery=sqlGetContentByScenarioId;
+
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
 
 
-             ResultSet rs = stmt.executeQuery(sqlGetContentByScenarioId +"\n UNION\n" + secondFallback +"\n UNION\n" + sqlGetContentBySeasonId)) {
+
+             ResultSet rs = stmt.executeQuery(finalUnionQuery)) {
 
             while (rs.next() && contentList2.size()<=4) {
 
@@ -75,30 +80,14 @@ public class ContentRepository {
         }
         return contentList2;
 
-        /*
 
-        new solution
-      16
-11
-12
-13
-14
-
-
-        old solution
-        16
-11
-12
-13
-14
-tempcat5
-countryIN
-scenarioid1
-weathercat6
-seasonid; 1
-
-         */
     }
+
+    public List<Content> getContentListbyId(int searchScenario) {
+
+        return getContentList2(searchScenario, -1, -1, -1);
+    }
+
 
     private boolean isContentInListAlready2(List<Content> contentList2, int contentid) {
         for(int i=0;i<contentList2.size();i++)
@@ -109,124 +98,11 @@ seasonid; 1
     }
 
 
-    public List<Content> getContentList(int searchScenario, int seasonId, int departmentId, int weatherCatId) {
-        List<Content> content = new ArrayList<>();
-        content = getContentListbyId(searchScenario);
-        int contentCount = content.size();
-        System.out.println("Content count 1: " + contentCount);
-        // fetch fallback content if not enough content
-        if (contentCount < 5 ) {
-            List<Content> contentTemp = new ArrayList<>();
-            if (departmentId == 7) //All departments, fetch content by season and weathersymbol
-                contentTemp = getContentWeatherFallback(seasonId, weatherCatId);
-            else                    //fetch content by season and department
-                contentTemp = getContentDepFallback(seasonId, departmentId);
-            for (int i=0;i<(contentTemp.size());i++) {
-                System.out.println("(1) try to add contentid from temp-list: " +  contentTemp.get(i).getId());
-                if(!isContentInListAlready(content, contentTemp.get(i))) {
-                    content.add(contentTemp.get(i));
-                    System.out.println("added id " + contentTemp.get(i).getId());
-                    contentCount += 1;
-                }
-                if (contentCount == 5)
-                    break;
-            }
-            System.out.println("Content count 2: " + contentCount);
-        }
-        // fetch fallback content from season if not enough content
-        if (contentCount < 5 ) {
-            List<Content> contentTemp = getSeasonFallback(seasonId);
-            for (int i=0;i<(contentTemp.size());i++) {
-                System.out.println("(2) try to add contentid from temp-list: " +  contentTemp.get(i).getId());
-                if(!isContentInListAlready(content, contentTemp.get(i))) {
-                    content.add(contentTemp.get(i));
-                    System.out.println("added id " + contentTemp.get(i).getId());
-                    contentCount += 1;
-                }
-                if (contentCount == 5)
-                    break;
-            }
-            System.out.println("Content count 3: " + contentCount);
-        }
-        return content;
-    }
 
-    private boolean isContentInListAlready(List<Content> currentContentList, Content tempContent) {
-
-        for(int i=0;i<currentContentList.size();i++)
-           if(currentContentList.get(i).getId() == tempContent.getId())
-               return true;
-
-           return false;
-
-    }
 
     // fetch content with correct scenarioId
-    public List<Content> getContentListbyId(int searchScenario) {
-        List<Content> content = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
-                     "FROM CONTENTBYSCENARIO \n" +
-                     "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
-                     "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
-                     "WHERE CONTENTBYSCENARIO.SCENARIOID =" + searchScenario)) {
 
-            while (rs.next()) {
-                content.add(rsContent(rs));
-            }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return content;
-    }
-
-    //fetch all content with correct season and department. Dont care about weathersymbol or temperature
-    public List<Content> getContentDepFallback(int seasonId, int departmentId) {
-        List<Content> content = new ArrayList<>();
-
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
-                     "FROM CONTENTBYSCENARIO \n" +
-                     "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
-                     "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
-                     "WHERE SCENARIO.SEASONID =" + seasonId + "\n" +
-                     "AND SCENARIO.DEPARTMENTID =" + departmentId)) {
-
-            while (rs.next()) {
-                content.add(rsContent(rs));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return content;
-    }
-
-    //fetch all content with correct season and weathersymbol (snow, rain etc). Dont care about deprtment or temperature
-    public List<Content> getContentWeatherFallback(int seasonId, int weatherCat) {
-        List<Content> content = new ArrayList<>();
-
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
-                     "FROM CONTENTBYSCENARIO \n" +
-                     "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
-                     "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
-                     "WHERE SCENARIO.SEASONID =" + seasonId + "\n" +
-                     "AND SCENARIO.WEATHERSYMBOLID =" + weatherCat)) {
-
-            while (rs.next()) {
-                content.add(rsContent(rs));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return content;
-    }
 
     private Content rsContent(ResultSet rs) throws SQLException {
         return new Content(
@@ -236,27 +112,7 @@ seasonid; 1
                 rs.getString("TEXT"));
     }
 
-    //Last fallback. fetch all content with correct season. dont care about other parameters
-    public List<Content> getSeasonFallback(int seasonId) {
-        List<Content> content = new ArrayList<>();
 
-        try (Connection conn = dataSource.getConnection();
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
-                                "FROM CONTENTBYSCENARIO \n" +
-                                "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
-                                "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
-                                "WHERE SCENARIO.SEASONID =" + seasonId)) {
-
-                while (rs.next()) {
-                content.add(rsContent(rs));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return content;
-    }
 
     public int addContent(Content content) {
         int generatedId = 0;

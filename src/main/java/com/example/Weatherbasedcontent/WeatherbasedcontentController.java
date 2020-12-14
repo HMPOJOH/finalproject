@@ -71,13 +71,11 @@ public class WeatherbasedcontentController {
         System.out.println(scenario.getId());
         System.out.println(scenario.getDescription());
         //test contentcall
-        List<Content> contentList = productRepos.getContentList(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
+        List<Content> contentList = productRepos.getContentList2(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
         System.out.println("Content list id:");
-        for (Content id:contentList)
-            System.out.println(id.getId());
 
         System.out.println("Content list id new:");
-        for (Content id:productRepos.getContentList2(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId))
+        for (Content id:contentList)
             System.out.println(id.getId());
 
         //Just to show the values - will rather be used in the Content lookup
@@ -89,7 +87,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("country", weatherFromAPI.getCity().getCountry());
         model.addAttribute("tempcat", tempCategory);
         System.out.println("tempcat" + tempCategory);
-        model.addAttribute("contentList", productRepos.getContentList2(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId));
+        model.addAttribute("contentList", contentList );
         System.out.println("country" + weatherFromAPI.getCity().getCountry());
         model.addAttribute("scenario", scenario.getDescription());
         System.out.println("scenarioid" + scenario.getId());
