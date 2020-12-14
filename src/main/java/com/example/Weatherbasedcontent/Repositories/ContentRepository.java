@@ -54,8 +54,8 @@ public class ContentRepository {
                 "WHERE SCENARIO.SEASONID =" + seasonId;
 
         String finalUnionQuery = sqlGetContentByScenarioId +"\n UNION\n" + secondFallback +"\n UNION\n" + sqlGetContentBySeasonId;
-        if(seasonId<0)
-            finalUnionQuery=sqlGetContentByScenarioId;
+       // if(seasonId<0)
+         //   finalUnionQuery=sqlGetContentByScenarioId; not needed since -1 on all other cases will not give any result besides the first sql query
 
 
         try (Connection conn = dataSource.getConnection();
