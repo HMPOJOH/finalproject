@@ -46,4 +46,12 @@ public class Content {
     public String getText() {
         return text;
     }
+
+
+    public void printContent(){
+        System.out.println("id:"+id);
+        System.out.println("image:"+image);
+        System.out.println("url:"+url);
+        System.out.println("text:"+text);
+    }
 }

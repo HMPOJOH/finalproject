@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class WeatherbasedcontentController {
@@ -71,7 +72,9 @@ public class WeatherbasedcontentController {
         System.out.println(scenario.getId());
         System.out.println(scenario.getDescription());
         //test contentcall
-        List<Content> contentList = productRepos.getContentList(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
+        Set<Content> contentList = productRepos.getContentList(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
+
+
 
         //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
@@ -94,7 +97,7 @@ public class WeatherbasedcontentController {
  @GetMapping("/addcontent/{scenarioId}")
     public String addContent(Model model, @PathVariable int scenarioId) {
         Scenario scenario = prmRep.getScenario(scenarioId);
-        List<Content> contentList = productRepos.getContentListbyId(scenario.getId());
+        Set<Content> contentList = productRepos.getContentListbyId(scenario.getId());
         model.addAttribute("scenarioId", scenarioId);
         model.addAttribute("scenarioDesc", scenario.getDescription());
         model.addAttribute("contentList", contentList);

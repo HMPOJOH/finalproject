@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class ContentRepository {
@@ -18,24 +20,30 @@ public class ContentRepository {
     @Autowired
     private DataSource dataSource;
 
+    Set<Content> content = new HashSet<>();
+    List<Content> contentTemp = new ArrayList<>();
 
 
 
 
-    public List<Content> getContentList(int searchScenario, int seasonId, int departmentId, int weatherCatId) {
-        List<Content> content = new ArrayList<>();
-        content = getContentListbyId(searchScenario);
+    //scenario id - department, weathercat, tempcat, seasonid
+    public Set<Content> getContentList(int searchScenario, int seasonId, int departmentId, int weatherCatId) {
+
+        getContentListbyId(searchScenario);
         int contentCount = content.size();
         System.out.println("Content count 1: " + contentCount);
         // fetch fallback content if not enough content
         if (contentCount < 5 ) {
-            List<Content> contentTemp = new ArrayList<>();
+
             if (departmentId == 7) //All departments, fetch content by season and weathersymbol
-                contentTemp = getContentWeatherFallback(seasonId, weatherCatId);
+                getContentWeatherFallback(seasonId, weatherCatId);
             else                    //fetch content by season and department
-                contentTemp = getContentDepFallback(seasonId, departmentId);
+                getContentDepFallback(seasonId, departmentId);
+
             for (int i=0;i<(contentTemp.size()-1);i++) {
                 content.add(contentTemp.get(i));
+                System.out.println("adding below content fallback 2:");
+                contentTemp.get(i).printContent();
                 contentCount +=1;
                 if (contentCount == 5)
                     break;
@@ -44,21 +52,25 @@ public class ContentRepository {
         }
         // fetch fallback content from season if not enough content
         if (contentCount < 5 ) {
-            List<Content> contentTemp = getSeasonFallback(seasonId);
+           getSeasonFallback(seasonId);
             for (int i=0;i<(contentTemp.size()-1);i++) {
                 content.add(contentTemp.get(i));
+                content.add(contentTemp.get(i));
+                System.out.println("adding below content fallback 3:");
                 contentCount +=1;
                 if (contentCount == 5)
                     break;
             }
             System.out.println("Content count 3: " + contentCount);
         }
+
+        System.out.println("Real size of content list= " + content.size());
         return content;
     }
 
     // fetch content with correct scenarioId
-    public List<Content> getContentListbyId(int searchScenario) {
-        List<Content> content = new ArrayList<>();
+    public Set<Content> getContentListbyId(int searchScenario) {
+
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO\n" +
@@ -78,8 +90,8 @@ public class ContentRepository {
     }
 
     //fetch all content with correct season and department. Dont care about weathersymbol or temperature
-    public List<Content> getContentDepFallback(int seasonId, int departmentId) {
-        List<Content> content = new ArrayList<>();
+    public void getContentDepFallback(int seasonId, int departmentId) {
+
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
@@ -91,18 +103,19 @@ public class ContentRepository {
                      "AND SCENARIO.DEPARTMENTID =" + departmentId)) {
 
             while (rs.next()) {
-                content.add(rsContent(rs));
+
+                contentTemp.add(rsContent(rs));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return content;
+
     }
 
     //fetch all content with correct season and weathersymbol (snow, rain etc). Dont care about deprtment or temperature
-    public List<Content> getContentWeatherFallback(int seasonId, int weatherCat) {
-        List<Content> content = new ArrayList<>();
+    public void getContentWeatherFallback(int seasonId, int weatherCat) {
+
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
@@ -114,26 +127,29 @@ public class ContentRepository {
                      "AND SCENARIO.WEATHERSYMBOLID =" + weatherCat)) {
 
             while (rs.next()) {
-                content.add(rsContent(rs));
+                contentTemp.add(rsContent(rs));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return content;
+
     }
 
     private Content rsContent(ResultSet rs) throws SQLException {
-        return new Content(
+        Content newContent = new Content(
                 rs.getInt("CONTENTID"),
                 rs.getString("IMAGE"),
                 rs.getString("URL"),
                 rs.getString("TEXT"));
+
+
+        return newContent;
     }
 
     //Last fallback. fetch all content with correct season. dont care about other parameters
-    public List<Content> getSeasonFallback(int seasonId) {
-        List<Content> content = new ArrayList<>();
+    public void getSeasonFallback(int seasonId) {
+
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
@@ -144,13 +160,13 @@ public class ContentRepository {
                      "WHERE SCENARIO.SEASONID =" + seasonId)) {
 
             while (rs.next()) {
-                content.add(rsContent(rs));
+                contentTemp.add(rsContent(rs));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return content;
+
     }
 
     public int addContent(Content content) {
