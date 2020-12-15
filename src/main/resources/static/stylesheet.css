@@ -2,45 +2,85 @@
 body {
     font-family: 'Montserrat', sans-serif;
     display: flex;
-    width: 100%;
-    height: 100%;
-    background: #f4f4f4;
+    background: #A6C8BA;
     justify-content: center;
     align-items: center;
 }
 
-
-.imageBox {
-    width: 80%;
-    height: 100%;
-    background: #ffffff;
-    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .2);
-    border: 1px;
-    border-radius: 3px;
-    border-color: #f4f4f4;
-}
-
 .header-setupPanel {
-    border-radius: 1px;
+    /*border-radius: 1px;
     background: transparent;
     color: #000000;
     border-color: #f4f4f4;
     padding: 20px;
-    margin-top: 1px;
+    margin-top: 1px;*/
+    position: fixed;
+    width: 100%;
+    height: 10%;
+    top: 0;
+    left: 0;
+    background-color: #f4f4f4;
+    color: white;
+    text-align: center;
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .2);
+    border: 1px;
+    border-radius: 3px;
+
 }
 
+
 .header {
-    width: 100%;
+    width: 96%;
     height: 20%;
     box-shadow: 0 6px 8px 0 rgba(0, 0, 0, .2);
     border: 1px;
     border-radius: 1px;
     border-color: #000000;
     padding: 25px;
+
 }
 
-.city-dropdown, .smhidays-dropdown, .department-dropdown {
-    width: 98%;
+
+.imageBox {
+    position: center;
+    width: 60%;
+    height: 100%;
+    background-color: #f4f4f4;
+    color: #000000;
+    text-align: center;
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .2);
+    border: 1px;
+    border-radius: 3px;
+    border-color: #f4f4f4;
+}
+
+.content {
+display:block;
+padding: 25px;
+}
+
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f4f4f4;
+  color: white;
+  text-align: center;
+  box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, .2);
+  border: 1px;
+  border-radius: 3px;
+}
+
+
+.city-dropdown,
+.smhidays-dropdown,
+.department-dropdown,
+.brand-dropdown,
+.store-dropdown,
+.monitor-dropdown {
+    width: 100%;
     height: 100%;
     background-color: #ffffff;
     /*box-shadow: 0 0px 4px 0 rgba(0, 0, 0, .2);*/
@@ -48,20 +88,25 @@ body {
     border: 1px;
     border-radius: 3px;
     border-color: #f4f4f4;
-    padding: 25px;
+    padding: 5px;
     -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
     appearance:none;
+    justify-content: center;
+    align-items: center;
 }
 
 .city-dropdown:hover,
 .department-dropdown:hover,
-.smhidays-dropdown:hover {
+.smhidays-dropdown:hover,
+.brand-dropdown:hover,
+.store-dropdown:hover,
+.monitor-dropdown:hover {
 background-color: #f4f4f4;
 }
 
 
-.startPanel-btn {
+.startPanel-btn, .showScenarios-btn {
     width: 15%;
     height: 25%;
     background-color: #ffffff;
@@ -70,13 +115,14 @@ background-color: #f4f4f4;
     border-radius: 3px;
     border-color: #f4f4f4;
     padding: 25px;
-    font-size: 18px;
-    margin-top: 5%;
-    margin-bottom:5%;
-
+    font-size: 12px;
+    margin-top: 3%;
+    /*margin-bottom:3%;*/
+    margin-left: 1%;
 }
 
-.startPanel-btn:hover {
+.startPanel-btn:hover,
+.showScenarios-btn:hover {
 background-color: #f4f4f4;
 }
 
@@ -86,11 +132,69 @@ background-color: #f4f4f4;
 /*For every second of fading, add 900 to the carousel timeout.*/
 .w3-animate-fading{animation:fading 5s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
 
-.w3-content,.w3-auto{margin-left:auto;margin-right:auto}.w3-content{max-width:980px}.w3-auto{max-width:1140px}
+.w3-content,.w3-auto {
+margin-left:auto;
+margin-right:auto;
+}
 
-.w3-section,.w3-code{margin-top:16px!important;margin-bottom:16px!important}
+.w3-content {
+max-width:980px;
+}
+
+.w3-auto{
+max-width:1140px;
+}
+
+.w3-section,.w3-code {
+margin-top:16px!important;
+margin-bottom:16px!important;
+}
 
 
+/* The navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #f4f4f4;
+  position: center; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
 
 
+}
 
+/* Links inside the navbar */
+.navbar a {
+
+  display:inline-block;
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.navbar li{
+    display:inline;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+  background: #A6C8BA;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.active {
+  background-color: #A6C8BA;
+  color: white;
+}
+
+.disabledNavLink {
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+/* Main content */
+.main {
+  margin-top: 30px; /* Add a top margin to avoid content overlay */
+}
