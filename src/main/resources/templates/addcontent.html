@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-<div class="imageBox" align="center">
+<div class="container" align="center">
     <div class="header-setupPanel" align="left">
         <img src="hmLogo.png" height="7%" width="7%">
         <h1 align="center">Add content to scenario</h1>
@@ -16,7 +16,7 @@
         <h3 class="display-4"> <p th:text="${scenarioDesc}"></p></h3>
     </div>
 
-    <form th:action="'/saveContent/' +${scenarioId}" th:object="${content}" method="POST">
+    <form th:action="'/savecontent/' +${scenarioId}" th:object="${content}" method="POST">
         <div class="form-row">
             <div class="col-sm-4">
                 <label for="image">Image</label>
@@ -39,11 +39,20 @@
     </form>
 
     <h3 class="display-4">Existing content in this scenario:</h3>
-    <div class="w3-content w3-section"style="max-width: 30%; float: top;" >
-        <img th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width:100%" src="">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm" th:each="contentItem : ${contentList}">
+                <img  th:src="${contentItem.image}" style="max-width:80%;" >
+                <h5 class="card-title" th:text="${contentItem.text}"></h5>
+                <a th:href="'/removecontent/'+${contentItem.id}+'/'+${scenarioId}" class="btn btn-outline-danger" style="font-size:13px; margin-bottom:10px;">Delete</a>
+            </div>
+        </div>
     </div>
 
 </div>
-
+<!--   model.addAttribute("scenarioId", scenarioId); /removecontent/{contentId}/{scenarioId}
+        model.addAttribute("scenarioDesc", scenario.getDescription());
+        model.addAttribute("contentList", contentList);-->
 </body>
 </html>

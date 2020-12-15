@@ -77,14 +77,17 @@ public class ParameterRepository {
 
             if (rs.next()) {
                 scenario.setId(rs.getInt("ID"));
-                scenario.setDescription(rs.getString("DESCRIPTION"));
+                scenario.setDescription("Scenario: " + rs.getString("DESCRIPTION"));
                 return scenario;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
+        } //fallback in case no scenario..
+        System.out.println("seasonId:" + seasonId);
+        System.out.println("weatherId:" + weatherId);
+        System.out.println("depId:" + depId);
+        scenario.setDescription("Show: " + getSeasonDesc(seasonId) + ", " + getWeatherDesc(weatherId) + ", " + getDepDesc(depId));
         return scenario;
     }
 
@@ -108,16 +111,64 @@ public class ParameterRepository {
         return scenario;
     }
 
+    public String getSeasonDesc(int seasonId) {
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT DESCRIPTION FROM SEASON WHERE ID="+seasonId) ) {
+
+            if (rs.next()) {
+                return rs.getString("DESCRIPTION");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return " ";
+    }
+
+    public String getDepDesc(int depId) {
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT DESCRIPTION FROM DEPARTMENT WHERE ID="+depId) ) {
+
+            if (rs.next()) {
+                return rs.getString("DESCRIPTION");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return " ";
+    }
+
+    public String getWeatherDesc(int weatherSymbolId) {
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT DESCRIPTION FROM WEATHERSYMBOL WHERE ID="+weatherSymbolId) ) {
+
+            if (rs.next()) {
+                return rs.getString("DESCRIPTION");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return " ";
+    }
+
     //ny
     public int getSeasonIdbyDateAndCountry(String date, String isoCountry) {
 
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select ID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date.substring(0,9)+"' AND DATETO>='"+date.substring(0,9)+"'") ) {
+             ResultSet rs = stmt.executeQuery("select SEASONID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date.substring(0,9)+"' AND DATETO>='"+date.substring(0,9)+"'") ) {
 //SELECT * FROM SEASONPERCOUNTRY WHERE COUNTRYID='SE' AND DATEFROM<='2020-12-09' AND DATETO>='2020-12-09'
             if (rs.next()) {
-                return rs.getInt("ID");
+                return rs.getInt("SEASONID");
             }
 
         } catch (SQLException e) {

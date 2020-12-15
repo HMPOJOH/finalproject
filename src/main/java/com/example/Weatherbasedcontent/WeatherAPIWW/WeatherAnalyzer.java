@@ -43,6 +43,8 @@ if	781			4
 
          */
 
+        System.out.println(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId());
+
         if (weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Thunderstorm"))
                 return 4;
         else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Drizzle"))
@@ -51,13 +53,13 @@ if	781			4
             return 2;
         else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Clear"))
             return 1;
-        else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Cloud"))
+        else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Clouds"))
             return 6;
         else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()>=600
-        || weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()<=602)
+        && weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()<=602)
             return 3;
         else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()>=613
-                || weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()<=622)
+                && weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()<=622)
             return 5;
         else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()==781
                 )
@@ -177,7 +179,15 @@ if	781			4
 
     public String getWeatherCategoryImage() {
 
-        return "https://openweathermap.org/img/wn/" + weatherFromAPI.getList().get(listIndex).getWeather().get(0).getIcon()+ "@2x.png";
+        String picture = "";
+        System.out.println("picture icon:"+ weatherFromAPI.getList().get(listIndex).getWeather().get(0).getIcon().equals("01n"));
+
+        if (weatherFromAPI.getList().get(listIndex).getWeather().get(0).getIcon().equals("01n"))  //Converting night clear sky to day clear sky
+            picture="01d";
+        else
+            picture = weatherFromAPI.getList().get(listIndex).getWeather().get(0).getIcon();
+
+        return "https://openweathermap.org/img/wn/" + picture+ "@2x.png";
     }
 
     public String getWeatherDesc() {

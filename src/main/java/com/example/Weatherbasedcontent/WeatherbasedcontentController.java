@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -70,7 +71,12 @@ public class WeatherbasedcontentController {
         System.out.println(scenario.getId());
         System.out.println(scenario.getDescription());
         //test contentcall
-        List<Content> contentList = productRepos.getContentList(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
+        List<Content> contentList = productRepos.getContentList2(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
+        System.out.println("Content list id:");
+
+        System.out.println("Content list id new:");
+        for (Content id:contentList)
+            System.out.println(id.getId());
 
         //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
@@ -81,7 +87,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("country", weatherFromAPI.getCity().getCountry());
         model.addAttribute("tempcat", tempCategory);
         System.out.println("tempcat" + tempCategory);
-        model.addAttribute("contentList", contentList);
+        model.addAttribute("contentList", contentList );
         System.out.println("country" + weatherFromAPI.getCity().getCountry());
         model.addAttribute("scenario", scenario.getDescription());
         System.out.println("scenarioid" + scenario.getId());
@@ -101,12 +107,21 @@ public class WeatherbasedcontentController {
         return "addcontent";
     }
 
-    @PostMapping("/saveContent/{scenarioId}")
+    @PostMapping("/savecontent/{scenarioId}")
     public String set(@ModelAttribute Content content, @PathVariable int scenarioId) {
         System.out.println("add into scenario " + scenarioId);
+        System.out.println("content text 1 " + content.getText());
         int contentId = productRepos.addContent(content);
+        productRepos.addContentByScenario(contentId,scenarioId);
         System.out.println("contentId added: " + contentId);
-        return "redirect:/addcontent";
+        return "redirect:/addcontent/{scenarioId}";
+    }
+
+    @GetMapping("/removecontent/{contentId}/{scenarioId}")
+    public String set(@PathVariable int contentId, @PathVariable int scenarioId) {
+        System.out.println("delete content " + contentId + " from scenario " + scenarioId);
+        productRepos.removeContentFromScenario(contentId,scenarioId);
+        return "redirect:/addcontent/{scenarioId}";
     }
 
     @GetMapping("/scenarios")
