@@ -26,6 +26,9 @@ public class WeatherAnalyzer {
     }
 
     public int getWeatherCategory(){
+
+        String mainWeather = weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain();
+        int weatherId = weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId();
         /*
         if	main		Cat	return
 	Thunderstorm		windy	4
@@ -43,25 +46,25 @@ if	781			4
 
          */
 
-        System.out.println(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId());
+        System.out.println(weatherId);
 
-        if (weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Thunderstorm"))
+        if (mainWeather.equals("Thunderstorm"))
                 return 4;
-        else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Drizzle"))
+        else if(mainWeather.equals("Drizzle"))
                 return 2;
-        else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Rain"))
+        else if(mainWeather.equals("Rain"))
             return 2;
-        else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Clear"))
+        else if(mainWeather.equals("Clear"))
             return 1;
-        else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getMain().equals("Clouds"))
+        else if(mainWeather.equals("Clouds"))
             return 6;
-        else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()>=600
-        && weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()<=602)
+        else if(weatherId>=600
+        && weatherId<=602)
             return 3;
-        else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()>=613
-                && weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()<=622)
+        else if(weatherId>=613
+                && weatherId<=622)
             return 5;
-        else if(weatherFromAPI.getList().get(listIndex).getWeather().get(0).getId()==781
+        else if(weatherId==781
                 )
             return 4;
 
