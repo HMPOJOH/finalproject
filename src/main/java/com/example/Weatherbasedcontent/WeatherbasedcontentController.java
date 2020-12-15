@@ -70,6 +70,7 @@ public class WeatherbasedcontentController {
         Scenario scenario = prmRep.getScenariobyValues(seasonIdbyDateAndCountry, weatherCategoryId, tempCategory, department);
         System.out.println(scenario.getId());
         System.out.println(scenario.getDescription());
+        System.out.println(scenario.getBackground());
         //test contentcall
         List<Content> contentList = productRepos.getContentList2(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
         System.out.println("Content list id:");
@@ -90,6 +91,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("contentList", contentList );
         System.out.println("country" + weatherFromAPI.getCity().getCountry());
         model.addAttribute("scenario", scenario.getDescription());
+        model.addAttribute("background", scenario.getBackground());
         System.out.println("scenarioid" + scenario.getId());
         System.out.println("weathercat" + weatherCategoryId);
         System.out.println("seasonid; "+seasonIdbyDateAndCountry );
