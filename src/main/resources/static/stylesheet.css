@@ -10,12 +10,9 @@ background-image: url("ShopWindow.jpg")
 body {
     font-family: 'Montserrat', sans-serif;
     display: flex;
-    width: 100%;
-    height: 100%;
     background: #A6C8BA;
     justify-content: center;
     align-items: center;
-
 }
 
 .header-setupPanel {
@@ -55,7 +52,7 @@ body {
 .imageBox {
     position: center;
     width: 60%;
-    height: 100%;
+    height: 100vh;
     background-color: #f4f4f4;
     color: #000000;
     text-align: center;
@@ -66,8 +63,11 @@ body {
 }
 
 .content {
-display:block;
+display:fixed;
 padding: 25px;
+padding-bottom: 20%;
+padding-top: 10%;
+
 }
 
 
@@ -82,6 +82,7 @@ padding: 25px;
   box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, .2);
   border: 1px;
   border-radius: 3px;
+
 }
 
 
@@ -113,11 +114,11 @@ padding: 25px;
 .brand-dropdown:hover,
 .store-dropdown:hover,
 .monitor-dropdown:hover {
-background-color: #f4f4f4;
+background-color: #A6C8BA;
 }
 
 
-.startPanel-btn, .showScenarios-btn {
+.startPanel-btn {
     width: 15%;
     height: 25%;
     background-color: #ffffff;
@@ -132,9 +133,23 @@ background-color: #f4f4f4;
     margin-left: 1%;
 }
 
+.showContent-btn {
+   width: 15%;
+       height: 25%;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2);
+    border: 0px;
+    border-radius: 3px;
+    border-color: #f4f4f4;
+    padding: 3px;
+    font-size: 12px;
+    color: black;
+    text-decoration: none;
+}
+
 .startPanel-btn:hover,
-.showScenarios-btn:hover {
-background-color: #f4f4f4;
+.showContent-btn:hover {
+background-color: #A6C8BA;
 }
 
 .portrait {
