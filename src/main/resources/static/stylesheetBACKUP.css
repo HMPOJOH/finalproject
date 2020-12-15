@@ -1,0 +1,120 @@
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+/*  <--If enabled, scroll sideways appears..-->
+    width: 100%;
+    height: 100%;
+*/
+    background: #A6C8BA;
+    /*background-image: url("hm-background.jfif");*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+.imageBox {
+    width: 80%;
+    height: 100%;
+    background: white;
+
+/*  <--Semi transparent-->
+    opacity:0.8;
+*/
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .2);
+    border: 1px;
+    border-radius: 3px;
+    border-color: #f4f4f4;
+    padding-bottom: 6%;
+
+}
+
+.header-setupPanel {
+    border-radius: 1px;
+    background: transparent;
+    color: #000000;
+    border-color: #f4f4f4;
+    padding: 20px;
+    margin-top: 1px;
+}
+
+.header {
+    width: 96%;
+    height: 20%;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, .2);
+    border: 1px;
+    border-radius: 1px;
+    border-color: #000000;
+    padding: 25px;
+}
+
+.city-dropdown, .smhidays-dropdown, .department-dropdown {
+    width: 98%;
+    height: 100%;
+    background-color: #ffffff;
+    /*box-shadow: 0 0px 4px 0 rgba(0, 0, 0, .2);*/
+    box-shadow: 0 0px 4px 0 rgba(0, 0, 0, .2);
+    border: 1px;
+    border-radius: 3px;
+    border-color: #f4f4f4;
+    padding: 25px;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+
+.city-dropdown:hover,
+.department-dropdown:hover,
+.smhidays-dropdown:hover {
+background-color: #f4f4f4;
+}
+
+
+.startPanel-btn, .showScenarios-btn {
+    width: 15%;
+    height: 25%;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2);
+    border: 0px;
+    border-radius: 3px;
+    border-color: #f4f4f4;
+    padding: 25px;
+    font-size: 18px;
+    margin-top: 3%;
+    margin-bottom:3%;
+    margin-left: 1%;
+
+    align-items: left;
+    float: left;
+}
+
+.startPanel-btn:hover,.showScenarios-btn:hover {
+background-color: #f4f4f4;
+}
+
+
+/*Below is where you set the fading timer for carousels (fading #s infinite..)*/
+/*You will need to change the "setTimeout" for the carousel in HTML <script> as well.*/
+/*For every second of fading, add 900 to the carousel timeout.*/
+.w3-animate-fading{animation:fading 5s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+
+.w3-content,.w3-auto{margin-left:auto;margin-right:auto}.w3-content{max-width:980px}.w3-auto{max-width:1140px}
+
+.w3-section,.w3-code{margin-top:16px!important;margin-bottom:16px!important}
+
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f4f4f4;
+  color: white;
+  text-align: center;
+}
+
+
