@@ -55,16 +55,32 @@ public class WeatherbasedcontentController {
 
     @PostMapping("/index")
     public String index(ForecastDays forecastdays, HttpSession session, @RequestParam String city, int department, @RequestParam(required = false, defaultValue = "18.071093") double longitude, @RequestParam(required = false, defaultValue = "59.325117") double latitude, RestTemplate restTemplate, Model model) {
-        WeatherRoot weatherFromAPI =restTemplate.getForObject("https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherRoot.class);
-        analyzeWeatherAPI = new WeatherAnalyzer(weatherFromAPI, forecastdays);
-        float temperature = analyzeWeatherAPI.getTemp();
-        int   tempCategory = analyzeWeatherAPI.getTempCategory(temperature);
-        float  windSpeed = analyzeWeatherAPI.getWindSpeed();
-        int  seasonIdbyDateAndCountry = prmRep.getSeasonIdbyDateAndCountry(analyzeWeatherAPI.getDateForSpecificDay(), weatherFromAPI.getCity().getCountry());
-        int weatherCategoryId = analyzeWeatherAPI.getWeatherCategory();
-        String  weatherImage = analyzeWeatherAPI.getWeatherCategoryImage(); //http://openweathermap.org/img/wn/10d@2x.png
-        String  weatherDesc = analyzeWeatherAPI.getWeatherDesc();
+        //default values if API is down
+        float temperature = 5.1f;
+        int   tempCategory = 5; //avg
+        float  windSpeed = 1.2f;
+        int  seasonIdbyDateAndCountry = 2; //winter
+        int weatherCategoryId = 6; //all clouds
+        String  weatherImage = "http://openweathermap.org/img/wn/03d@2x.png"; //http://openweathermap.org/img/wn/10d@2x.png
+        String  weatherDesc = "Clouds";
+        String country="";
 
+
+        try {
+            WeatherRoot weatherFromAPI = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherRoot.class);
+            analyzeWeatherAPI = new WeatherAnalyzer(weatherFromAPI, forecastdays);
+            temperature = analyzeWeatherAPI.getTemp();
+            tempCategory = analyzeWeatherAPI.getTempCategory(temperature);
+            windSpeed = analyzeWeatherAPI.getWindSpeed();
+            seasonIdbyDateAndCountry = prmRep.getSeasonIdbyDateAndCountry(analyzeWeatherAPI.getDateForSpecificDay(), weatherFromAPI.getCity().getCountry());
+            weatherCategoryId = analyzeWeatherAPI.getWeatherCategory();
+            weatherImage = analyzeWeatherAPI.getWeatherCategoryImage(); //http://openweathermap.org/img/wn/10d@2x.png
+            weatherDesc = analyzeWeatherAPI.getWeatherDesc();
+            country=weatherFromAPI.getCity().getCountry();
+        }
+        catch (Exception e){
+            System.out.println("API down, using default values for demo purpose");
+        }
 
         //desc, seasonid, weathersymbolid, tempid, department =
         Scenario scenario = prmRep.getScenariobyValues(seasonIdbyDateAndCountry, weatherCategoryId, tempCategory, department);
@@ -85,11 +101,11 @@ public class WeatherbasedcontentController {
         model.addAttribute("currentWindSpeed", windSpeed);
         model.addAttribute("currentWeatherImage", weatherImage);
         model.addAttribute("weatherdesc", weatherDesc);
-        model.addAttribute("country", weatherFromAPI.getCity().getCountry());
+        model.addAttribute("country", country);
         model.addAttribute("tempcat", tempCategory);
         System.out.println("tempcat" + tempCategory);
         model.addAttribute("contentList", contentList );
-        System.out.println("country" + weatherFromAPI.getCity().getCountry());
+        System.out.println("country" + country);
         model.addAttribute("scenario", scenario.getDescription());
         model.addAttribute("background", scenario.getBackground());
         System.out.println("scenarioid" + scenario.getId());
