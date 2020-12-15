@@ -6,9 +6,7 @@
     <link rel="stylesheet" href="stylesheetIndex.css">
 
     <style>
-    .portrait{
-        background-image: url("SpringDay.jpg");
-        }
+
 </style>
     <button type="button" class="collapsible">Menu</button>
     <div class="content">
@@ -59,7 +57,7 @@ for (i = 0; i < coll.length; i++) {
 
     <!--<img src="summerBeach.jpg" style="max-width: 200%;">-->
 
-    <div class="portrait">
+    <div class="portrait" th:style="'background-image: url(' + ${background} + ');'">
         <img src="FinalProjectOverlay2.png" style="max-width: 100%;">
 </div>
 <!--

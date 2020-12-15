@@ -138,6 +138,9 @@ INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('GB',4
 --INSERT INTO CONTENT (IMAGE,URL,TEXT) VALUES ('https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F17%2F1e%2F171ee680ed7f25efa9936d7e658b4f825dd7aac0.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_jacketscoats_jackets%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0819500006.html','Text6 to show');
 --INSERT INTO CONTENT (IMAGE,URL,TEXT) VALUES ('https://lp2.hm.com/hmgoepprod?set=source[/ed/9a/ed9a41fb39cd7f8be80629a18c89560b1e9e916d.jpg],origin[dam],category[ladies_swimwear_swimsuits],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0636505001.html','Text7 to show');
 
+
+-- Men, Spring, 3 , 5, 19, Fall background without rain, Umbrella, rain jacket M&F. 
+
 -- Fall Rainy NULL Kids ¨¨¨v
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('RubberBoots', 'https://lp2.hm.com/hmgoepprod?set=source[/43/68/43683d8712388e9f4ba946f982f8a02ce86c29be.jpg],origin[dam],category[kids_boy8y_shoes_boots],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]', 'https://www2.hm.com/sv_se/productpage.0902058001.html');
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('RainJacket', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F2a%2Fd2%2F2ad2700201c5abd55b86fb68aebf59389aa674f8.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bkids_babygirl_outdoor%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/fullscreen]', 'https://www2.hm.com/sv_se/productpage.0867828002.html');
