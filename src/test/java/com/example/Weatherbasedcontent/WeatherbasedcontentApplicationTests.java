@@ -5,6 +5,7 @@ import com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays;
 import com.example.Weatherbasedcontent.WeatherAPIWW.WeatherAnalyzer;
 import com.example.Weatherbasedcontent.WeatherAPIWW.WeatherRoot;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +20,10 @@ class WeatherbasedcontentApplicationTests {
 	private ParameterRepository prmRep;
 	@Autowired
 	private ContentRepository productRepos;
+
+
+
+
 
 	//check that the external weather API is available
 	@Test
@@ -86,6 +91,29 @@ added id 15
 		Assertions.assertTrue(content.size() > 0);
 		content = productRepos.getSeasonFallback(4);  should be equal to getContentList2 ( -1, 4, -1, -1) // autumn content
 		Assertions.assertTrue(content.size() > 0);*/
+	}
+
+
+
+	@Test
+	void checkTempCategory() {
+		Float temp=10f; //10 Celcius --> Average temp category 5
+		WeatherAnalyzer testAnalyzer = new WeatherAnalyzer(null, ForecastDays.TODAY);
+
+		Assertions.assertEquals(5, testAnalyzer.getTempCategory(temp));
+
+	}
+
+	@Test
+	void checkWeahterCategory() {
+		RestTemplate restTemplate = new RestTemplate();
+		WeatherAnalyzer testAnalyzer;
+		WeatherRoot weatherFromAPI =restTemplate.getForObject("https://api.openweathermap.org/data/2.5/forecast?q=Stockholm&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherRoot.class);
+		testAnalyzer = new WeatherAnalyzer(weatherFromAPI, ForecastDays.TODAY);
+		weatherFromAPI.getList().get(0).getWeather().get(0).setMain("Clear"); //manipulate weather to always get weather i want.
+
+		Assertions.assertEquals(1, testAnalyzer.getWeatherCategory());
+
 	}
 
 
