@@ -47,7 +47,7 @@ public class ParameterRepository {
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select ID, DESCRIPTION FROM SCENARIO")) {
+             ResultSet rs = stmt.executeQuery("select ID, DESCRIPTION, BACKGROUND FROM SCENARIO")) {
 
             while (rs.next()) {
                 scenarios.add(rsScenario(rs));
@@ -62,14 +62,15 @@ public class ParameterRepository {
     private Scenario rsScenario(ResultSet rs) throws SQLException {
         return new Scenario(
                 rs.getInt("ID"),
-                rs.getString("DESCRIPTION"));
+                rs.getString("DESCRIPTION"),
+                rs.getString("BACKGROUND"));
     }
 
 
 
 
     public Scenario getScenariobyValues(int seasonId, int weatherId, int tempId, int depId) {
-        Scenario scenario = new Scenario(1,"no scenario");
+        Scenario scenario = new Scenario(1,"no scenario","WinterDay.jpg");
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
@@ -78,6 +79,7 @@ public class ParameterRepository {
             if (rs.next()) {
                 scenario.setId(rs.getInt("ID"));
                 scenario.setDescription("Scenario: " + rs.getString("DESCRIPTION"));
+                scenario.setBackground(rs.getString("BACKGROUND"));
                 return scenario;
             }
 
@@ -88,11 +90,17 @@ public class ParameterRepository {
         System.out.println("weatherId:" + weatherId);
         System.out.println("depId:" + depId);
         scenario.setDescription("Show: " + getSeasonDesc(seasonId) + ", " + getWeatherDesc(weatherId) + ", " + getDepDesc(depId));
+        if (seasonId == 1)
+            scenario.setBackground("SummerDay.jpg");
+        else if (seasonId == 3)
+            scenario.setBackground("SpringDay.jpg");
+        else if (seasonId == 4)
+            scenario.setBackground("RainyDay.jpg");
         return scenario;
     }
 
     public Scenario getScenario(int scenarioId) {
-        Scenario scenario = new Scenario(1,"no scenario");
+        Scenario scenario = new Scenario(1,"no scenario","WinterDay.jpg");
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
@@ -101,6 +109,7 @@ public class ParameterRepository {
             if (rs.next()) {
                 scenario.setId(rs.getInt("ID"));
                 scenario.setDescription(rs.getString("DESCRIPTION"));
+                scenario.setBackground(rs.getString("BACKGROUND"));
                 return scenario;
             }
 
