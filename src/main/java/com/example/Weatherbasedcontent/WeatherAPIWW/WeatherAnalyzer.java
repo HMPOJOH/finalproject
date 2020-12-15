@@ -75,7 +75,6 @@ if	781			4
 
     private int getIndex(ForecastDays forecastDays) {
     int index = 0;
-
         LocalDateTime lDTNow = LocalDateTime.now();
         System.out.println(forecastDays);
 
@@ -84,16 +83,11 @@ if	781			4
                 index= 0;
                 break;
             case TOMORROW:
-
                 for (int i=0; i<weatherFromAPI.getList().size();i++){
                     if(isCorrectDay(i,lDTNow,1)) {
                         index = i;
                         break;
-
                     }
-
-
-
                 }
                 break;
             case DAY_THREE:
@@ -112,7 +106,6 @@ if	781			4
                         break;
                     }
                 }
-
                 break;
             case DAY_FIVE:
                 for (int i=0; i<weatherFromAPI.getList().size();i++){
