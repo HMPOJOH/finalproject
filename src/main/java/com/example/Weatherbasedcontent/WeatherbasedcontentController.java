@@ -72,7 +72,7 @@ public class WeatherbasedcontentController {
             temperature = analyzeWeatherAPI.getTemp();
             tempCategory = analyzeWeatherAPI.getTempCategory(temperature);
             windSpeed = analyzeWeatherAPI.getWindSpeed();
-            seasonIdbyDateAndCountry = prmRep.getSeasonIdbyDateAndCountry(analyzeWeatherAPI.getDateForSpecificDay(), weatherFromAPI.getCity().getCountry());
+            seasonIdbyDateAndCountry = prmRep.decideSeason(analyzeWeatherAPI.getDateForSpecificDay(), weatherFromAPI.getCity().getCountry(), tempCategory);
             weatherCategoryId = analyzeWeatherAPI.getWeatherCategory();
             weatherImage = analyzeWeatherAPI.getWeatherCategoryImage(); //http://openweathermap.org/img/wn/10d@2x.png
             weatherDesc = analyzeWeatherAPI.getWeatherDesc();
