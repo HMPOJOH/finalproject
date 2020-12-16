@@ -95,7 +95,7 @@ public class ParameterRepository {
         else if (seasonId == 3)
             scenario.setBackground("SpringDay.jpg");
         else if (seasonId == 4)
-            scenario.setBackground("RainyDay.jpg");
+            scenario.setBackground("FallDay.jpg");
         return scenario;
     }
 
