@@ -53,7 +53,7 @@ public class ContentRepository {
                 "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
                 "WHERE SCENARIO.SEASONID =" + seasonId;
 
-        String finalUnionQuery = sqlGetContentByScenarioId +"\n UNION\n" + secondFallback +"\n UNION\n" + sqlGetContentBySeasonId;
+        String finalUnionQuery = sqlGetContentByScenarioId +"\n UNION\n" + secondFallback +"\n UNION\n" + sqlGetContentBySeasonId + "ORDER BY Priority";
        // if(seasonId<0)
          //   finalUnionQuery=sqlGetContentByScenarioId; not needed since -1 on all other cases will not give any result besides the first sql query
 

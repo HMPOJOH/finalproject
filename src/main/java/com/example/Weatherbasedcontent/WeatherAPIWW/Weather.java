@@ -14,6 +14,10 @@ public class Weather{
         return main;
     }
 
+    public void setMain(String main) {
+        this.main=main;
+    }
+
     public String getDescription() {
         return description;
     }
