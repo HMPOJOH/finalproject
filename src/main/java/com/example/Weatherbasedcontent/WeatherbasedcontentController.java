@@ -89,11 +89,9 @@ public class WeatherbasedcontentController {
         System.out.println(scenario.getBackground());
         //test contentcall
         List<Content> contentList = productRepos.getContentList2(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
-        System.out.println("Content list id:");
 
-        System.out.println("Content list id new:");
-        for (Content id:contentList)
-            System.out.println(id.getId());
+
+
 
         //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
@@ -103,14 +101,24 @@ public class WeatherbasedcontentController {
         model.addAttribute("weatherdesc", weatherDesc);
         model.addAttribute("country", country);
         model.addAttribute("tempcat", tempCategory);
-        System.out.println("tempcat" + tempCategory);
+
         model.addAttribute("contentList", contentList );
-        System.out.println("country" + country);
         model.addAttribute("scenario", scenario.getDescription());
         model.addAttribute("background", scenario.getBackground());
-        System.out.println("scenarioid" + scenario.getId());
-        System.out.println("weathercat" + weatherCategoryId);
-        System.out.println("seasonid; "+seasonIdbyDateAndCountry );
+
+
+        System.out.println("------ Content list id--------");
+        for (Content id:contentList)
+            System.out.println(id.getId() + " " + id.getText());
+        System.out.println("------Weather parameter-----------");
+        System.out.println("country" + country);
+        System.out.println("seasonid: "+seasonIdbyDateAndCountry );
+        System.out.println("weathercat:" + weatherCategoryId);
+        System.out.println("tempcat" + tempCategory);
+        System.out.println("departmentid: "+ department);
+        System.out.println("------Calculated scenario-----------");
+        System.out.println("scenarioid: " + scenario.getId());
+        System.out.println("scenario desc: " + scenario.getDescription());
         return "index";
     }
 
