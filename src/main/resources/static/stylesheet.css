@@ -13,6 +13,7 @@ body {
     background: #A6C8BA;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .header-setupPanel {
@@ -32,7 +33,6 @@ body {
     text-align: center;
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .2);
     border: 1px;
-    border-radius: 3px;
 
 }
 
@@ -60,6 +60,7 @@ body {
     border: 1px;
     border-radius: 3px;
     border-color: #f4f4f4;
+    overflow: scroll;
 }
 
 .content {
@@ -81,7 +82,6 @@ padding-top: 10%;
   text-align: center;
   box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, .2);
   border: 1px;
-  border-radius: 3px;
 
 }
 
