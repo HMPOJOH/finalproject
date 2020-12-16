@@ -168,9 +168,18 @@ public class ParameterRepository {
         return " ";
     }
 
-    //ny
-    public int getSeasonIdbyDateAndCountry(String date, String isoCountry) {
+    public int decideSeason(String date, String isoCountry, int tempCategory) {
+        int decidedSeason = 2;
+        if (tempCategory == 1 || tempCategory == 2) //hot or warm
+            decidedSeason = 1; //summer
+        else if (tempCategory == 4) //very cold
+            decidedSeason = 2; //winter
+        else
+            decidedSeason = getSeasonIdbyDateAndCountry(date, isoCountry);
+        return decidedSeason;
+    }
 
+    public int getSeasonIdbyDateAndCountry(String date, String isoCountry) {
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
