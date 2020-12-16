@@ -278,3 +278,49 @@ container .navbar li{
 .main {
   margin-top: 30px; /* Add a top margin to avoid content overlay */
 }
+
+.paginator {
+  text-decoration: royalblue;
+  position: absolute;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+
+}
+
+#paginationId {
+    position: relative;
+
+    padding: 12px 20px;
+    position: center;
+
+}
+
+
+#nobg{
+background-color:white;
+}
+#nobg2{
+background-color:#A6C8BA;
+color:white;
+}
+
+.page-link .active {
+background-color:#A6C8BA;
+color:white;
+}
+
+.page-link a {
+
+color:black;
+}
+
+.pagination-lg .page-link {
+    padding: .75rem 1.5rem;
+    font-size: 15px;
+    line-height: 1.5;
+
+#paginationCenter {
+margin: auto;
+border: none;
+background-color:#white;
