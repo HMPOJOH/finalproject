@@ -125,11 +125,17 @@ public class WeatherbasedcontentController {
  @GetMapping("/addcontent/{scenarioId}")
     public String addContent(Model model, @PathVariable int scenarioId) {
         Scenario scenario = prmRep.getScenario(scenarioId);
+     List<Scenario> scenarios = prmRep.getAllScenarios();
+     model.addAttribute("scenarios", scenarios);
         List<Content> contentList = productRepos.getContentListbyId(scenario.getId());
         model.addAttribute("scenarioId", scenarioId);
         model.addAttribute("scenarioDesc", scenario.getDescription());
         model.addAttribute("contentList", contentList);
         model.addAttribute("content", new Content());
+        model.addAttribute("showPrev", scenarioId>1);
+     model.addAttribute("showNext",scenarioId<scenarios.size()-1 );
+     model.addAttribute("currentPage", scenarioId);
+
         return "addcontent";
     }
 

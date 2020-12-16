@@ -66,6 +66,36 @@
                        style="font-size:13px; margin-bottom:10px;">Delete</a>
                 </div>
             </div>
+
+            <hr>
+            <div class="panel panel-default">
+
+                <nav aria-label="...">
+                <span id="paginationId" class="pagination pagination-lg">
+                    <div class="page-link" id="paginationCenter">
+                        <li class="page-item active" id="nobg" aria-current="page">
+
+                            <span class="page-item" th:if="${showPrev}">
+                                <a th:href="'/addcontent/' + ${currentPage-1}" th:text="Previous"></a>
+                            </span>
+
+                            <span class="page-item" th:each="page : ${scenarios}">
+                                <span th:if="${currentPage == page.id}" id="nobg2" th:text="${page.id}"></span>
+                                <a th:if="${currentPage != page.id}" th:href="'/addcontent/' + ${page.id}" th:text="${page.id}"></a>
+                            </span>
+
+                            <span class="page-item" th:if="${showNext}">
+                                <a th:href="'/addcontent/' + ${currentPage+1}" th:text="Next"></a>
+                            </span>
+
+                        </li>
+                    </div>
+                </span>
+                </nav>
+                </li>
+            </div>
+
+
         </div>
     </div>
 </div>
