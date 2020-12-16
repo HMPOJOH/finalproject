@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -160,14 +159,27 @@ public class WeatherbasedcontentController {
     public String scenarios(HttpSession session, Model model) {
         List<Scenario> scenarios = prmRep.getAllScenarios();
 
-        int[] contentQtyPerScenario = productRepos.getcontentQtyPerScenario(scenarios);
-        for (int i=0;i<contentQtyPerScenario.length;i++)
-            System.out.println("Scenario " +(i+1) + "qty " + contentQtyPerScenario[i]);
+
+        //just testing. Should not be handled here
+        int[] contentQtyPerScenario = productRepos.updateContentQtyPerScenario(scenarios);
+
+        for (int i=0;i<contentQtyPerScenario.length;i++){
+            scenarios.get(i).setQtyContent(contentQtyPerScenario[i]);
+        }
+        for (int i=0;i<contentQtyPerScenario.length;i++){
+            System.out.println("scenario "+scenarios.get(i).getId() +" count Content:" +  scenarios.get(i).getQtyContent());
+        }
 
         model.addAttribute("scenarios", scenarios);
 
 
         return "scenarios";
+    }
+
+
+    public void updateScenarioQty(int[] listQTY, List<Scenario> scenarioList){
+
+
     }
 
 }

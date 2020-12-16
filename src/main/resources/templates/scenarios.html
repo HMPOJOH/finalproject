@@ -29,11 +29,13 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Description</th>
+                <th scope="col">Qty Content</th>
             </tr>
             </thead>
             <tr th:each="scenario,iter : ${scenarios}">
                 <td th:text="${scenario.id}">Id</td>
                 <td th:text="${scenario.description}">Description</td>
+                <td th:text="${scenario.qtyContent}"></td>
                 <td>
                     <a th:href="'addcontent/' +${scenario.id}" class="showContent-btn">Show content</a>
                 </td>
