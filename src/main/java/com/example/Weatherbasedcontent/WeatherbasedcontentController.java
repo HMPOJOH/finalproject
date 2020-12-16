@@ -31,6 +31,9 @@ public class WeatherbasedcontentController {
     private ParameterRepository prmRep;
 
 
+    private ScenarioService scenarioService = new ScenarioService();
+
+
 
 
     private WeatherRoot weatherFromAPI = new WeatherRoot();
@@ -159,16 +162,7 @@ public class WeatherbasedcontentController {
     public String scenarios(HttpSession session, Model model) {
         List<Scenario> scenarios = prmRep.getAllScenarios();
 
-
-        //just testing. Should not be handled here
-        int[] contentQtyPerScenario = productRepos.updateContentQtyPerScenario(scenarios);
-
-        for (int i=0;i<contentQtyPerScenario.length;i++){
-            scenarios.get(i).setQtyContent(contentQtyPerScenario[i]);
-        }
-        for (int i=0;i<contentQtyPerScenario.length;i++){
-            System.out.println("scenario "+scenarios.get(i).getId() +" count Content:" +  scenarios.get(i).getQtyContent());
-        }
+        scenarios = scenarioService.updateScenarioQty(productRepos.updateContentQtyPerScenario(scenarios), scenarios);
 
         model.addAttribute("scenarios", scenarios);
 
@@ -177,9 +171,6 @@ public class WeatherbasedcontentController {
     }
 
 
-    public void updateScenarioQty(int[] listQTY, List<Scenario> scenarioList){
 
-
-    }
 
 }
