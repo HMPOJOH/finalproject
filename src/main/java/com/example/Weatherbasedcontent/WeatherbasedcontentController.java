@@ -159,7 +159,13 @@ public class WeatherbasedcontentController {
     @GetMapping("/scenarios")
     public String scenarios(HttpSession session, Model model) {
         List<Scenario> scenarios = prmRep.getAllScenarios();
+
+        int[] contentQtyPerScenario = productRepos.getcontentQtyPerScenario(scenarios);
+        for (int i=0;i<contentQtyPerScenario.length;i++)
+            System.out.println("Scenario " +(i+1) + "qty " + contentQtyPerScenario[i]);
+
         model.addAttribute("scenarios", scenarios);
+
 
         return "scenarios";
     }

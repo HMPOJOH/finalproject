@@ -305,6 +305,11 @@ background-color:#A6C8BA;
 color:white;
 }
 
+.form-control:focus {
+  border-color: #A6C8BA;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #A6C8BA;
+}
+
 .page-link .active {
 background-color:#A6C8BA;
 color:white;
