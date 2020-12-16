@@ -90,7 +90,9 @@ public class ParameterRepository {
         System.out.println("weatherId:" + weatherId);
         System.out.println("depId:" + depId);
         scenario.setDescription("Show: " + getSeasonDesc(seasonId) + ", " + getWeatherDesc(weatherId) + ", " + getDepDesc(depId));
-        if (seasonId == 1)
+        if (weatherId == 2) //rain
+            scenario.setBackground("RainyDay.jpg");
+        else if (seasonId == 1)
             scenario.setBackground("SummerDay.jpg");
         else if (seasonId == 3)
             scenario.setBackground("SpringDay.jpg");

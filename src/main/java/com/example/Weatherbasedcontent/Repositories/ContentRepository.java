@@ -38,30 +38,58 @@ public class ContentRepository {
                 "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
                 "WHERE SCENARIO.SEASONID =" + seasonId + "\n" +
                 "AND SCENARIO.WEATHERSYMBOLID =" + weatherCatId;
-        String sqlGetContentBySeasonIdAndDepartmentId = "select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '2nd' as Priority\n" +
+
+        String sqlGetContentBySeasonAndWeatherAndDep = "select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '2nd' as Priority\n" +
+                "FROM CONTENTBYSCENARIO \n" +
+                "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                "WHERE SCENARIO.SEASONID =" + seasonId + "\n" +
+                "AND SCENARIO.WEATHERSYMBOLID =" + weatherCatId + "\n" +
+                "AND SCENARIO.DEPARTMENTID =" + departmentId;
+
+        String secondFallback= (departmentId == 7)?sqlGetContentBySeasonIdAndWeatherCat:sqlGetContentBySeasonAndWeatherAndDep;
+
+        String sqlGetContentBySeasonIdAndDepartmentId = "select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '3rd' as Priority\n" +
                 "FROM CONTENTBYSCENARIO \n" +
                 "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
                 "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
                 "WHERE SCENARIO.SEASONID =" + seasonId + "\n" +
                 "AND SCENARIO.DEPARTMENTID =" + departmentId;
 
-        String secondFallback= (departmentId == 7)?sqlGetContentBySeasonIdAndWeatherCat:sqlGetContentBySeasonIdAndDepartmentId;
+        String sqlGetContentByWeatherCatAndDepartmentId = "select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '3rd' as Priority\n" +
+                "FROM CONTENTBYSCENARIO \n" +
+                "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                "WHERE SCENARIO.WEATHERSYMBOLID =" + weatherCatId + "\n" +
+                "AND SCENARIO.DEPARTMENTID =" + departmentId;
 
-        String sqlGetContentBySeasonId="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '3rd' as Priority\n" +
+        String sqlGetContentByWeatherCat="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '3rd' as Priority\n" +
+                "FROM CONTENTBYSCENARIO \n" +
+                "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
+                "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
+                "WHERE SCENARIO.WEATHERSYMBOLID =" + weatherCatId;
+
+        String thirdFallback = " ";
+        if (departmentId == 7 && (weatherCatId == 2 || weatherCatId == 2 )) //all dep + rain or snow
+            thirdFallback = sqlGetContentByWeatherCat;
+        else if (weatherCatId == 2 || weatherCatId == 2 ) //rain or snow
+            thirdFallback = sqlGetContentByWeatherCatAndDepartmentId;
+        else
+            thirdFallback= sqlGetContentBySeasonIdAndDepartmentId;
+
+        String sqlGetContentBySeasonId="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '4th' as Priority\n" +
                 "FROM CONTENTBYSCENARIO \n" +
                 "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
                 "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
                 "WHERE SCENARIO.SEASONID =" + seasonId;
 
-        String finalUnionQuery = sqlGetContentByScenarioId +"\n UNION\n" + secondFallback +"\n UNION\n" + sqlGetContentBySeasonId + "ORDER BY Priority";
+        String finalUnionQuery = sqlGetContentByScenarioId +"\n UNION\n" + secondFallback +"\n UNION\n" + thirdFallback +"\n UNION\n" + sqlGetContentBySeasonId + "ORDER BY Priority";
        // if(seasonId<0)
          //   finalUnionQuery=sqlGetContentByScenarioId; not needed since -1 on all other cases will not give any result besides the first sql query
 
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-
-
 
              ResultSet rs = stmt.executeQuery(finalUnionQuery)) {
 
