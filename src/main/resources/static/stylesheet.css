@@ -197,6 +197,36 @@ margin-bottom:16px!important;
 
 
 /* The navigation bar */
+.contentbar {
+  overflow: hidden;
+  background-color: #f4f4f4;
+  position: center; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+
+
+}
+
+/* Links inside the navbar */
+.contentbar a {
+
+  display:inline-block;
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.contentbar li{
+    display:inline;
+}
+
+/* Change background on mouse-over */
+.contentbar a:hover {
+  background: #A6C8BA;
+  color: black;
+}
+
+
 .navbar {
   overflow: hidden;
   background-color: #f4f4f4;
@@ -220,11 +250,16 @@ margin-bottom:16px!important;
     display:inline;
 }
 
+container .navbar li{
+    display:inline;
+}
+
 /* Change background on mouse-over */
 .navbar a:hover {
   background: #A6C8BA;
   color: black;
 }
+
 
 /* Add a color to the active/current link */
 .active {
