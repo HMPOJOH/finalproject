@@ -117,6 +117,9 @@ padding-top: 10%;
 background-color: #A6C8BA;
 }
 
+table, th.moveleft{
+text-align: left;
+}
 
 .startPanel-btn {
     width: 15%;
