@@ -49,9 +49,22 @@ INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('Swim shorts', 'https://lp2.hm.com/
 --Winter Very Cold Men
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('Winter Jacket', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F8c%2Fc5%2F8cc520662a7b88dc90b796072e8ce3ee91505843.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_jacketscoats_jackets%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]', 'https://www2.hm.com/sv_se/productpage.0762174001.html');
 
+--insert into scenario 27
+INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Hooded puffer jacket','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fc0%2Fc0%2Fc0c0814cff1176be858edc4e185d82f6732a6631.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_jacketscoats_jackets%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0872568001.html');
+INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Ankle boots ','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fd2%2F08%2Fd208f907669c5eaecda66c39118e3ef42615e02c.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_shoes_boots%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0622969001.html');
+INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Ribbed Hat','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F0f%2Fde%2F0fde71251edccadf5283f19c13723686791bc102.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_accessories_hatsscarvesgloves_hats%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0816919014.html');
+INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Leather gloves','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Ffa%2Fbd%2Ffabdf7d8b8a17461564f46e82247438d0448983b.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_accessories_hatsscarvesgloves_gloves%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0754751001.html');
+INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Woven scarf','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F82%2F5e%2F825eed5d1d24e3ebdc3d45d5accf208cce2e5973.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_accessories_scarves%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0757905007.html');
+
 
 
 --KEEP INSERTING CONTENT FROM HERE OTHERWISE IDs can be mixed up.
+
+
+
+
+
+
 
 
 
@@ -137,6 +150,14 @@ INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATU
 INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Rain, warm, kids','RainyDay.jpg',1,2,2,3);
 INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, All(clouds), warm, men','SummerDay.jpg',1,6,2,2);
 INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Winter, All(clouds), warm, men','WinterDay.jpg',2,6,2,2);
+
+--Insert contentbyscenario below scenarios
+
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('38','27');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('39','27');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('40','27');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('41','27');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('42','27');
 
 
 INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('SE',1,'2021-06-01','2021-08-31');
