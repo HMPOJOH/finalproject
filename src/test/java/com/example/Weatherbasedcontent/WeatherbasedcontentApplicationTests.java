@@ -21,10 +21,6 @@ class WeatherbasedcontentApplicationTests {
 	@Autowired
 	private ContentRepository productRepos;
 
-
-
-
-
 	//check that the external weather API is available
 	@Test
 	void isWeatherAvailable() {
@@ -70,27 +66,19 @@ class WeatherbasedcontentApplicationTests {
 	}
 
 	//check there is some content for each season
-	// comment this out since we right now dont have content for all seasons in database. Needs to be added.
 	@Test
 	void checkContentBySeason() {
-		List<Content> content = productRepos.getContentList2 ( -1, 1, -1, -1);// summer content
-
-
+		List<Content> content = productRepos.getContentList ( -1, 1, -1, -1);// summer content
 		Assertions.assertTrue(content.size() > 0);
-		/*
-		added id 11
-added id 12
-added id 13
-added id 14
-added id 15
-		 */
 
-		/*content = productRepos.getContentList2 ( -1, 2, -1, -1) // winter content
+		content = productRepos.getContentList ( -1, 2, -1, -1); // winter content
 		Assertions.assertTrue(content.size() > 0);
-		content = productRepos.getSeasonFallback(3);  should be equal to getContentList2 ( -1, 3, -1, -1) // spring content
+		/* remove for now since we dont have spring content
+		content = productRepos.getContentList ( -1, 3, -1, -1); // spring content
+		Assertions.assertTrue(content.size() > 0); */
+
+		content = productRepos.getContentList ( -1, 4, -1, -1); // autumn content
 		Assertions.assertTrue(content.size() > 0);
-		content = productRepos.getSeasonFallback(4);  should be equal to getContentList2 ( -1, 4, -1, -1) // autumn content
-		Assertions.assertTrue(content.size() > 0);*/
 	}
 
 
