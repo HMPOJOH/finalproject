@@ -8,78 +8,53 @@
 </head>
 <body>
 
-<div class="header-setupPanel">
-    <!-- <img src="hmGroup1.jpeg" height="100%" width="10%">-->
+<div class="container-test" align="center">
     <ul class="navbar" align="center">
         <li><a href="setuppanel">Store setup</a></li>
         <li><a class="disabledNavLink" href="">Website</a></li>
         <li><a class="disabledNavLink" href="">Mobile app</a></li>
         <li><a th:href="'scenarios'" class="active">Show scenarios</a></li>
     </ul>
-</div>
 
-<div class="imageBox">
+    <div class="header-test">
+        <h2 align="center" style="margin-top: 7px;">Scenarios</h2>
+    </div>
 
-    <div class="content" align="center">
-    <h1 align="center" style="color: black;">Scenarios</h1>
+    <div class="scroll-body">
+        <div class="body-test" align="center">
+            <div class="body-content">
 
-    <form th:action="'/addContent/' +${scenarioId}" method="POST">
-        <table class="table table-light">
-            <thead>
-            <tr>
-                <th scope="col" class="moveleft">Id</th>
-                <th scope="col" class="moveleft">Description</th>
-                <th scope="col" class="moveleft">Qty Content</th>
-                <th scope="col" class="moveleft"></th>
-            </tr>
-            </thead>
-            <tr th:each="scenario,iter : ${scenarios}">
-                <td th:text="${scenario.id}">Id</td>
-                <td th:text="${scenario.description}">Description</td>
-                <td th:text="${scenario.qtyContent}"></td>
-                <td>
-                    <a th:href="'addcontent/' +${scenario.id}" class="showContent-btn">Show content</a>
-                </td>
-            </tr>
-
-        </table>
-    </form>
-    <!-- <form>
-
-        <div class="row" style="width:80%;">
-            <div class="col">
-                <select class="form-control">
-                    <option>Season</option>
-                </select>
-            </div>
-            <div class="col">
-                <select class="form-control">
-                    <option>Weather</option>
-                </select>
-            </div>
-            <div class="col">
-                <select class="form-control">
-                    <option>Temperature category</option>
-                </select>
-            </div>
-            <div class="col">
-                <select class="form-control">
-                    <option>Department</option>
-                </select>
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                <form th:action="'/addContent/' +${scenarioId}" method="POST">
+                    <table class="tableBody" align="center" >
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Qty Content</th>
+                            <th scope="col">Show content</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="scenario,iter : ${scenarios}">
+                            <td th:text="${scenario.id}">Id</td>
+                            <td th:text="${scenario.description}">Description</td>
+                            <td th:text="${scenario.qtyContent}"></td>
+                            <td><a th:href="'addcontent/' +${scenario.id}" class="showContent-btn">Open</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
-    </form>-->
-
+    </div>
+</div>
+<div class="footer-test">
+    <div class="footer">
+        <img src="hmGroupBrands1.png" align="center">
     </div>
 </div>
 
-<div class="footer" align="center">
-    <img src="hmGroupBrands.png" align="center" >
-</div>
 
-</div>
 </body>
 </html>

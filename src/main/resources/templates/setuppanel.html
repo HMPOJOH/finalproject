@@ -2,100 +2,96 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Setup panel</title>
+    <title>Scenarios</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="stylesheet.css">
 </head>
-
 <body>
 
-<div class="header-setupPanel">
-    <!-- <img src="hmGroup1.jpeg" height="100%" width="10%">-->
+<div class="container-test" align="center">
     <ul class="navbar" align="center">
         <li><a href="setuppanel" class="active">Store setup</a></li>
         <li><a class="disabledNavLink" href="">Website</a></li>
         <li><a class="disabledNavLink" href="">Mobile app</a></li>
         <li><a th:href="'scenarios'">Show scenarios</a></li>
     </ul>
-</div>
 
-<div class="imageBox">
-
-    <div class="content">
-        <h1 align="center">Admin page - setup panel</h1>
-    <form th:action="@{/index}" method="POST">
-
-        <h4 align="left">Brand</h4>
-
-        <select name="brand" class="brand-dropdown" disabled="true">
-            <option value="H&M">H&M</option>
-            <option value="COS">COS</option>
-            <option value="WEEKDAY">WEEKDAY</option>
-            <option value="MONKI">MONKI</option>
-            <option value="HOME">HOME</option>
-            <option value="& Other Stories">& Other Stories</option>
-            <option value="ARKET">ARKET</option>
-            <option value="AFOUND">AFOUND</option>
-        </select>
-
-        <h4 align="left">City</h4>
-
-        <select th:name="city" id="city" class="city-dropdown" onChange="start()">
-            <option th:each="location : ${locations}"
-                    th:value="${location}"
-                    th:text="${location}"></option>
-        </select>
-        <h4 align="left">Store</h4>
-
-        <select name="store" id="store" class="store-dropdown">
-
-
-
-        </select>
-
-        <h4 align="left">Monitor</h4>
-
-        <select name="monitor" class="monitor-dropdown" >
-            <option value="TBD">Monitor 1</option>
-            <option value="TBD">Monitor 2</option>
-            <option value="TBD">Monitor 3</option>
-
-        </select>
-
-
-
-
-
-        <h4 align="left">Department</h4>
-        <select th:name="department" class="department-dropdown">
-            <option th:each="dep : ${departments}"
-                    th:value="${dep.id}"
-                    th:text="${dep.description}"></option>
-        </select>
-
-
-        <h4 align="left">Time frame</h4>
-        <select name="forecastdays" class="smhidays-dropdown">
-            <option th:each="day : ${T(com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays).values()}"
-                    th:value="${day}"
-                    th:text="${day}"></option>
-        </select>
-
-        <input type="submit" class="startPanel-btn" value="Start panel">
-    </form>
-
-    <!--Move to new template "Scenarios" in sidebar-->
-
-    <!--Scenarios button latest version-->
-    <!--<a th:href="'scenarios'" class="showScenarios-btn" value="Show scenarios">Show scenarios</a>-->
-
-    <!--Scenarios button first version-->
-    <!--<a th:href="'scenarios'" class="showScenarios-btn">Show scenarios</a>-->
-</div>
-</div>
-
-    <div class="footer" align="center">
-        <img src="hmGroupBrands.png" align="center">
+    <div class="header-test">
+        <h2 align="center" style="margin-top: 7px;">Admin page - setup panel</h2>
     </div>
+
+    <div class="scroll-body">
+        <div class="body-test" align="center">
+            <div class="body-content">
+
+                <form th:action="@{/index}" method="POST">
+
+                    <h4 align="left" style="padding-left:1%;">Brand</h4>
+
+                    <select name="brand" class="brand-dropdown" disabled="true">
+                        <option value="H&M">H&M</option>
+                        <option value="COS">COS</option>
+                        <option value="WEEKDAY">WEEKDAY</option>
+                        <option value="MONKI">MONKI</option>
+                        <option value="HOME">HOME</option>
+                        <option value="& Other Stories">& Other Stories</option>
+                        <option value="ARKET">ARKET</option>
+                        <option value="AFOUND">AFOUND</option>
+                    </select>
+
+                    <h4 align="left" style="padding-left:1%;">City</h4>
+
+                    <select th:name="city" id="city" class="city-dropdown" onChange="start()">
+                        <option th:each="location : ${locations}"
+                                th:value="${location}"
+                                th:text="${location}"></option>
+                    </select>
+                    <h4 align="left" style="padding-left:1%;">Store</h4>
+
+                    <select name="store" id="store" class="store-dropdown">
+                   
+                    </select>
+
+                    <h4 align="left" style="padding-left:1%;">Monitor</h4>
+
+                    <select name="monitor" class="monitor-dropdown">
+                        <option value="TBD">Monitor 1</option>
+                        <option value="TBD">Monitor 2</option>
+                        <option value="TBD">Monitor 3</option>
+
+                    </select>
+
+
+                    <h4 align="left" style="padding-left:1%;">Department</h4>
+                    <select th:name="department" class="department-dropdown">
+                        <option th:each="dep : ${departments}"
+                                th:value="${dep.id}"
+                                th:text="${dep.description}"></option>
+                    </select>
+
+
+                    <h4 align="left" style="padding-left:1%;">Time frame</h4>
+                    <select name="forecastdays" class="smhidays-dropdown">
+                        <option th:each="day : ${T(com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays).values()}"
+                                th:value="${day}"
+                                th:text="${day}"></option>
+                    </select>
+
+                    <input type="submit" class="startPanel-btn" value="Start panel">
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-test">
+        <div class="footer">
+            <img src="hmGroupBrands1.png" align="center">
+        </div>
+    </div>
+
+</div>
+
 <script>
 
 
@@ -144,7 +140,6 @@ document.getElementById("store").innerHTML=` <option value="Pune">Westend Mall, 
 
 }
 </script>
-
 
 </body>
 </html>
