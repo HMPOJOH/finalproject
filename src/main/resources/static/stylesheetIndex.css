@@ -104,12 +104,9 @@ h2 {
     margin-left: auto;
     margin-right: auto;
     clip-path: inset(0% 0% 2% 0%);
-    background-image: url("WinterDay.jpg");
     background-size: cover;
     background-clip: content-box;
     background-repeat: no-repeat;
-    position: relative;
-    z-index: -2;
 }
 /*  WINDOW STYLE END  */
 

@@ -49,27 +49,32 @@
 -->
 
 <!--    WEATHER MOD PICKER     -->
-<canvas th:if="${weatherCategoryId==3}" class="snow" style="position: absolute; z-index: 13;"></canvas>
+
 
 
 <!--    PRODUCT WINDOW START    -->
 <div class="imageBox" align="center">
 
-    <div class="portrait" th:style="'background-image: url(' + ${background} + ');'">
-        <img src="FinalProjectOverlay2.png" style="max-width: 100%;">
+   <!-- <div class="portrait" th:style="'background-image: url(' + ${background} + ');'"> -->
+    <img src="FinalProjectOverlay2.png" class="portrait" th:style="'background-image: url(' + ${background} + ');'" style="max-width: 100%; position: absolute; z-index: 1;">
+        <canvas th:if="${weatherCategoryId==3}" class="snow" style="position: absolute; z-index: 2; left: 670px; clip-path: inset(0px 1350px 0px 0px);"></canvas>
+    <!---->
+        <img src="FinalProjectOverlay2.png" class="portrait" style="max-width: 100%; height: 100%; position: absolute; z-index: 3; left: 670px;">
     </div>
 
+    <!--  PRODUCT IMAGE 1 & 2   -->
     <div class="portrait3">
-        <div class="w3-content w3-section" style="width: 100%; float: top; clip-path: inset(15.5% 0% 15% 0%);">
+        <div class="w3-content w3-section" style="width: 100%; float: top; clip-path: inset(15.5% 0% 15% 0%); position: relative; z-index: 13; left: 16%;">
             <img class="mySlides w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}"
-                 style="width: 37%; margin-top: -93.1%;">
+                 style="width: 37.5%; margin-top: -93.9%;">
         </div>
 
-        <div class="w3-content w3-section" style="width: 100%; float: top; clip-path: inset(15% 0% 21.1% 0%);">
+        <div class="w3-content w3-section" style="width: 100%; float: top; clip-path: inset(15% 0% 21.3% 0%); position: relative; z-index: 13; left: 16%;">
             <img class="mySlides2 w3-animate-fading" th:each="contentItem : ${contentList}"
-                 th:src="${contentItem.image}" style="width: 37%; margin-top: -18.35%">
+                 th:src="${contentItem.image}" style="width: 37.5%; margin-top: -18.48%;">
         </div>
 
+        <!--    HM LOGO     -->
         <div>
             <img src="hmLogo.png"
                  style="max-width: 8%; margin-top: -10.3%; position: absolute; left: 46.5%; z-index: 15;">
