@@ -6,165 +6,39 @@
     <link rel="stylesheet" href="stylesheetIndex.css">
 
 
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-body {
-  font-family: 'Lato', sans-serif;
-}
-
-.overlay {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 14;
-  top: 0;
-  left: 0;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0, 0.9);
-  overflow-x: hidden;
-  transition: 0.5s;
-}
-
-.overlay-content {
-  position: relative;
-  top: 25%;
-  width: 100%;
-  text-align: center;
-  margin-top: 30px;
-}
-
-.weather-content {
-  position: relative;
-  top: 26%;
-  width: 100%;
-  text-align: center;
-  margin-top: 60px;
-}
-
-.overlay a {
-  padding: 8px;
-  text-decoration: none;
-  font-size: 36px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-h3, h1{
-  padding: 8px;
-  text-decoration: none;
-  font-size: 16px;
-  color: gray;
-  display: block;
-  line-height: 4px;
-  }
-
-h2 {
-  padding: 8px;
-  text-decoration: none;
-  font-size: 26px;
-  color: gray;
-  display: block;
-  line-height: 7px;
-  }
-
-.overlay a:hover, .overlay a:focus {
-  color: #f1f1f1;
-}
-
-.overlay .closebtn {
-  position: absolute;
-  top: 20px;
-  right: 45px;
-  font-size: 60px;
-}
-
-.closebtnleft {
-  position: absolute;
-  top: 4px;
-  left: 14px;
-  font-size: 20px;
-  text-color: black;
-}
-
-@media screen and (max-height: 450px) {
-  .overlay a {font-size: 20px}
-  .overlay .closebtn {
-  font-size: 40px;
-  top: 15px;
-  right: 35px;
-  }
-}
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="javascript:void(0)" class="closebtnleft" onclick="closeNav()">&#9776;</a>
-    <div class="overlay-content">
-        <a href="/setuppanel">Setup</a>
-        <a href="/scenarios">Scenarios</a>
-        <a href="/addcontent/2">Add Content</a>
+<!--    OVERLAY MENU START     -->
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="javascript:void(0)" class="closebtnleft" onclick="closeNav()">&#9776;</a>
+        <div class="overlay-content">
+            <a href="/setuppanel">Setup</a>
+            <a href="/scenarios">Scenarios</a>
+            <a href="/addcontent/2">Add Content</a>
+        </div>
+
+        <div class="weather-content">
+            <img th:src="${currentWeatherImage}" src="">
+            <h1 th:text="${city}+' ' +${country}"></h1>
+            <h3 th:text="${weatherdesc}"></h3>
+            <h3 th:text="'temp: ' + ${temperature}+' C'"></h3>
+            <h3 th:text="'wind: ' + ${currentWindSpeed} + ' m/s'"></h3>
+            <h2 th:text="${scenario}"></h2>
+        </div>
     </div>
-    <div class="weather-content">
-        <img th:src="${currentWeatherImage}" src=""><h1 th:text="${city}+' ' +${country}"></h1>
-        <h3 th:text="${weatherdesc}"></h3>
-        <h3 th:text="'temp: ' + ${temperature}+' C'"></h3>
-        <h3 th:text="'wind: ' + ${currentWindSpeed} + ' m/s'"></h3>
-        <h2 th:text="${scenario}"></h2>
-    </div>
-</div>
-
-<span style="font-size:30px;cursor:pointer;margin-left: 20px" onclick="openNav()">&#9776;</span>
-
-<script>
-function openNav() {
-  document.getElementById("myNav").style.width = "100%";
-}
-
-function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
-}
-</script>
 
 
+    <!--    OPEN OVERLAY MENU BUTTON    -->
+    <span style="font-size:30px;cursor:pointer;margin-left: 20px" onclick="openNav()">&#9776;</span>
 
-
-<!--    <style>
-</style>
-    <button type="button" class="collapsible">Menu</button>
-    <div class="content">
-        <div class="header" align="left">
-            <div style="padding-left: 20px" align="left">
-                <img th:src="${currentWeatherImage}" src=""><h1 th:text="${city}+' ' +${country}"></h1>
-                <h3 th:text="${weatherdesc}"></h3>
-                <h3 th:text="'temp: ' + ${temperature}+' C'"></h3>
-                <h3 th:text="'wind: ' + ${currentWindSpeed} + ' m/s'"></h3>
-            </div>
-
-            <div style="padding-right: 20px" align="right" float="top">
-                <h1 th:text="${scenario}"></h1>
-            </div>
-
-            <a th:href="'/setuppanel'" class="startPanel-btn">Setup</a>
-
-    </div>
-    </div> -->
-
-    <style type="text/css">
-    body {
-        overflow: hidden;
-    }
-</style>
-
-
-
+<!--    OVERLAY MENU END       -->
 
 </head>
 <body>
 
-<!-- SNÖ -->
+
 <!--Weather Category IDs
 1 = Sunny
 2 = Rain
@@ -174,8 +48,109 @@ function closeNav() {
 6 = All
 -->
 
-
+<!--    WEATHER MOD PICKER     -->
 <canvas th:if="${weatherCategoryId==3}" class="snow" style="position: absolute; z-index: 13;"></canvas>
+
+
+<!--    PRODUCT WINDOW START    -->
+<div class="imageBox" align="center">
+
+    <div class="portrait" th:style="'background-image: url(' + ${background} + ');'">
+        <img src="FinalProjectOverlay2.png" style="max-width: 100%;">
+    </div>
+
+    <div class="portrait3">
+        <div class="w3-content w3-section" style="width: 100%; float: top; clip-path: inset(15.5% 0% 15% 0%);">
+            <img class="mySlides w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}"
+                 style="width: 37%; margin-top: -93.1%;">
+        </div>
+
+        <div class="w3-content w3-section" style="width: 100%; float: top; clip-path: inset(15% 0% 21.1% 0%);">
+            <img class="mySlides2 w3-animate-fading" th:each="contentItem : ${contentList}"
+                 th:src="${contentItem.image}" style="width: 37%; margin-top: -18.35%">
+        </div>
+
+        <div>
+            <img src="hmLogo.png"
+                 style="max-width: 8%; margin-top: -10.3%; position: absolute; left: 46.5%; z-index: 15;">
+        </div>
+
+    </div>
+</div>
+
+<!--    PRODUCT WINDOW END  -->
+
+
+<!--    SCRIPTS     -->
+
+
+<!-- Product carousel -->
+<script>
+  var myIndex = 0;
+  carousel();
+
+  function carousel() {
+    let i;
+    let x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}
+    x[myIndex-1].style.display = "block";
+    setTimeout(carousel, 4500);
+  }
+
+  var myIndex2 = 2;
+  setTimeout(carousel2, 900);
+
+  function carousel2() {
+    let i;
+    let x = document.getElementsByClassName("mySlides2");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    myIndex2++;
+    if (myIndex2 > x.length) {myIndex2 = 1}
+    x[myIndex2-1].style.display = "block";
+    setTimeout(carousel2, 4500);
+
+  }
+
+</script>
+
+
+<!-- Collapsible overlay -->
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+</script>
+<script>
+function openNav() {
+  document.getElementById("myNav").style.width = "100%";
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
+
+    </script>
+
+
+<!-- Snow! -->
 <script>
     var canvas = document.querySelector('.snow'),
     ctx = canvas.getContext('2d'),
@@ -296,98 +271,9 @@ function distanceBetween(vector1, vector2) {
 }
 
 init();
+
 </script>
 
-
-
-<!-- ------------------------------------------ -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-}
-</script>
-
-
-
-
-<div class="imageBox" align="center" >
-
-    <!--<img src="summerBeach.jpg" style="max-width: 200%;">-->
-<!-- th:style="'background-image: url(' + ${background} + ');'"-->
-
-   <div class="portrait" th:style="'background-image: url(' + ${background} + ');'">
-        <img src="FinalProjectOverlay2.png" style="max-width: 100%;">
-</div>
-<!--
-    <div class="productBox" align="center" >
--25
-        <div class="portrait2">
-            <img src="productArea.jpg" style="max-width: 100%;">
-        </div>-->
-
-        <div class="portrait3">
-            <div class="w3-content w3-section"  style="width: 100%; float: top; clip-path: inset(15.5% 0% 15% 0%);">
-                <img class="mySlides w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width: 37%; margin-top: -93.1%;">
-            </div>
-
-            <div class="w3-content w3-section"  style="width: 100%; float: top; clip-path: inset(15% 0% 21.1% 0%);">
-                <img class="mySlides2 w3-animate-fading" th:each="contentItem : ${contentList}" th:src="${contentItem.image}" style="width: 37%; margin-top: -18.35%">
-            </div>
-
-            <div>
-                <img src="hmLogo.png" style="max-width: 8%; margin-top: -10.3%; position: absolute; left: 46.5%; z-index: 15;">
-            </div>
-
-    </div>
-</div>
-
-
-
-
-
-<script>
-  var myIndex = 0;
-  carousel();
-
-  function carousel() {
-    let i;
-    let x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}
-    x[myIndex-1].style.display = "block";
-    setTimeout(carousel, 4500);
-  }
-
-  var myIndex2 = 2;
-  setTimeout(carousel2, 900);
-
-  function carousel2() {
-    let i;
-    let x = document.getElementsByClassName("mySlides2");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
-    myIndex2++;
-    if (myIndex2 > x.length) {myIndex2 = 1}
-    x[myIndex2-1].style.display = "block";
-    setTimeout(carousel2, 4500);
-
-  }
-  </script>
 
 </body>
 </html>
