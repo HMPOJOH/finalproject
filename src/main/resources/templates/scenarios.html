@@ -31,6 +31,7 @@
                             <th scope="col">Id</th>
                             <th scope="col">Description</th>
                             <th scope="col">Qty Content</th>
+                            <th scope="col">Show content</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -39,7 +40,7 @@
                             <td th:text="${scenario.id}">Id</td>
                             <td th:text="${scenario.description}">Description</td>
                             <td th:text="${scenario.qtyContent}"></td>
-                            <td><a th:href="'addcontent/' +${scenario.id}" class="showContent-btn">Show content</a></td>
+                            <td><a th:href="'addcontent/' +${scenario.id}" class="showContent-btn">Open</a></td>
                         </tr>
                         </tbody>
                     </table>
