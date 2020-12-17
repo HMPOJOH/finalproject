@@ -20,9 +20,6 @@ import java.util.List;
 @Controller
 public class WeatherbasedcontentController {
 
-
-    private WeatherAnalyzer analyzeWeatherAPI;
-
     @Autowired
     private ContentRepository productRepos;
     @Autowired
@@ -30,13 +27,9 @@ public class WeatherbasedcontentController {
     @Autowired
     private ParameterRepository prmRep;
 
-
-    private ScenarioService scenarioService = new ScenarioService();
-
-
-
-
+    private WeatherAnalyzer analyzeWeatherAPI;
     private WeatherRoot weatherFromAPI = new WeatherRoot();
+    private ScenarioService scenarioService = new ScenarioService();
 
     private List<String> possibleLocations = new ArrayList<String>();
     private List<Department> departments = new ArrayList<Department>();
@@ -49,7 +42,6 @@ public class WeatherbasedcontentController {
 
         model.addAttribute("locations", possibleLocations);
         model.addAttribute("departments", departments);
-
 
         return "setuppanel";
     }
@@ -66,7 +58,6 @@ public class WeatherbasedcontentController {
         String  weatherImage = "http://openweathermap.org/img/wn/03d@2x.png"; //http://openweathermap.org/img/wn/10d@2x.png
         String  weatherDesc = "Clouds";
         String country="";
-
 
         try {
             WeatherRoot weatherFromAPI = restTemplate.getForObject("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=0de04dc3bae5ebc08ee10c77aabe6215&units=metric", WeatherRoot.class);
@@ -85,15 +76,8 @@ public class WeatherbasedcontentController {
         }
 
         //desc, seasonid, weathersymbolid, tempid, department =
-        Scenario scenario = prmRep.getScenariobyValues(seasonIdbyDateAndCountry, weatherCategoryId, tempCategory, department);
-        System.out.println(scenario.getId());
-        System.out.println(scenario.getDescription());
-        System.out.println(scenario.getBackground());
-        //test contentcall
-        List<Content> contentList = productRepos.getContentList2(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
-
-
-
+        Scenario scenario = prmRep.getScenarioByValues(seasonIdbyDateAndCountry, weatherCategoryId, tempCategory, department);
+        List<Content> contentList = productRepos.getContentList(scenario.getId(), seasonIdbyDateAndCountry, department, weatherCategoryId);
 
         //Just to show the values - will rather be used in the Content lookup
         model.addAttribute("city", city);
@@ -107,7 +91,6 @@ public class WeatherbasedcontentController {
         model.addAttribute("contentList", contentList );
         model.addAttribute("scenario", scenario.getDescription());
         model.addAttribute("background", scenario.getBackground());
-
 
         System.out.println("------ Content list id--------");
         for (Content id:contentList)
@@ -127,33 +110,31 @@ public class WeatherbasedcontentController {
  @GetMapping("/addcontent/{scenarioId}")
     public String addContent(Model model, @PathVariable int scenarioId) {
         Scenario scenario = prmRep.getScenario(scenarioId);
-     List<Scenario> scenarios = prmRep.getAllScenarios();
-     model.addAttribute("scenarios", scenarios);
+        List<Scenario> scenarios = prmRep.getAllScenarios();
         List<Content> contentList = productRepos.getContentListbyId(scenario.getId());
+
+        model.addAttribute("scenarios", scenarios);
         model.addAttribute("scenarioId", scenarioId);
         model.addAttribute("scenarioDesc", scenario.getDescription());
         model.addAttribute("contentList", contentList);
         model.addAttribute("content", new Content());
         model.addAttribute("showPrev", scenarioId>1);
-     model.addAttribute("showNext",scenarioId<scenarios.size()-1 );
-     model.addAttribute("currentPage", scenarioId);
+        model.addAttribute("showNext",scenarioId<scenarios.size()-1 );
+        model.addAttribute("currentPage", scenarioId);
 
         return "addcontent";
     }
 
     @PostMapping("/savecontent/{scenarioId}")
     public String set(@ModelAttribute Content content, @PathVariable int scenarioId) {
-        System.out.println("add into scenario " + scenarioId);
-        System.out.println("content text 1 " + content.getText());
         int contentId = productRepos.addContent(content);
-        productRepos.addContentByScenario(contentId,scenarioId);
-        System.out.println("contentId added: " + contentId);
+
+        productRepos.addContentToScenario(contentId,scenarioId);
         return "redirect:/addcontent/{scenarioId}";
     }
 
     @GetMapping("/removecontent/{contentId}/{scenarioId}")
     public String set(@PathVariable int contentId, @PathVariable int scenarioId) {
-        System.out.println("delete content " + contentId + " from scenario " + scenarioId);
         productRepos.removeContentFromScenario(contentId,scenarioId);
         return "redirect:/addcontent/{scenarioId}";
     }
@@ -163,14 +144,7 @@ public class WeatherbasedcontentController {
         List<Scenario> scenarios = prmRep.getAllScenarios();
 
         scenarios = scenarioService.updateScenarioQty(productRepos.updateContentQtyPerScenario(scenarios), scenarios);
-
         model.addAttribute("scenarios", scenarios);
-
-
         return "scenarios";
     }
-
-
-
-
 }
