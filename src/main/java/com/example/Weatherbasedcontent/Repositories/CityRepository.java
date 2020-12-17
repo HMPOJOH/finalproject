@@ -11,8 +11,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 @Repository
 public class CityRepository {
 
@@ -33,8 +31,5 @@ public class CityRepository {
             e.printStackTrace();
         }
         return cities;
-
     }
-
-
 }

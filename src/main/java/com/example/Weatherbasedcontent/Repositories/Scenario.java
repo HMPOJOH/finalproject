@@ -5,6 +5,7 @@ public class Scenario {
     private String description;
     private String background;
     private int qtyContent;
+
     public Scenario(int id, String description, String background) {
         this.id = id;
         this.description = description;
