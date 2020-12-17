@@ -18,7 +18,7 @@ INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('Beach bag', 'https://lp2.hm.com/hm
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('SwimSuit', 'https://lp2.hm.com/hmgoepprod?set=source[/3f/ef/3fefb4de4c4ae65e4af1e35e901878652dc52f28.jpg],origin[dam],category[ladies_maternity_swimwear],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]', 'https://www2.hm.com/en_gb/productpage.0690513001.html');
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('SunHat', 'https://lp2.hm.com/hmgoepprod?set=source[/43/7b/437bc8e1294172c48f970f8f443cccc42ff8baa3.jpg],origin[dam],category[ladies_accessories_hatsscarvesgloves_hats],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]', 'https://www2.hm.com/en_gb/productpage.0616763007.html');
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('Sandals', 'https://lp2.hm.com/hmgoepprod?set=source[/90/f6/90f689ec40799d02723b88bb0a10f69ff358aff8.jpg],origin[dam],category[Ladies_shoes_flipflops],type[DESCRIPTIVESTILLLIFE],res[z],hmver[2]&call=url[file:/product/main]', 'https://www2.hm.com/sv_se/productpage.0892254002.html');
---Springe none average men
+--Spring none average men
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('ShirtJacket','https://lp2.hm.com/hmgoepprod?set=source[/d6/22/d62294472c066930a5b067e9623f1454e9252d5b.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0934392002.html');
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('LightJacket','https://lp2.hm.com/hmgoepprod?set=source[/90/23/9023ca60b64aff10e4ab857fc7ca4021bae42016.jpg],origin[dam],category[men_jacketscoats_jackets],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0899020001.html');
 INSERT INTO CONTENT (TEXT,IMAGE,URL) VALUES ('DenimJacket','https://lp2.hm.com/hmgoepprod?set=source[/25/35/25357c0ee63be50aa3f0c66db8e7d7aea02c43ce.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[z],hmver[1]&call=url[file:/product/main]','https://www2.hm.com/sv_se/productpage.0917357001.html');
@@ -90,7 +90,6 @@ INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Cold');
 INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Very cold');
 INSERT INTO TEMPERATURE (DESCRIPTION) VALUES ('Average temperature');
 
-
 INSERT INTO SEASON (DESCRIPTION) VALUES ('Summer');
 INSERT INTO SEASON (DESCRIPTION) VALUES ('Winter');
 INSERT INTO SEASON (DESCRIPTION) VALUES ('Spring');
@@ -103,7 +102,7 @@ INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATU
 INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Winter, very cold, Men','WinterDay.jpg',2,3,4,2);
 INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Hot, women','SummerDay.jpg',1,1,1,1);
 INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Summer, Sunny and Warm, women','SummerDay.jpg',1,1,2,1);
-INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Spring, Sunny, average temperature, women','SpringDay.jpg',1,1,4,1);
+INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Spring, Sunny, average temperature, women','SpringDay.jpg',3,1,4,1);
 INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Autumn, Rain, kids','RainyDay.jpg',4,2,3,3);
 INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Winter, very cold, women','Winterday.jpg',2,3,4,1);
 INSERT INTO SCENARIO (DESCRIPTION,BACKGROUND,SEASONID, WEATHERSYMBOLID,TEMPERATUREID,DEPARTMENTID) VALUES ('Winter, all(cloud), women','Winterday.jpg',2,6,3,1);
@@ -209,13 +208,6 @@ INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('GB',2
 INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('GB',3,'2021-04-01','2021-05-31');
 INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('GB',4,'2021-09-01','2021-11-30');
 
-
-
-
-
-
-
-
 --INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (1,1);
 --INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (2,2);
 --INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (3,3);
@@ -284,7 +276,6 @@ INSERT INTO CITY (NAME) VALUES ('Köpenhamn');
 INSERT INTO CITY (NAME) VALUES ('Sydney');
 INSERT INTO CITY (NAME) VALUES ('Ottawa');
 INSERT INTO CITY (NAME) VALUES ('London');
-
 INSERT INTO CITY (NAME) VALUES ('Rom');
 INSERT INTO CITY (NAME) VALUES ('New York');
 INSERT INTO CITY (NAME) VALUES ('Bangkok');
@@ -292,4 +283,3 @@ INSERT INTO CITY (NAME) VALUES ('Atlanta');
 INSERT INTO CITY (NAME) VALUES ('Singapore');
 INSERT INTO CITY (NAME) VALUES ('Pune');
 INSERT INTO CITY (NAME) VALUES ('Miami');
-
