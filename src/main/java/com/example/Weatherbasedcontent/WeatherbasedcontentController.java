@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -30,6 +29,9 @@ public class WeatherbasedcontentController {
     private CityRepository locationRep;
     @Autowired
     private ParameterRepository prmRep;
+
+
+    private ScenarioService scenarioService = new ScenarioService();
 
 
 
@@ -101,7 +103,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("weatherdesc", weatherDesc);
         model.addAttribute("country", country);
         model.addAttribute("tempcat", tempCategory);
-
+        model.addAttribute("weatherCategoryId", weatherCategoryId);
         model.addAttribute("contentList", contentList );
         model.addAttribute("scenario", scenario.getDescription());
         model.addAttribute("background", scenario.getBackground());
@@ -160,14 +162,15 @@ public class WeatherbasedcontentController {
     public String scenarios(HttpSession session, Model model) {
         List<Scenario> scenarios = prmRep.getAllScenarios();
 
-        int[] contentQtyPerScenario = productRepos.getcontentQtyPerScenario(scenarios);
-        for (int i=0;i<contentQtyPerScenario.length;i++)
-            System.out.println("Scenario " +(i+1) + "qty " + contentQtyPerScenario[i]);
+        scenarios = scenarioService.updateScenarioQty(productRepos.updateContentQtyPerScenario(scenarios), scenarios);
 
         model.addAttribute("scenarios", scenarios);
 
 
         return "scenarios";
     }
+
+
+
 
 }

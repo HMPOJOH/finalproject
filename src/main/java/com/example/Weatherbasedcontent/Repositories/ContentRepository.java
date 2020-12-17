@@ -25,8 +25,6 @@ public class ContentRepository {
 
 
 
-
-
     public List<Content> getContentList2 (int searchScenario, int seasonId, int departmentId, int weatherCatId) {
         List<Content> contentList2 = new ArrayList<>();
 
@@ -114,19 +112,14 @@ public class ContentRepository {
 
     }
 
-    public int[] getcontentQtyPerScenario (List<Scenario> scenarios) {
+
+
+
+    public int[] updateContentQtyPerScenario(List<Scenario> scenarios) {
 
         int[] contentQtyPerScenario = new int[scenarios.size()];
-
-
-
-
-
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-
-
-
              ResultSet rs = stmt.executeQuery("SELECT SCENARIOID, COUNT(*) as QTY FROM CONTENTBYSCENARIO GROUP BY SCENARIOID")) {
 
             while (rs.next()) {

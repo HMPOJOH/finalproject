@@ -4,13 +4,19 @@ public class Scenario {
     private int id;
     private String description;
     private String background;
-
+    private int qtyContent;
     public Scenario(int id, String description, String background) {
         this.id = id;
         this.description = description;
         this.background = background;
     }
 
+    public void setQtyContent(int qtyContent) {
+        this.qtyContent = qtyContent;
+    }
+    public int getQtyContent() {
+        return qtyContent;
+    }
     public int getId() {
         return id;
     }
