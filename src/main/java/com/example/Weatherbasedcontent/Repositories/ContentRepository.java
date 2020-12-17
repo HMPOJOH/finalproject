@@ -93,7 +93,7 @@ public class ContentRepository {
                 while (rs.next() && contentList.size()<=4) {
                     if(!isContentInListAlready(contentList, rs.getInt("CONTENTID"))) {
                         contentList.add(rsContent(rs));
-                    System.out.println("added id " + rs.getInt("CONTENTID"));
+                    System.out.println("added id " + rs.getInt("CONTENTID") + " from: " + rs.getString("SCENARIO") + " Priority: " + rs.getString("Priority"));
                 }
             }
         } catch (SQLException e) {
