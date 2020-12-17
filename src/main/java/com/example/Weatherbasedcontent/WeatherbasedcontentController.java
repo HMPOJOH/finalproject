@@ -104,6 +104,7 @@ public class WeatherbasedcontentController {
         System.out.println("------Calculated scenario-----------");
         System.out.println("scenarioid: " + scenario.getId());
         System.out.println("scenario desc: " + scenario.getDescription());
+        model.addAttribute("forecastday", forecastdays);
         return "index";
     }
 

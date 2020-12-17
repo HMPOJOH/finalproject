@@ -67,6 +67,11 @@ INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Jacket','https://lp2.hm.com/hmgoep
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Cap','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F9c%2Fce%2F9ccef9e340f7d3d9cf6b7d74b64bb9887cfbf815.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0956527001.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Skirt','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F57%2F77%2F5777a9abd12fef9b7a0bb3df490a949f5655d7f7.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0878022001.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('T-shirt','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fe9%2F68%2Fe968590f25567d629c02649ffa2e2774c2901391.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0933292001.html');
+--prepare content for scenario 1-2
+INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Chino shorts','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F11%2F5d11930fbf353d39a4d94e96cae6b009c6c70d9e.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_shorts_chinos%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F11%2F5d11930fbf353d39a4d94e96cae6b009c6c70d9e.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_shorts_chinos%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]');
+INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Sunglasses','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fd5%2Fc2%2Fd5c2edea1733d101e38b6891a9b5dda6843a3846.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_accessories_sunglasses%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0888077003.html');
+INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Tank top','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F10%2F73%2F1073061864cecc75c5892b45621a6d2340d70c82.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_tshirtstanks_tanks%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_us/productpage.0757813009.html');
+INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Swim shorts','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F70%2F09%2F7009c8d4bfeaf0373cc238ed5bb3a86efc2e5bcc.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_swimweear%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_us/productpage.0769483005.html');
 
 --KEEP INSERTING CONTENT FROM HERE OTHERWISE IDs can be mixed up.
 
@@ -169,6 +174,21 @@ INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('39','27');
 INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('40','27');
 INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('41','27');
 INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('42','27');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('43','1');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('44','1');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('45','1');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('46','1');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('43','2');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('44','2');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('45','2');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('46','2');
+
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('43','48');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('44','48');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('45','48');
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES ('46','48');
+
+
 
 
 INSERT INTO SEASONPERCOUNTRY (COUNTRYID,SEASONID,DATEFROM,DATETO) VALUES ('SE',1,'2021-06-01','2021-08-31');
