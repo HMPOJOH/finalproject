@@ -29,11 +29,14 @@ public class ContentRepository {
     public List<Content> getContentList (int searchScenario, int seasonId, int departmentId, int weatherCatId) {
         List<Content> contentList = new ArrayList<>();
 
+        //priority 1: exact match scenario
         String sqlGetContentByScenarioId="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '1st' as Priority\n" +
                 "FROM CONTENTBYSCENARIO \n" +
                 "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
                 "JOIN SCENARIO ON SCENARIO.ID = CONTENTBYSCENARIO.SCENARIOID\n" +
                 "WHERE CONTENTBYSCENARIO.SCENARIOID =" + searchScenario;
+
+        //Second fallback:
         String sqlGetContentBySeasonIdAndWeatherCat="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '2nd' as Priority\n" +
                 "FROM CONTENTBYSCENARIO \n" +
                 "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
@@ -51,6 +54,7 @@ public class ContentRepository {
 
         String secondFallback= (departmentId == 7)?sqlGetContentBySeasonIdAndWeatherCat:sqlGetContentBySeasonAndWeatherAndDep;
 
+        //Third fallback
         String sqlGetContentBySeasonIdAndDepartmentId = "select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '3rd' as Priority\n" +
                 "FROM CONTENTBYSCENARIO \n" +
                 "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
@@ -79,6 +83,7 @@ public class ContentRepository {
         else
             thirdFallback= sqlGetContentBySeasonIdAndDepartmentId;
 
+        //final fallback
         String sqlGetContentBySeasonId="select CONTENT.ID AS CONTENTID, CONTENT.IMAGE AS IMAGE, CONTENT.URL AS URL, CONTENT.TEXT AS TEXT, SCENARIO.DESCRIPTION AS SCENARIO, '4th' as Priority\n" +
                 "FROM CONTENTBYSCENARIO \n" +
                 "JOIN CONTENT ON CONTENT.ID = CONTENTBYSCENARIO.CONTENTID\n" +
@@ -93,9 +98,9 @@ public class ContentRepository {
                 while (rs.next() && contentList.size()<=4) {
                     if(!isContentInListAlready(contentList, rs.getInt("CONTENTID"))) {
                         contentList.add(rsContent(rs));
-                    System.out.println("added id " + rs.getInt("CONTENTID") + " from: " + rs.getString("SCENARIO") + " Priority: " + rs.getString("Priority"));
+                        System.out.println("show contentId " + rs.getInt("CONTENTID") + " from: " + rs.getString("SCENARIO") + " Priority: " + rs.getString("Priority"));
+                    }
                 }
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
