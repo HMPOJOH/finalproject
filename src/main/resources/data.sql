@@ -56,21 +56,21 @@ INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Ribbed Hat','https://lp2.hm.com/hm
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Leather gloves','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Ffa%2Fbd%2Ffabdf7d8b8a17461564f46e82247438d0448983b.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_accessories_hatsscarvesgloves_gloves%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0754751001.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Woven scarf','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F82%2F5e%2F825eed5d1d24e3ebdc3d45d5accf208cce2e5973.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_accessories_scarves%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0757905007.html');
 
---insert into scenario 55 autumn, kids. cloud
+--insert into scenario 55 autumn, kids. cloud  /43 - 47
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Knitted jumper','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F86%2F24%2F862430e7faf2026f574e5ce356faeab5b9973553.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0928804002.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Jeans','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fcb%2F81%2Fcb81207a23d409e959ca9cd68d438ab389e059d7.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bkids_boy8y_jeans_skinny%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0556560011.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Sweatshirt','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F9f%2F68%2F9f68c85bdee8ea98fdc7ff414effa849b1cff8aa.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0937831001.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Shirt jacket','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fbc%2Fdc%2Fbcdc44e4cf47de6f1ac1629972be06483fcdedd5.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bkids_girl14y_outdoor%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0879945001.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Jacket','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fe6%2F38%2Fe63858b0085ba3df6d42f65a2a62d6a01b46ab4b.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bkids_outerwear_jackets%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0875002001.html');
 
---insert into scenario 56 autumn, kids. sunny
+--insert into scenario 56 autumn, kids. sunny / 48 - 52
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Cap','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F9c%2Fce%2F9ccef9e340f7d3d9cf6b7d74b64bb9887cfbf815.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0956527001.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Skirt','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F57%2F77%2F5777a9abd12fef9b7a0bb3df490a949f5655d7f7.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0878022001.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('T-shirt','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fe9%2F68%2Fe968590f25567d629c02649ffa2e2774c2901391.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0933292001.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Jacket','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F90%2F17%2F90171b1d3227224952735a6986dcaa1487b93193.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bkids_girl8y_outdoor%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0812674003.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Skirt','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F07%2Fc4%2F07c4e6690bcae3ec61f6e0902aaea892f6ead3e0.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bkids_girl8y_dressesskirts_skirts%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0850795002.html');
 
---prepare content for scenario 1-2
+--prepare content for scenario 1-2 / 53- 56
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Chino shorts','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F11%2F5d11930fbf353d39a4d94e96cae6b009c6c70d9e.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_shorts_chinos%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F11%2F5d11930fbf353d39a4d94e96cae6b009c6c70d9e.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_shorts_chinos%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Sunglasses','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fd5%2Fc2%2Fd5c2edea1733d101e38b6891a9b5dda6843a3846.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_accessories_sunglasses%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_gb/productpage.0888077003.html');
 INSERT INTO CONTENT (TEXT,IMAGE, URL) VALUES('Tank top','https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F10%2F73%2F1073061864cecc75c5892b45621a6d2340d70c82.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_tshirtstanks_tanks%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]','https://www2.hm.com/en_us/productpage.0757813009.html');
@@ -300,6 +300,12 @@ INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (33,25);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (34,25);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (35,25);
 
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (38,27);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (39,27);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (40,27);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (41,27);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID, SCENARIOID) VALUES (42,27);
+
 INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (43,55);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (44,55);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (45,55);
@@ -311,6 +317,16 @@ INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (49,56);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (50,56);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (51,56);
 INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (52,56);
+
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (53,1);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (54,1);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (55,1);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (56,1);
+
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (53,2);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (54,2);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (55,2);
+INSERT INTO CONTENTBYSCENARIO (CONTENTID,SCENARIOID) VALUES (56,2);
 
 
 INSERT INTO CITY (NAME) VALUES ('Stockholm');
