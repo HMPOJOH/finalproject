@@ -165,7 +165,17 @@ function closeNav() {
 <body>
 
 <!-- SNÖ -->
-<canvas class="snow" style="position: absolute; z-index: 13;"></canvas>
+<!--Weather Category IDs
+1 = Sunny
+2 = Rain
+3 = Snow
+4 = Windy
+5 = Sleet
+6 = All
+-->
+
+
+<canvas th:if="${weatherCategoryId==3}" class="snow" style="position: absolute; z-index: 13;"></canvas>
 <script>
     var canvas = document.querySelector('.snow'),
     ctx = canvas.getContext('2d'),

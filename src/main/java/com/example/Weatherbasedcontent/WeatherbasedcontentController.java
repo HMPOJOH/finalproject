@@ -103,7 +103,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("weatherdesc", weatherDesc);
         model.addAttribute("country", country);
         model.addAttribute("tempcat", tempCategory);
-
+        model.addAttribute("weatherCategoryId", weatherCategoryId);
         model.addAttribute("contentList", contentList );
         model.addAttribute("scenario", scenario.getDescription());
         model.addAttribute("background", scenario.getBackground());
