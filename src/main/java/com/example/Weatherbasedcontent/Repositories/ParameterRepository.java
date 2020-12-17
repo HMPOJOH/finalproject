@@ -68,7 +68,7 @@ public class ParameterRepository {
 
     //find suitable scenario depending on season, weather and department
     public Scenario getScenarioByValues(int seasonId, int weatherId, int tempId, int depId) {
-        Scenario scenario = new Scenario(1,"no scenario","WinterDay.jpg");
+        Scenario scenario = new Scenario(-1,"no scenario","WinterDay.jpg");
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
