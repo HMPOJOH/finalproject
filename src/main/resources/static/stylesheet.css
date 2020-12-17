@@ -87,7 +87,7 @@ padding-top: 10%;
     border: 1px;
     border-radius: 3px;
     border-color: #f4f4f4;
-    padding: 5px;
+    padding: 10px;
     -moz-appearance:none; /* Firefox */
    /* -webkit-appearance:none; /* Safari and Chrome */
     appearance:none;
@@ -336,7 +336,7 @@ background-color:#white;
 }
 
 .header-test {
-    height: 4%;
+    height: 4.5%;
     width: 100%;
     background: #333;
     color: white;
@@ -349,7 +349,7 @@ background-color:#white;
 }
 
 .footer-test {
-    height: 9%;
+    height: 9.5%;
     width: 100%;
     background: #333;
        position: fixed;
@@ -377,11 +377,11 @@ background-color:#white;
 
 .body-test {
     height: 80%;
-    width: 80%;
+    width: 90%;
     background: #ffffff;
-    overflow: auto;
+
     top: 10%;
-    left: 10%;
+    left: 5%;
     bottom: 10%;
     position: fixed;
     margin: 0 auto;
@@ -391,6 +391,7 @@ background-color:#white;
     height: 100%;
     width: 100%;
     position: relative;
+    overflow: auto;
 
 }
 
@@ -399,6 +400,8 @@ background-color:#white;
     width: 100%;
     position: fixed;
     margin: 0 auto;
+    overflow: auto;
+
  }
 
 .tableBody {
