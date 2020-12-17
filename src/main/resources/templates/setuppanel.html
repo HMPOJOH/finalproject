@@ -2,148 +2,97 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Setup panel</title>
+    <title>Scenarios</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="stylesheet.css">
 </head>
-
 <body>
 
-<div class="header-setupPanel">
-    <!-- <img src="hmGroup1.jpeg" height="100%" width="10%">-->
+<div class="container-test" align="center">
     <ul class="navbar" align="center">
         <li><a href="setuppanel" class="active">Store setup</a></li>
         <li><a class="disabledNavLink" href="">Website</a></li>
         <li><a class="disabledNavLink" href="">Mobile app</a></li>
         <li><a th:href="'scenarios'">Show scenarios</a></li>
     </ul>
-</div>
 
-<div class="imageBox">
-
-    <div class="content">
-        <h1 align="center">Admin page - setup panel</h1>
-    <form th:action="@{/index}" method="POST">
-
-        <h4 align="left">Brand</h4>
-
-        <select name="brand" class="brand-dropdown" disabled="true">
-            <option value="H&M">H&M</option>
-            <option value="COS">COS</option>
-            <option value="WEEKDAY">WEEKDAY</option>
-            <option value="MONKI">MONKI</option>
-            <option value="HOME">HOME</option>
-            <option value="& Other Stories">& Other Stories</option>
-            <option value="ARKET">ARKET</option>
-            <option value="AFOUND">AFOUND</option>
-        </select>
-
-        <h4 align="left">City</h4>
-
-        <select th:name="city" id="city" class="city-dropdown" onChange="start()">
-            <option th:each="location : ${locations}"
-                    th:value="${location}"
-                    th:text="${location}"></option>
-        </select>
-        <h4 align="left">Store</h4>
-
-        <select name="store" id="store" class="store-dropdown">
-
-
-
-        </select>
-
-        <h4 align="left">Monitor</h4>
-
-        <select name="monitor" class="monitor-dropdown" >
-            <option value="TBD">Monitor 1</option>
-            <option value="TBD">Monitor 2</option>
-            <option value="TBD">Monitor 3</option>
-
-        </select>
-
-
-
-
-
-        <h4 align="left">Department</h4>
-        <select th:name="department" class="department-dropdown">
-            <option th:each="dep : ${departments}"
-                    th:value="${dep.id}"
-                    th:text="${dep.description}"></option>
-        </select>
-
-
-        <h4 align="left">Time frame</h4>
-        <select name="forecastdays" class="smhidays-dropdown">
-            <option th:each="day : ${T(com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays).values()}"
-                    th:value="${day}"
-                    th:text="${day}"></option>
-        </select>
-
-        <input type="submit" class="startPanel-btn" value="Start panel">
-    </form>
-
-    <!--Move to new template "Scenarios" in sidebar-->
-
-    <!--Scenarios button latest version-->
-    <!--<a th:href="'scenarios'" class="showScenarios-btn" value="Show scenarios">Show scenarios</a>-->
-
-    <!--Scenarios button first version-->
-    <!--<a th:href="'scenarios'" class="showScenarios-btn">Show scenarios</a>-->
-</div>
-</div>
-
-    <div class="footer" align="center">
-        <img src="hmGroupBrands.png" align="center">
+    <div class="header-test">
+        <h2 align="center" style="margin-top: 7px;">Admin page - setup panel</h2>
     </div>
-<script>
+
+    <div class="scroll-body">
+        <div class="body-test" align="center">
+            <div class="body-content">
+
+                <form th:action="@{/index}" method="POST">
+
+                    <h4 align="left" style="padding-left:1%;">Brand</h4>
+
+                    <select name="brand" class="brand-dropdown" disabled="true">
+                        <option value="H&M">H&M</option>
+                        <option value="COS">COS</option>
+                        <option value="WEEKDAY">WEEKDAY</option>
+                        <option value="MONKI">MONKI</option>
+                        <option value="HOME">HOME</option>
+                        <option value="& Other Stories">& Other Stories</option>
+                        <option value="ARKET">ARKET</option>
+                        <option value="AFOUND">AFOUND</option>
+                    </select>
+
+                    <h4 align="left" style="padding-left:1%;">City</h4>
+
+                    <select th:name="city" id="city" class="city-dropdown" onChange="start()">
+                        <option th:each="location : ${locations}"
+                                th:value="${location}"
+                                th:text="${location}"></option>
+                    </select>
+                    <h4 align="left" style="padding-left:1%;">Store</h4>
+
+                    <select name="store" id="store" class="store-dropdown">
+                        <option value="TBD">Address 1</option>
+                        <option value="TBD">Address 2</option>
+                        <option value="TBD">Address 3</option>
+                    </select>
+
+                    <h4 align="left" style="padding-left:1%;">Monitor</h4>
+
+                    <select name="monitor" class="monitor-dropdown">
+                        <option value="TBD">Monitor 1</option>
+                        <option value="TBD">Monitor 2</option>
+                        <option value="TBD">Monitor 3</option>
+
+                    </select>
 
 
-start();
+                    <h4 align="left" style="padding-left:1%;">Department</h4>
+                    <select th:name="department" class="department-dropdown">
+                        <option th:each="dep : ${departments}"
+                                th:value="${dep.id}"
+                                th:text="${dep.description}"></option>
+                    </select>
 
-function start(){
 
-let x = document.getElementById("city").value
-console.log(x)
+                    <h4 align="left" style="padding-left:1%;">Time frame</h4>
+                    <select name="forecastdays" class="smhidays-dropdown">
+                        <option th:each="day : ${T(com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays).values()}"
+                                th:value="${day}"
+                                th:text="${day}"></option>
+                    </select>
 
-//Probably the worst script ever written before :) Just a quickfix
-if (x==="Stockholm")
-document.getElementById("store").innerHTML=`<option value="Stockholm">Drottninggatan 56, 111 21 Stockholm</option>
-            <option value="Stockholm">Hamngatan 22, 111 47 Stockholm</option>`
+                    <input type="submit" class="startPanel-btn" value="Start panel">
+                </form>
 
-if (x==="Göteborg")
-document.getElementById("store").innerHTML=`<option value="Göteborg">Kungsportsavenyen 26-28, 411 36 Göteborg</option>`
+            </div>
+        </div>
+    </div>
 
-if (x==="Malmö")
-document.getElementById("store").innerHTML=`<option value="Malmö">Gustav Adolfs torg 2, 211 39 Malmö</option>`
-if (x==="Umeå")
-document.getElementById("store").innerHTML=`<option value="Umeå"> Rådhusesplanaden 4C, 903 28 Umeå</option>`
-if (x==="Köpenhamn")
-document.getElementById("store").innerHTML=`<option value="Köpenhamn">Amagertorv 23, 1160 Copenhagen</option>`
-if (x==="Sydney")
-document.getElementById("store").innerHTML=`<option value="Sydney">135 King St, Sydney NSW 2000</option>`
-if (x==="Ottawa")
-document.getElementById("store").innerHTML=`<option value="Ottawa">50 Rideau St Unit E107B, Ottawa, ON K1N 9J7</option>`
-if (x==="London")
-document.getElementById("store").innerHTML=`<option value="London"> 29 Molesworth St, Lewisham, London SE13 7EP</option>`
-if (x==="Rom")
-document.getElementById("store").innerHTML=`<option value="Rom">Via del Corso, 422, 00186 Roma RM</option>`
-if (x==="New York")
-document.getElementById("store").innerHTML=`<option value="New York">1472 Broadway, New York, NY 10036</option>`
+    <div class="footer-test">
+        <div class="footer">
+            <img src="hmGroupBrands1.png" align="center">
+        </div>
+    </div>
 
-if (x==="Bangkok")
-document.getElementById("store").innerHTML=`<option value="Bangkok">991 Rama I Rd, Pathum Wan</option>`
-if (x==="Atlanta")
-document.getElementById("store").innerHTML=` <option value="Atlanta">31 18th St NW, Atlanta, GA 30363</option>`
-if (x==="Singapore")
-document.getElementById("store").innerHTML=` <option value="Singapore">Silvercord, 30 Canton Rd, Shop G38B, Sha Thsui</option>`
-if (x==="Pune")
-document.getElementById("store").innerHTML=` <option value="Pune">Westend Mall, near Parihar Chowk, Aundh, Pune,</option>`
-  if (x==="Miami")
-  document.getElementById("store").innerHTML=`<option value="Miami">126 8th St, Miami Beach, FL 33139</option>`
-
-}
-</script>
+</div>
 
 
 </body>
