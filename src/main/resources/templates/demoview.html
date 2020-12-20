@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Store setup</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+
+<div class="container-test" align="center">
+    <ul class="navbar" align="center">
+        <li><a href="setuppanel" class="active">Store setup</a></li>
+        <li><a class="disabledNavLink" href="">Website</a></li>
+        <li><a class="disabledNavLink" href="">Mobile app</a></li>
+        <li><a th:href="'scenarios'">Show scenarios</a></li>
+    </ul>
+
+    <div class="header-test">
+        <h2 align="center" style="margin-top: 7px;">Store setup panel</h2>
+    </div>
+
+    <div class="scroll-body">
+        <div class="body-test" align="center">
+            <div class="body-content">
+
+                <form th:action="@{/index}" method="POST">
+
+                    <h4 align="left" style="padding-left:1%;">Brand</h4>
+
+                    <select name="brand" class="brand-dropdown" disabled="true">
+                        <option value="H&M">H&M</option>
+                        <option value="COS">COS</option>
+                        <option value="WEEKDAY">WEEKDAY</option>
+                        <option value="MONKI">MONKI</option>
+                        <option value="HOME">HOME</option>
+                        <option value="& Other Stories">& Other Stories</option>
+                        <option value="ARKET">ARKET</option>
+                        <option value="AFOUND">AFOUND</option>
+                    </select>
+
+
+
+                    <h4 align="left" style="padding-left:1%;">Department</h4>
+                    <select th:name="department" class="department-dropdown">
+                        <option th:each="dep : ${departments}"
+                                th:value="${dep.id}"
+                                th:text="${dep.description}"></option>
+                    </select>
+
+
+                    <h4 align="left" style="padding-left:1%;">Time frame</h4>
+                    <select name="forecastdays" class="smhidays-dropdown">
+                        <option th:each="day : ${T(com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays).values()}"
+                                th:value="${day}"
+                                th:text="${day}"></option>
+                    </select>
+
+                    <input type="submit" class="startPanel-btn" value="Start panel">
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-test">
+        <div class="footer">
+            <img src="hmGroupBrands1.png" align="center">
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+
+
+
+function start(){
+
+
+  
+}
+</script>
+
+</body>
+</html>
