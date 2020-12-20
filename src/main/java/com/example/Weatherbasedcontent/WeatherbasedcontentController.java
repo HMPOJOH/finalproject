@@ -216,7 +216,7 @@ public class WeatherbasedcontentController {
 
         departments = prmRep.getDepList();
 
-
+        model.addAttribute("city", city);
         model.addAttribute("departments", departments);
 
         return "demoview";

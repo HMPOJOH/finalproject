@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Store setup</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="/stylesheet.css">
 </head>
 <body>
 
@@ -23,9 +23,7 @@
     <div class="scroll-body">
         <div class="body-test" align="center">
             <div class="body-content">
-
-                <form th:action="@{/index}" method="POST">
-
+<form>
                     <h4 align="left" style="padding-left:1%;">Brand</h4>
 
                     <select name="brand" class="brand-dropdown" disabled="true">
@@ -42,7 +40,7 @@
 
 
                     <h4 align="left" style="padding-left:1%;">Department</h4>
-                    <select th:name="department" class="department-dropdown">
+                    <select th:name="department" class="department-dropdown" id="department">
                         <option th:each="dep : ${departments}"
                                 th:value="${dep.id}"
                                 th:text="${dep.description}"></option>
@@ -50,14 +48,14 @@
 
 
                     <h4 align="left" style="padding-left:1%;">Time frame</h4>
-                    <select name="forecastdays" class="smhidays-dropdown">
+                    <select name="forecastdays" class="smhidays-dropdown" onChange="start()" id="days">
                         <option th:each="day : ${T(com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays).values()}"
                                 th:value="${day}"
                                 th:text="${day}"></option>
                     </select>
 
-                    <input type="submit" class="startPanel-btn" value="Start panel">
-                </form>
+                <div id="startbutton"></div>
+</form>
 
             </div>
         </div>
@@ -74,12 +72,17 @@
 <script>
 
 
-
+start()
 
 function start(){
 
+let dep=document.getElementById("department").value
+let day=document.getElementById("days").value
+console.log(dep)
+console.log(day)
 
-  
+document.getElementById("startbutton").innerHTML=`<a href="/stockholm/${dep}/${day}" class="showContent-btn">Open</a>`
+
 }
 </script>
 
