@@ -5,6 +5,7 @@ import com.example.Weatherbasedcontent.WeatherAPIWW.WeatherAnalyzer;
 import com.example.Weatherbasedcontent.Repositories.*;
 import com.example.Weatherbasedcontent.WeatherAPIWW.WeatherRoot;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -152,6 +155,9 @@ public class WeatherbasedcontentController {
     @GetMapping("/{city}/{department}/{forecastdays}")
     public String view(@PathVariable ForecastDays forecastdays, HttpSession session, @PathVariable String city,@PathVariable Integer department,  RestTemplate restTemplate, Model model) {
         //default values if API is down
+
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+
         float temperature = 5.1f;
         int   tempCategory = 5; //avg
         float  windSpeed = 1.2f;
@@ -172,6 +178,8 @@ public class WeatherbasedcontentController {
             weatherImage = analyzeWeatherAPI.getWeatherCategoryImage(); //http://openweathermap.org/img/wn/10d@2x.png
             weatherDesc = analyzeWeatherAPI.getWeatherDesc();
             country=weatherFromAPI.getCity().getCountry();
+
+
         }
         catch (Exception e){
             System.out.println("API down, using default values for demo purpose");
@@ -207,6 +215,7 @@ public class WeatherbasedcontentController {
         System.out.println("scenarioid: " + scenario.getId());
         System.out.println("scenario desc: " + scenario.getDescription());
         model.addAttribute("forecastday", forecastdays);
+        model.addAttribute("dateTimeNow", dateTimeNow);
         return "viewpanel";
     }
 
