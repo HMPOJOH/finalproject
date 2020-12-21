@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +74,8 @@ public class WeatherbasedcontentController {
             weatherImage = analyzeWeatherAPI.getWeatherCategoryImage(); //http://openweathermap.org/img/wn/10d@2x.png
             weatherDesc = analyzeWeatherAPI.getWeatherDesc();
             country=weatherFromAPI.getCity().getCountry();
+
+
         }
         catch (Exception e){
             System.out.println("API down, using default values for demo purpose");
@@ -158,6 +161,15 @@ public class WeatherbasedcontentController {
 
         LocalDateTime dateTimeNow = LocalDateTime.now();
 
+        // Inbuilt format
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+
+// Custom format
+//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+// Format LocalDateTime
+        String formattedDateTime = dateTimeNow.format(formatter);
+
         float temperature = 5.1f;
         int   tempCategory = 5; //avg
         float  windSpeed = 1.2f;
@@ -178,7 +190,7 @@ public class WeatherbasedcontentController {
             weatherImage = analyzeWeatherAPI.getWeatherCategoryImage(); //http://openweathermap.org/img/wn/10d@2x.png
             weatherDesc = analyzeWeatherAPI.getWeatherDesc();
             country=weatherFromAPI.getCity().getCountry();
-
+            formattedDateTime = analyzeWeatherAPI.getDateForSpecificDay();
 
         }
         catch (Exception e){
@@ -215,7 +227,7 @@ public class WeatherbasedcontentController {
         System.out.println("scenarioid: " + scenario.getId());
         System.out.println("scenario desc: " + scenario.getDescription());
         model.addAttribute("forecastday", forecastdays);
-        model.addAttribute("dateTimeNow", dateTimeNow);
+        model.addAttribute("dateTimeNow", formattedDateTime);
         return "viewpanel";
     }
 
