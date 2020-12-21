@@ -21,7 +21,8 @@
 
         <div class="weather-content">
             <h2 th:text="${forecastday}"></h2>
-            <h3 th:text="${dateTimeNow}"></h3>
+            <h3 th:text="${dateTimeNow} + ' (now)'"></h3>
+            <h3 th:text="${datefromapi}+ ' (api)'"></h3>
             <img th:src="${currentWeatherImage}" src="">
             <h1 th:text="${city}+' ' +${country}"></h1>
             <h3 th:text="${weatherdesc}"></h3>

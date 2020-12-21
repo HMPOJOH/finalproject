@@ -169,7 +169,7 @@ public class WeatherbasedcontentController {
 
 // Format LocalDateTime
         String formattedDateTime = dateTimeNow.format(formatter);
-
+        String formattedDateTime2 = formattedDateTime;
         float temperature = 5.1f;
         int   tempCategory = 5; //avg
         float  windSpeed = 1.2f;
@@ -227,7 +227,9 @@ public class WeatherbasedcontentController {
         System.out.println("scenarioid: " + scenario.getId());
         System.out.println("scenario desc: " + scenario.getDescription());
         model.addAttribute("forecastday", forecastdays);
-        model.addAttribute("dateTimeNow", formattedDateTime);
+        model.addAttribute("dateTimeNow", formattedDateTime2);
+        model.addAttribute("datefromapi", formattedDateTime);
+
         return "viewpanel";
     }
 
