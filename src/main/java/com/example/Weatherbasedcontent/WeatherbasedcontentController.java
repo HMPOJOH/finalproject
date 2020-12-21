@@ -232,7 +232,7 @@ public class WeatherbasedcontentController {
     }
 
 
-    @GetMapping("/{city}")
+    @GetMapping("/view/{city}")
     public String setupPanel(HttpSession session, Model model,@PathVariable String city) {
 
         departments = prmRep.getDepList();
