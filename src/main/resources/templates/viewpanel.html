@@ -21,7 +21,7 @@
 
         <div class="weather-content">
             <h2 th:text="${forecastday}"></h2>
-            <img th:src="${currentWeatherImage}" src="">
+            <img th:src="'http://contentbyscenario.azurewebsites.net/' + ${currentWeatherImage}" src="">
             <h1 th:text="${city}+' ' +${country}"></h1>
             <h3 th:text="${weatherdesc}"></h3>
             <h3 th:text="'temp: ' + ${temperature}+' C'"></h3>
@@ -37,7 +37,7 @@
 <!--    OVERLAY MENU END       -->
 
 </head>
-<body>
+<body onload = "JavaScript:AutoRefresh(900000);">
 
 
 <!--Weather Category IDs
@@ -402,6 +402,14 @@ function distanceBetween(vector1, vector2) {
 
 init();
 </script>
+
+<script type = "text/JavaScript">
+         <!--
+            function AutoRefresh( t ) {
+               setTimeout("location.reload(true);", t);
+            }
+         //-->
+      </script>
 
 
 </body>
