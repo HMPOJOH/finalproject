@@ -17,13 +17,16 @@
     </ul>
 
     <div class="header-test">
-        <h2 align="center" style="margin-top: 7px;">Store setup panel</h2>
+        <h2 align="center" style="margin-top: 7px;" th:text="'Store setup ' + ${city}"></h2>
     </div>
 
     <div class="scroll-body">
         <div class="body-test" align="center">
             <div class="body-content">
+
 <form>
+
+
                     <h4 align="left" style="padding-left:1%;">Brand</h4>
 
                     <select name="brand" class="brand-dropdown" disabled="true">
@@ -40,7 +43,7 @@
 
 
                     <h4 align="left" style="padding-left:1%;">Department</h4>
-                    <select th:name="department" class="department-dropdown" id="department">
+                    <select th:name="department" class="department-dropdown" id="department" th:onchange="start()">
                         <option th:each="dep : ${departments}"
                                 th:value="${dep.id}"
                                 th:text="${dep.description}"></option>
@@ -48,13 +51,13 @@
 
 
                     <h4 align="left" style="padding-left:1%;">Time frame</h4>
-                    <select name="forecastdays" class="smhidays-dropdown" onChange="start()" id="days">
+                    <select name="forecastdays" class="smhidays-dropdown" th:onchange="start()" id="days">
                         <option th:each="day : ${T(com.example.Weatherbasedcontent.WeatherAPIWW.ForecastDays).values()}"
                                 th:value="${day}"
                                 th:text="${day}"></option>
                     </select>
 
-                <div id="startbutton"></div>
+                <div ><a th:href="${city}" id="startbutton" class="showContent-btn">Open</a></div>
 </form>
 
             </div>
@@ -69,21 +72,26 @@
 
 </div>
 
-<script>
-
+<script th:inline="javascript">
 
 start()
 
 function start(){
+
+
+let city2 = [[${city}]]
 
 let dep=document.getElementById("department").value
 let day=document.getElementById("days").value
 console.log(dep)
 console.log(day)
 
-document.getElementById("startbutton").innerHTML=`<a href="/stockholm/${dep}/${day}" class="showContent-btn">Open</a>`
+document.getElementById("startbutton").href= `${city2}/${dep}/${day}`
 
 }
+
+
+
 </script>
 
 </body>
