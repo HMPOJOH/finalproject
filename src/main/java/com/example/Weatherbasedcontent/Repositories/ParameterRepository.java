@@ -180,7 +180,7 @@ public class ParameterRepository {
     public int getSeasonIdbyDateAndCountry(String date, String isoCountry) {
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select SEASONID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date.substring(0,9)+"' AND DATETO>='"+date.substring(0,9)+"'") ) {
+             ResultSet rs = stmt.executeQuery("select SEASONID FROM SEASONPERCOUNTRY WHERE COUNTRYID='"+isoCountry+"' AND DATEFROM<='"+date.substring(0,10)+"' AND DATETO>='"+date.substring(0,10)+"'") ) {
                 if (rs.next()) {
                     return rs.getInt("SEASONID");
                 }

@@ -170,6 +170,7 @@ if	781			4
     }
 
     public String getDateForSpecificDay() {
+        System.out.println("date " +  weatherFromAPI.getList().get(listIndex).getDt_txt().substring(0,10));
         return weatherFromAPI.getList().get(listIndex).getDt_txt();
     }
 
