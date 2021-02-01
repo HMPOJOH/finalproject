@@ -92,6 +92,7 @@ public class WeatherbasedcontentController {
         model.addAttribute("currentWeatherImage", weatherImage);
         model.addAttribute("weatherdesc", weatherDesc);
         model.addAttribute("country", country);
+        System.out.println("country " + country);
         model.addAttribute("tempcat", tempCategory);
         model.addAttribute("weatherCategoryId", weatherCategoryId);
         model.addAttribute("contentList", contentList );

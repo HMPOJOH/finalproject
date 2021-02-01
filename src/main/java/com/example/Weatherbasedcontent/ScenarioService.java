@@ -18,9 +18,9 @@ public class ScenarioService {
         for (int i=0;i<listQTY.length;i++){
             scenarioList.get(i).setQtyContent(listQTY[i]);
         }
-        for (int i=0;i<listQTY.length;i++){
+        /*for (int i=0;i<listQTY.length;i++){
             System.out.println("scenario "+scenarioList.get(i).getId() +" count Content:" +  scenarioList.get(i).getQtyContent());
-        }
+        }*/
 
         return scenarioList;
     }
